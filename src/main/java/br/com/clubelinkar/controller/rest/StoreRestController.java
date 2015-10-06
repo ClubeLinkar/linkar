@@ -27,7 +27,7 @@ public class StoreRestController {
     }
 
     @RequestMapping(value = "/store", method = RequestMethod.GET)
-    public List<Store> list() {
+    public List<Store> findAll() {
         return storeRepository.findAll();
     }
 

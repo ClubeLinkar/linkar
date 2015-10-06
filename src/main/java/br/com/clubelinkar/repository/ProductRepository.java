@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 /**
  * @author Lennon Jesus
  */
-@Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
 }
