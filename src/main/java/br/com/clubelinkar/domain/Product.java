@@ -21,8 +21,7 @@ public class Product {
 
     private BigDecimal price;
 
-    @DBRef
-    private Store store;
+    private String storeId;
 
     public String getId() {
         return id;
@@ -56,5 +55,11 @@ public class Product {
         this.price = price;
     }
 
+    public String getStoreId() {
+        return storeId;
+    }
 
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
 }

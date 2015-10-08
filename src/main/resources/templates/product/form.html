@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>Linkar</title>
+
+</head>
+
+<body>
+
+    <form th:action="@{/checkout}" method="post">
+        <input type="text" id="product" th:value="${product.name}" /><br/>
+        <input type="text" id="product" th:value="${product.price}" /><br/>
+
+        <select th:field="*{product.storeId}">
+            <option th:each="store : ${stores}" th:value="${store.id}" th:text="${store.name}"></option>
+        </select>
+
+        <input type="submit" />
+    </form>
+
+</body>
+
+
+</html>
