@@ -4,10 +4,7 @@ import br.com.clubelinkar.domain.Product;
 import br.com.clubelinkar.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,6 +26,11 @@ public class ProductRestController {
     @RequestMapping(method = RequestMethod.GET)
     public List<Product> findAll() {
         return productRepository.findAll();
+    }
+
+    @RequestMapping(value = "/product/{id}")
+    public Product getById(@PathVariable("id") String id) {
+        return productRepository.findOne(id);
     }
 
 }

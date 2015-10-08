@@ -1,15 +1,13 @@
 package br.com.clubelinkar.controller.rest
 
 import br.com.clubelinkar.domain.Product
-import br.com.clubelinkar.domain.Store
 import com.google.gson.Gson
 import org.junit.Test
-import org.springframework.http.MediaType;
+import org.springframework.http.MediaType
 
 import static org.junit.Assert.*
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 /**
@@ -42,9 +40,9 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
 
         def result = mockMvc.perform(get("/product")).andExpect(status().isOk()).andReturn()
 
-        def products = new Gson().fromJson(result.response.contentAsString, List)
+        def stores = new Gson().fromJson(result.response.contentAsString, List)
 
-        assertFalse products.empty
+        assertFalse stores.empty
 
     }
 
