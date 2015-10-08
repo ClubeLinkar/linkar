@@ -1,4 +1,4 @@
-package br.com.clubelinkar.controller.rest;
+package br.com.clubelinkar.controller;
 
 import br.com.clubelinkar.domain.Product;
 import br.com.clubelinkar.domain.Purchase;
@@ -7,6 +7,7 @@ import br.com.clubelinkar.repository.ProductRepository;
 import br.com.clubelinkar.repository.PurchaseRepository;
 import br.com.clubelinkar.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,7 @@ import java.util.Optional;
 /**
  * @author Lennon Jesus
  */
-@RestController
+@Controller
 public class CheckoutRestController {
 
     @Autowired
@@ -31,7 +32,7 @@ public class CheckoutRestController {
     private PurchaseRepository purchaseRepository;
 
     @RequestMapping(value = "/checkout/{storeId}/{productId}", method = RequestMethod.GET)
-    public Purchase checkout(@PathVariable("storeId") String storeId,
+    public String checkout(@PathVariable("storeId") String storeId,
                              @PathVariable("productId") String productId) {
 
 
@@ -44,11 +45,9 @@ public class CheckoutRestController {
 
             purchase.setProductId(productId);
 
-            return purchase;
-
         }
 
-        return null;
+        return "purchase/form";
     }
 
     @RequestMapping(value = "/checkout", method = RequestMethod.POST) // FIXME melhorar essa url
