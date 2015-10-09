@@ -9,19 +9,30 @@
 
 <body>
 
-    <form th:action="@{/store}" method="post">
-        <input type="text" th:value="${store.name}" /><br/>
+    <form id="product_form">
+        <input type="text" name="name" th:value="${store.name}" /><br/>
 
-        <input type="submit" />
+        <input type="button" id="btn_save_product" value="save" />
+
+        <div id="pnl_message"></div>
     </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
 
     <script type="text/javascript">
 
-        (function () {
+        $(function() {
+            $("#btn_save_product").click(function () {
 
-        })
+                console.log("salvando...");
+
+                $.post("/store", JSON.stringify({'name' : 'All Motos'})).done(function(data) {
+                    $("#pnl_message" ).html(data);
+                    console.log(data);
+                });
+            });
+        });
+
 
     </script>
 

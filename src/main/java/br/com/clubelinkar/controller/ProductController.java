@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     private StoreRepository storeRepository;
 
-    @RequestMapping(value = "/product/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/new", method = RequestMethod.GET)
     public String create(Model model) {
 
         model.addAttribute("product", new Product());

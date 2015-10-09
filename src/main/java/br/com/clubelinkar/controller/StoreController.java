@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class StoreController {
 
-    @RequestMapping(value = "/store/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/store/new", method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("store", new Store());
 
