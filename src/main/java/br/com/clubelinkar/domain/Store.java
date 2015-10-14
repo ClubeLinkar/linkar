@@ -22,6 +22,8 @@ public class Store {
 
     private String url;
 
+    public Store() {
+    }
 
     public String getId() {
         return id;

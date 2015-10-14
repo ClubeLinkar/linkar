@@ -26,6 +26,8 @@ public class Purchase {
 
     private LocalDateTime dateTime;
 
+    public Purchase() {
+    }
 
     public String getId() {
         return id;

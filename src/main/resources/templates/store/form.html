@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:name="http://www.w3.org/1999/xhtml">
 
 
 <head>
@@ -9,10 +9,17 @@
 
 <body>
 
-    <form id="product_form">
-        <input type="text" name="name" th:value="${store.name}" /><br/>
+
+    <form id="product_form" th:action="@{/store}" th:method="post" th:object="${store}" enctype="application/json">
+        name: <input type="text" name="name" th:value="${store.name}" /><br/>
+        description: <input type="text" name="description" th:value="${store.description}" /><br/>
+        address: <input type="text" name="address" th:value="${store.address}" /><br/>
+        phones: <input type="text" name="phones" th:value="${store.phones}" /><br/>
+        email: <input type="text" name="email" th:value="${store.email}" /><br/>
+        url: <input type="text" name="url" th:value="${store.url}" /><br/>
 
         <input type="button" id="btn_save_product" value="save" />
+        <input type="submit"  value="submit" />
 
         <div id="pnl_message"></div>
     </form>
@@ -24,11 +31,16 @@
         $(function() {
             $("#btn_save_product").click(function () {
 
-                console.log("salvando...");
+                console.log("salvando......");
 
-                $.post("/store", JSON.stringify({'name' : 'All Motos'})).done(function(data) {
-                    $("#pnl_message" ).html(data);
-                    console.log(data);
+                $.ajax({
+                    type: 'POST',
+                    url: '/store',
+                    data: JSON.stringify($("#product_form").serializeArray()),
+                    success: function(data) {
+                        alert('data: ' + data);
+                    },
+                    contentType: "application/json"
                 });
             });
         });
