@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" ng-app="linkar">
 
 
 <head>
@@ -7,18 +7,36 @@
 
 </head>
 
-<body>
+<body ng-controller="ProductController">
 
-    <form th:action="@{/checkout}" method="post">
-        <input type="text" id="product" th:value="${product.name}" /><br/>
-        <input type="text" id="product" th:value="${product.price}" /><br/>
 
-        <select th:field="*{product.storeId}">
-            <option th:each="store : ${stores}" th:value="${store.id}" th:text="${store.name}"></option>
+        <input type="text" id="name" ng-model="product.name" /><br/>
+        <input type="text" id="price" ng-model="product.price" /><br/>
+
+        <select ng-model="product.storeId">
+            <option value="{{store.id}}" ng-repeat="store in stores">{{store.name}}</option>
         </select>
 
-        <input type="submit" />
-    </form>
+        <button ng-click="linkar()">salvar</button>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('linkar', []).controller('ProductController', function ($scope, $http) {
+
+            $scope.stores = $http.get('/store').success(function (data) {
+                $scope.stores = data;
+            });
+
+            $scope.linkar = function () {
+                $http.post('/product', $scope.product);
+            }
+
+
+        });
+
+    </script>
 
 </body>
 

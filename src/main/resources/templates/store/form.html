@@ -10,35 +10,59 @@
 <body>
 
 
-    <form id="product_form" th:action="@{/store}" th:method="post" th:object="${store}" enctype="application/json">
-        name: <input type="text" name="name" th:value="${store.name}" /><br/>
-        description: <input type="text" name="description" th:value="${store.description}" /><br/>
-        address: <input type="text" name="address" th:value="${store.address}" /><br/>
-        phones: <input type="text" name="phones" th:value="${store.phones}" /><br/>
-        email: <input type="text" name="email" th:value="${store.email}" /><br/>
-        url: <input type="text" name="url" th:value="${store.url}" /><br/>
+        name: <input type="text" id="name" /><br/>
+        description: <input type="text" id="description" /><br/>
+        address: <input type="text" id="address" /><br/>
+        phones: <input type="text" id="phones" /><br/>
+        email: <input type="text" id="email" /><br/>
+        url: <input type="text" id="url" /><br/>
 
         <input type="button" id="btn_save_product" value="save" />
         <input type="submit"  value="submit" />
 
         <div id="pnl_message"></div>
-    </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
 
     <script type="text/javascript">
 
+
+        $.fn.serializeObject = function()
+        {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
         $(function() {
             $("#btn_save_product").click(function () {
 
-                console.log("salvando......");
+
+                var storeJson = {
+                    'name' : $("#name").val(),
+                    'description': $("#description").val(),
+                    'address': $("#address").val(),
+                    'phones': $("#phones").val(),
+                    'email': $("#email").val(),
+                    'url': $("#url").val(),
+                };
 
                 $.ajax({
                     type: 'POST',
                     url: '/store',
-                    data: JSON.stringify($("#product_form").serializeArray()),
+                    data: JSON.stringify(storeJson),
                     success: function(data) {
-                        alert('data: ' + data);
+                        $("#pnl_message").html(data);
                     },
                     contentType: "application/json"
                 });
