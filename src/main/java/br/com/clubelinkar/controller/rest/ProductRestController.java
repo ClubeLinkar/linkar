@@ -18,12 +18,12 @@ public class ProductRestController {
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Product create(@RequestBody @Valid Product product) {
         return productRepository.save(product);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
     public List<Product> findAll() {
         return productRepository.findAll();
     }

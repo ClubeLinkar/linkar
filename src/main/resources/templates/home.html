@@ -19,28 +19,13 @@
         |
         <a href="/product/list">produtos</a>
 
-        <div id="reader" style="width:300px;height:250px">
-        </div>
+        <div id="qrcode"></div>
 
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-        <script src="/html5-qrcode.min.js"></script>
+        <script src="/qrcode.js"></script>
 
         <script type="text/javascript">
-
-            $(function () {
-                $('#reader').html5_qrcode(function(data){
-                            // do something when code is read
-                        },
-                        function(error){
-                            //show read errors
-                        }, function(videoError){
-                            //the video stream could be opened
-                        }
-                );
-            });
-
-
+            new QRCode(document.getElementById("qrcode"), "http://clubelinkar.com.br/checkout/abc123loja/xyz321produto");
         </script>
 
 
