@@ -1,10 +1,12 @@
 package br.com.clubelinkar.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * @author Lennon Jesus
  */
+@Document
 public class Store {
 
     @Id

@@ -12,23 +12,23 @@ import java.util.List;
 /**
  * @author Lennon Jesus
  */
-@RestController("/product")
+@RestController("/api/v1/product")
 public class ProductRestController {
 
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/v1/product", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Product create(@RequestBody @Valid Product product) {
         return productRepository.save(product);
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/v1/product", method = RequestMethod.GET)
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    @RequestMapping(value = "/product/{id}")
+    @RequestMapping(value = "/api/v1/product/{id}")
     public Product getById(@PathVariable("id") String id) {
         return productRepository.findOne(id);
     }

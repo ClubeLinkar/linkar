@@ -15,18 +15,18 @@ import java.util.List;
 /**
  * @author Lennon Jesus
  */
-@RestController("/store")
+@RestController("/api/v1/store")
 public class StoreRestController {
 
     @Autowired
     private StoreRepository storeRepository;
 
-    @RequestMapping(value = "/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/v1/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Store create(@RequestBody @Valid Store store) {
         return storeRepository.save(store);
     }
 
-    @RequestMapping(value = "/store", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/v1/store", method = RequestMethod.GET)
     public List<Store> findAll() {
         return storeRepository.findAll();
     }
