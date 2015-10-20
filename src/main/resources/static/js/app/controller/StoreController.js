@@ -3,6 +3,7 @@ angular.module("linkar")
 
         $scope.store = {};
         $scope.mensagem = "";
+        $scope.storeProductList = [];
 
         $scope.salvar = function() {
 
@@ -16,6 +17,15 @@ angular.module("linkar")
             $scope.storeList = data;
         });
 
+        $scope.detail = function (store) {
+            $scope.store = store;
+
+            $http.get('/api/v1/product/store/' + store.id).success(function (data) {
+                $scope.storeProductList = data;
+            });
+            
+
+        }
 
     })
 ;

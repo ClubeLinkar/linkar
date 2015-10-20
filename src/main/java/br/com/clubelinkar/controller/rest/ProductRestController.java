@@ -1,6 +1,7 @@
 package br.com.clubelinkar.controller.rest;
 
 import br.com.clubelinkar.domain.Product;
+import br.com.clubelinkar.domain.Store;
 import br.com.clubelinkar.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -31,6 +32,11 @@ public class ProductRestController {
     @RequestMapping(value = "/api/v1/product/{id}")
     public Product getById(@PathVariable("id") String id) {
         return productRepository.findOne(id);
+    }
+
+    @RequestMapping(value = "/api/v1/product/store/{id}", method = RequestMethod.GET)
+    public List<Product> findByStoreId(@PathVariable("id") String id) {
+        return productRepository.findByStoreId(id);
     }
 
 }

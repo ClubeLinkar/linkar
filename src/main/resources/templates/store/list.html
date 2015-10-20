@@ -10,11 +10,16 @@
 Listar
 
 <li ng-repeat="store in storeList">
-    {{store.name}}
+    <a href="#" ng-click="detail(store)">{{store.name}}</a>
 </li>
 
 
 <div id="pnl_message">{{mensagem}}</div>
+
+
+<h1>{{store.name}}</h1>
+<li ng-repeat="product in storeProductList">{{product.name}}</li>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" ></script>
 <script src="/js/app/app.js"></script>
