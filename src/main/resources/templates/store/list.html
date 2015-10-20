@@ -1,32 +1,25 @@
 <!DOCTYPE html>
 <html ng-app="linkar">
 
-
 <head>
     <title>Linkar</title>
-
 </head>
 
-<body ng-controller="ProductController">
+<body ng-controller="StoreController">
 
-detail
+Listar
 
-<li ng-repeat="product in productList">
-    {{product.name}}
+<li ng-repeat="store in storeList">
+    {{store.name}}
 </li>
 
-<button ng-click="alert()">alert</button>
 
-
-
+<div id="pnl_message">{{mensagem}}</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" ></script>
 <script src="/app.js" ></script>
 
-
-
 </body>
-
 
 
 </html>

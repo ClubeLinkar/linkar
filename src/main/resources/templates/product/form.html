@@ -14,29 +14,17 @@
         <input type="text" id="price" ng-model="product.price" /><br/>
 
         <select ng-model="product.storeId">
-            <option value="{{store.id}}" ng-repeat="store in stores">{{store.name}}</option>
+            <option value="{{store.id}}" ng-repeat="store in storeList">{{store.name}}</option>
         </select>
 
-        <button ng-click="linkar()">salvar</button>
+        <button ng-click="salvar()">salvar</button>
+
+        <div id="pnl_message">{{mensagem}}</div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript">
+    <script src="/app.js"></script>
 
-        angular.module('linkar', []).controller('ProductController', function ($scope, $http) {
-
-            $scope.stores = $http.get('/store').success(function (data) {
-                $scope.stores = data;
-            });
-
-            $scope.linkar = function () {
-                $http.post('/api/v1/product', $scope.product);
-            }
-
-
-        });
-
-    </script>
 
 </body>
 
