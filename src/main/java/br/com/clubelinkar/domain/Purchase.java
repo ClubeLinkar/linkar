@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Document
 public class Purchase {
 
-
     @Id
     private String id;
 

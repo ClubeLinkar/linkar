@@ -1,19 +1,96 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" ng-app="linkar">
 
 
 <head>
     <title>Linkar</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
+    <style type='text/css'>
+        .fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
 </head>
 
-<body>
+<body ng-controller="PurchaseController">
 
 
-    <form th:action="@{/checkout}" method="post">
-        <input type="text" id="product" th:value="">
-    </form>
+<div class="container">
 
+    <h1>Linkar!</h1>
+
+    <fieldset class="fieldset">
+        <legend>Cliente</legend>
+
+        <div class="form-group">
+            <label for="userId">userId:</label>
+            <input type="text" id="userId" ng-model="purchase.userId" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="userPass">userPass:</label>
+            <input type="password" id="userPass" ng-model="purchase.userPass" class="form-control"/>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="fieldset">
+        <legend>Loja</legend>
+
+
+        <div class="form-group">
+            <label for="storeId">storeId:</label>
+            <input type="text" id="storeId" ng-model="purchase.store.id" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="storePass">storePass:</label>
+            <input type="password" id="storePass" ng-model="purchase.storePass" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="storeName">storeName:</label>
+            <input type="text" id="storeName" ng-model="purchase.store.name" class="form-control"/>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="fieldset">
+        <legend>Produto</legend>
+
+
+        <div class="form-group">
+            <label for="productId">productId:</label>
+            <input type="text" id="productId" ng-model="purchase.product.id" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="productName">productName:</label>
+            <input type="text" id="productName" ng-model="purchase.product.name" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="purchasePrice">purchasePrice:</label>
+            <input type="text" id="purchasePrice" ng-model="purchase.product.price" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="earnedPoints">earnedPoints:</label>
+            <input type="text" id="earnedPoints" ng-model="purchase.earnedPoints" class="form-control"/>
+        </div>
+
+    </fieldset>
+
+    <button ng-click="salvar()" class="btn btn-primary">salvar</button>
+
+    <div id="pnl_message">{{mensagem}}</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="/js/app/app.js"></script>
+<script src="/js/app/controller/PurchaseController.js"></script>
 </body>
 
 

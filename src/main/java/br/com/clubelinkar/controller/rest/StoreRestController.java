@@ -1,13 +1,11 @@
 package br.com.clubelinkar.controller.rest;
 
+import br.com.clubelinkar.domain.Product;
 import br.com.clubelinkar.domain.Store;
 import br.com.clubelinkar.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,6 +27,11 @@ public class StoreRestController {
     @RequestMapping(value = "/api/v1/store", method = RequestMethod.GET)
     public List<Store> findAll() {
         return storeRepository.findAll();
+    }
+
+    @RequestMapping(value = "/api/v1/store/{id}")
+    public Store getById(@PathVariable("id") String id) {
+        return storeRepository.findOne(id);
     }
 
 
