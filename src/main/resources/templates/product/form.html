@@ -4,29 +4,43 @@
 
 <head>
     <title>Linkar</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
 </head>
 
 <body ng-controller="ProductController">
 
+<div class="container">
 
-        <input type="text" id="name" ng-model="product.name" /><br/>
-        <input type="text" id="price" ng-model="product.price" /><br/>
+    <h1>Novo Produto</h1>
 
-        <select ng-model="product.storeId">
+    <div class="form-group">
+        <label for="name">name:</label>
+        <input type="text" id="name" ng-model="product.name" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label for="price">price:</label>
+        <input type="text" id="price" ng-model="product.price" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label for="storeId">loja:</label>
+        <select ng-model="product.storeId" class="form-control" id="storeId">
             <option value="{{store.id}}" ng-repeat="store in storeList">{{store.name}}</option>
         </select>
+    </div>
 
-        <button ng-click="salvar()">salvar</button>
+    <button ng-click="salvar()">salvar</button>
 
-        <div id="pnl_message">{{mensagem}}</div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="/js/app/app.js"></script>
-    <script src="/js/app/controller/ProductController.js"></script>
+    <div id="pnl_message">{{mensagem}}</div>
 
 
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="/js/app/app.js"></script>
+<script src="/js/app/controller/ProductController.js"></script>
 </body>
 
 

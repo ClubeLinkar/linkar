@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Created by lennon.lima on 20/10/2015.
+ * @author Lennon Jesus
  */
 @Document
 public class Customer {

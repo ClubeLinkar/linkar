@@ -3,20 +3,24 @@
 
 <head>
     <title>Linkar</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 
 <body ng-controller="ProductController">
 
-Listar
+<div class="container">
 
-<li ng-repeat="product in productList">
-    {{product.name}}
-</li>
+    <div class="list-group">
+        <a href="#" ng-repeat="product in productList" class="list-group-item">
+            {{product.name}}
+        </a>
+    </div>
 
+    <div id="pnl_message">{{mensagem}}</div>
 
-<div id="pnl_message">{{mensagem}}</div>
+</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src="/js/app/app.js"></script>
 <script src="/js/app/controller/ProductController.js"></script>
 
