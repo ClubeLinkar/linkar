@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html ng-app="linkar">
 
 
     <head>
@@ -24,14 +23,14 @@
         <a href="/user/list">usuários</a>
 
         <div id="qrcode"></div>
-
-
         <script src="/js/lib/qrcode.js"></script>
 
-        <script type="text/javascript">
-            new QRCode(document.getElementById("qrcode"), "http://clubelinkar.com.br/checkout/abc123loja/xyz321produto");
-        </script>
+        <!--<script type="text/javascript">-->
+<!--            new QRCode(document.getElementById("qrcode"), "http://clubelinkar.com.br/checkout/abc123loja/xyz321produto");-->
+        <!--</script>-->
 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <script src="/js/app/app.js"></script>
 
     </body>
 

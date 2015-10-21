@@ -11,7 +11,7 @@
 
 <div class="container">
 
-    <h1>Nova Loja</h1>
+    <h1>Registrar User</h1>
 
     <div class="form-group">
         <label for="name" >name:</label>
@@ -39,9 +39,8 @@
 
     <div class="form-group">
         <label for="state">state:</label>
-        <input type="text" id="state" ng-model="customer.state" class="form-control"/>
+        <uf id="state" ng-model="customer.state" class="form-control" />
     </div>
-
 
     <button ng-click="salvar()" class="btn btn-primary">salvar</button>
 
@@ -50,6 +49,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="/js/app/app.js"></script>
     <script src="/js/app/controller/CustomerController.js"></script>
+    <script src="/js/app/directive/ufDirective.js"></script>
 
 </div>
 
