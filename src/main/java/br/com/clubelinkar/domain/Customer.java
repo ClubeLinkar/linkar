@@ -24,6 +24,8 @@ public class Customer {
 
     private String state;
 
+    private String password; // FIXME HASH!!!!!!!
+
     public String getId() {
         return id;
     }
@@ -78,5 +80,13 @@ public class Customer {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

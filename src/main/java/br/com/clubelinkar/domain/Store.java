@@ -12,6 +12,8 @@ public class Store {
     @Id
     private String id;
 
+    private String password; // FIXME HASH!!!!!!!
+
     private String name;
 
     private String description;
@@ -81,5 +83,13 @@ public class Store {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

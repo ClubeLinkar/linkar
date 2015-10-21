@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -48,14 +47,6 @@ public class CheckoutController {
         }
 
         return "purchase/form";
-    }
-
-    @RequestMapping(value = "/checkout", method = RequestMethod.POST) // FIXME melhorar essa url
-    public Purchase checkout(Purchase purchase) {
-
-        purchase.setDateTime(LocalDateTime.now());
-
-        return purchaseRepository.save(purchase);
     }
 
 }
