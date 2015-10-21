@@ -18,11 +18,11 @@ public class Customer {
 
     private String cpf;
 
-    private String bairro;
+    private String district;
 
-    private String cidade;
+    private String city;
 
-    private String uf;
+    private String state;
 
     public String getId() {
         return id;
@@ -56,27 +56,27 @@ public class Customer {
         this.cpf = cpf;
     }
 
-    public String getBairro() {
-        return bairro;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getUf() {
-        return uf;
+    public String getState() {
+        return state;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="linkar">
+
+<head>
+    <title>Linkar</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+
+<body ng-controller="CustomerController">
+
+<div class="container">
+
+    <div class="list-group">
+        <a href="#" ng-repeat="customer in customerList" class="list-group-item">
+            {{customer.name}}
+        </a>
+    </div>
+
+    <div id="pnl_message">{{mensagem}}</div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="/js/app/app.js"></script>
+<script src="/js/app/controller/CustomerController.js"></script>
+
+</body>
+
+
+</html>

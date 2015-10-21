@@ -1,10 +1,10 @@
 package br.com.clubelinkar.repository;
 
-import br.com.clubelinkar.domain.Store;
+import br.com.clubelinkar.domain.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * @author Lennon Jesus
  */
-public interface StoreRepository extends MongoRepository<Store, String> {
+public interface CustomerRepository extends MongoRepository<Customer, String> {
 }
