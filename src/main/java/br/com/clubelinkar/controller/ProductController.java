@@ -34,6 +34,11 @@ public class ProductController {
         return "product/list";
     }
 
+    @RequestMapping("/product/tags")
+    public String tags() {
+        return "product/tags";
+    }
+
     @RequestMapping("/product/{id}")
     public String detail(@PathVariable("id") String id, Model model) {
 

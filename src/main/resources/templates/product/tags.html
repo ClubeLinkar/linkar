@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="linkar">
+
+<head>
+    <title>Linkar</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+
+<body ng-controller="ProductController">
+
+<div class="container">
+
+    <ul class="list-group">
+
+
+        <div ng-repeat="product in productList" class="row list-group-item">
+            <div class="col-sm-5">
+                <img src="https://lh5.googleusercontent.com/2I-Pfm1R9pJ6-spLMr-MJkzkdJF1JvONOMqLVZmDpMWE-trNLaduMA3toxEsnxDdUAZ8SQ=w1896-h859"/>
+            </div>
+            <div class="col-sm-5">
+                <h3>{{product.name}}</h3>
+
+                <h4>R$ {{product.price}}</h4>
+            </div>
+            <div class="col-sm-2">
+                <div id="qrcode"></div>
+            </div>
+        </div>
+
+
+    </ul>
+
+    <div id="pnl_message">{{mensagem}}</div>
+
+</div>
+
+
+<script src="/js/lib/qrcode.js"></script>
+
+<script type="text/javascript">
+
+    var qrCode = document.getElementById("qrcode")
+
+    new QRCode(qrCode, {
+        text: "http://clubelinkar.com.br/checkout/abc123loja/xyz321produto",
+        width: 96,
+        height: 96
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="/js/app/app.js"></script>
+<script src="/js/app/controller/ProductController.js"></script>
+
+</body>
+
+
+</html>
