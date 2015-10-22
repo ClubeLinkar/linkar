@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/linkar-admin.jar
+web: java $JAVA_OPTS -jar target/linkar-admin-0.0.1-SNAPSHOT.jar
