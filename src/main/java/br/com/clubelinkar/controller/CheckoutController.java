@@ -31,7 +31,7 @@ public class CheckoutController {
     private PurchaseRepository purchaseRepository;
 
     @RequestMapping(value = "/checkout/{storeId}/{productId}", method = RequestMethod.GET)
-    public String checkout(Model model, @PathVariable("storeId") String storeId,
+    public String create(Model model, @PathVariable("storeId") String storeId,
                              @PathVariable("productId") String productId) {
 
 

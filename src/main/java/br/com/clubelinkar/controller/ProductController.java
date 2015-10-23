@@ -24,7 +24,7 @@ public class ProductController {
 
         model.addAttribute("product", new Product());
 
-        model.addAttribute("stores", storeRepository.findAll());
+//        model.addAttribute("stores", storeRepository.findAll());
 
         return "product/form";
     }
