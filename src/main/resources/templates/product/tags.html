@@ -21,9 +21,10 @@
                 <h3>{{product.name}}</h3>
 
                 <h4>R$ {{product.price}}</h4>
+
             </div>
             <div class="col-sm-2">
-                <div id="qrcode"></div>
+                <img src="/qrcode/{{product.storeId}}/{{product.id}}" />
             </div>
         </div>
 
@@ -33,20 +34,6 @@
     <div id="pnl_message">{{mensagem}}</div>
 
 </div>
-
-
-<script src="/js/lib/qrcode.js"></script>
-
-<script type="text/javascript">
-
-    var qrCode = document.getElementById("qrcode")
-
-    new QRCode(qrCode, {
-        text: "http://clubelinkar.com.br/checkout/abc123loja/xyz321produto",
-        width: 96,
-        height: 96
-    });
-</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src="/js/app/app.js"></script>
