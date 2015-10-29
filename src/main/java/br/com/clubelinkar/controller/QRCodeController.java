@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -20,11 +21,14 @@ public class QRCodeController {
 
     @ResponseBody
     @RequestMapping(value = "/qrcode/{storeId}/{productId}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] qrcode(@PathVariable("storeId") String storeId, @PathVariable("productId") String productId) throws IOException {
+    public byte[] qrcode(@PathVariable("storeId") String storeId,
+                         @PathVariable("productId") String productId,
+                         HttpServletRequest request) throws IOException {
 
-        String url = "http://45.55.43.168:8080/checkout/" + storeId + "/" + productId;
+        String url = String.format("http://%s:%d/checkout/%s/%s", request.getServerName(), request.getServerPort(), storeId, productId);
 
         ByteArrayOutputStream in = QRCode.from(url).to(ImageType.PNG).stream();
+
         return in.toByteArray();
     }
 
