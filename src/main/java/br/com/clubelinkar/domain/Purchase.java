@@ -1,6 +1,7 @@
 package br.com.clubelinkar.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
@@ -15,7 +16,15 @@ public class Purchase {
     @Id
     private String id;
 
-    private String userId;
+    private String customerId;
+
+    @Transient
+    private String customerPassword;
+
+    private String storeId;
+
+    @Transient
+    private String storePassword;
 
     private String productId;
 
@@ -36,13 +45,7 @@ public class Purchase {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getProductId() {
         return productId;
@@ -74,5 +77,39 @@ public class Purchase {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getStorePassword() {
+        return storePassword;
+    }
+
+    public void setStorePassword(String storePassword) {
+        this.storePassword = storePassword;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getCustomerPassword() {
+        return customerPassword;
+    }
+
+    public void setCustomerPassword(String customerPassword) {
+        this.customerPassword = customerPassword;
     }
 }

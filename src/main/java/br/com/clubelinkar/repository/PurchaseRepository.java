@@ -7,4 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author Lennon Jesus
  */
 public interface PurchaseRepository extends MongoRepository<Purchase, String> {
+    Purchase findByCustomerIdAndStoreIdAndProductId(String customerId, String storeId, String productId);
 }

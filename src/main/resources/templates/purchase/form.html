@@ -39,11 +39,7 @@
     <fieldset class="fieldset">
         <legend>Loja</legend>
 
-
-        <div class="form-group">
-            <label for="storeId">storeId:</label>
-            <input type="text" id="storeId" ng-model="purchase.store.id" class="form-control"/>
-        </div>
+        <input type="hidden" id="storeId" ng-model="purchase.store.id" class="form-control"/>
 
         <div class="form-group">
             <label for="storePass">storePass:</label>
@@ -60,11 +56,7 @@
     <fieldset class="fieldset">
         <legend>Produto</legend>
 
-
-        <div class="form-group">
-            <label for="productId">productId:</label>
-            <input type="text" id="productId" ng-model="purchase.product.id" class="form-control"/>
-        </div>
+        <input type="hidden" id="productId" ng-model="purchase.product.id" class="form-control"/>
 
         <div class="form-group">
             <label for="productName">productName:</label>
@@ -82,7 +74,7 @@
 
     </fieldset>
 
-    <button ng-click="salvar()" class="btn btn-primary">salvar</button>
+    <button ng-click="checkout()" class="btn btn-primary">salvar</button>
 
     <div id="pnl_message">{{mensagem}}</div>
 
