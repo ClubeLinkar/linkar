@@ -29,6 +29,11 @@
     </div>
 
     <div class="form-group">
+        <label for="password">password:</label>
+        <input type="password" id="password" ng-model="customer.password" class="form-control" />
+    </div>
+
+    <div class="form-group">
         <label for="district">district:</label>
         <input type="text" id="district" ng-model="customer.district" class="form-control"/>
     </div>
@@ -47,9 +52,9 @@
     <div id="pnl_message">{{mensagem}}</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="/js/app/app.js"></script>
-    <script src="/js/app/controller/CustomerController.js"></script>
-    <script src="/js/app/directive/ufDirective.js"></script>
+    <script src="/app/js/app.js"></script>
+    <script src="/app/js/controller/CustomerController.js"></script>
+    <script src="/app/js/directive/ufDirective.js"></script>
 
 </div>
 
