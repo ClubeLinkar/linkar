@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @author Lennon Jesus
@@ -17,6 +18,9 @@ public class Purchase {
     private String id;
 
     private String customerId;
+
+    @Transient
+    private String customerEmail;
 
     @Transient
     private String customerPassword;
@@ -32,7 +36,7 @@ public class Purchase {
 
     private Long earnedPoints;
 
-    private LocalDateTime dateTime;
+    private Date dateTime;
 
     public Purchase() {
     }
@@ -71,11 +75,11 @@ public class Purchase {
         this.earnedPoints = earnedPoints;
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -111,5 +115,13 @@ public class Purchase {
 
     public void setCustomerPassword(String customerPassword) {
         this.customerPassword = customerPassword;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 }

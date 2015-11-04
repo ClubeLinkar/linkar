@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Optional;
 
 /**
@@ -44,7 +45,7 @@ public class CheckoutRestController {
     public Purchase checkout(@RequestBody Purchase purchase) {
 
         // verificar se userId e userPass coincidem
-        Customer customer = customerRepository.findByEmailAndPassword(purchase.getCustomerId(), purchase.getCustomerPassword());
+        Customer customer = customerRepository.findByEmailAndPassword(purchase.getCustomerEmail(), purchase.getCustomerPassword());
         if (customer == null) throw new InvalidCustomerException();
 
         // verificar se storeId e storePass coincidem
@@ -59,7 +60,8 @@ public class CheckoutRestController {
         Purchase existingPurchase = purchaseRepository.findByCustomerIdAndStoreIdAndProductId(customer.getId(), store.getId(), product.getId());
         if (existingPurchase != null) throw new RepeatedPurchaseException();
 
-        purchase.setDateTime(LocalDateTime.now());
+        purchase.setCustomerId(customer.getId());
+        purchase.setDateTime(Calendar.getInstance().getTime());
 
         return purchaseRepository.save(purchase);
     }
