@@ -27,16 +27,16 @@ import static org.junit.Assert.assertTrue
 class PurchaseRepositoryIntegrationTest {
 
     @Autowired
-    private static PurchaseRepository purchaseRepository
+    private PurchaseRepository purchaseRepository
 
-    @BeforeClass
-    public static void setupData() {
+    @Before
+    public void setupData() {
         purchaseRepository.save(new Purchase(customerId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
         purchaseRepository.save(new Purchase(customerId: "customer_id_2", storeId: "store_id_2", productId: "product_id_2"))
     }
 
-    @AfterClass
-    public static void destroyData() {
+    @After
+    public void destroyData() {
         purchaseRepository.deleteAll()
     }
 

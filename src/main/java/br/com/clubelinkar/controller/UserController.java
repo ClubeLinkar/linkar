@@ -20,4 +20,9 @@ public class UserController {
         return "customer/list";
     }
 
+    @RequestMapping("/user/dashboard")
+    public String dashboard() {
+        return "customer/dashboard";
+    }
+
 }
