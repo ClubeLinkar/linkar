@@ -8,11 +8,14 @@ angular.module("linkar")
         $scope.purchase = {};
 
         $http.get("/api/v1/product/" + productId).success(function (data) {
-            $scope.purchase.product = data;
+            console.log(data.name + data.id);
+            $scope.purchase.productId = data.id;
+            $scope.purchase.productName = data.name;
         });
 
         $http.get("/api/v1/store/" + storeId).success(function (data) {
-            $scope.purchase.store = data;
+            $scope.purchase.storeId = data.id;
+            $scope.purchase.storeName = data.name;
         });
 
 
@@ -22,8 +25,10 @@ angular.module("linkar")
             // verificar se storeId e productStoreId coincidem
             // verificar se nao existe um purchase by userId + storeId + productId
 
-            $http.post("/api/v1/checkout", $scope.purchase).success(function () {
+            $http.post("/api/v1/checkout", $scope.purchase).then(function () {
                 $scope.mensagem = "Purchase adicionada com sucesso!";
+            }, function (error) {
+                $scope.mensagem = error;
             });
 
         }
