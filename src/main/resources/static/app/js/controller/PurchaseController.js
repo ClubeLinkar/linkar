@@ -11,6 +11,9 @@ angular.module("linkar")
             console.log(data.name + data.id);
             $scope.purchase.productId = data.id;
             $scope.purchase.productName = data.name;
+            $scope.purchase.purchasePrice = data.price;
+            $scope.purchase.earnedPoints = Math.ceil(data.price / 1.3);
+
         });
 
         $http.get("/api/v1/store/" + storeId).success(function (data) {
@@ -28,7 +31,7 @@ angular.module("linkar")
             $http.post("/api/v1/checkout", $scope.purchase).then(function () {
                 $scope.mensagem = "Purchase adicionada com sucesso!";
             }, function (error) {
-                $scope.mensagem = error;
+                $scope.mensagem = error.data.message;
             });
 
         }
