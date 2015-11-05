@@ -3,9 +3,7 @@ package br.com.clubelinkar.repository
 import br.com.clubelinkar.LinkarAdminApplication
 import br.com.clubelinkar.domain.Purchase
 import org.junit.After
-import org.junit.AfterClass
 import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,10 +11,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration
 import org.springframework.boot.test.WebIntegrationTest
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertNotNull
-import static org.junit.Assert.assertNull
-import static org.junit.Assert.assertTrue
+import static org.junit.Assert.*
 
 /**
  * @author Lennon Jesus

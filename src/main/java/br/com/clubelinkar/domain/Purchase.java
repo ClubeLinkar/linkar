@@ -1,5 +1,7 @@
 package br.com.clubelinkar.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -49,7 +51,45 @@ public class Purchase {
         this.id = id;
     }
 
+    public String getCustomerId() {
+        return customerId;
+    }
 
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getCustomerPassword() {
+        return customerPassword;
+    }
+
+    public void setCustomerPassword(String customerPassword) {
+        this.customerPassword = customerPassword;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getStorePassword() {
+        return storePassword;
+    }
+
+    public void setStorePassword(String storePassword) {
+        this.storePassword = storePassword;
+    }
 
     public String getProductId() {
         return productId;
@@ -83,45 +123,27 @@ public class Purchase {
         this.dateTime = dateTime;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
 
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public String getStoreId() {
-        return storeId;
+        Purchase purchase = (Purchase) o;
+
+        return new EqualsBuilder()
+                .append(customerId, purchase.customerId)
+                .append(storeId, purchase.storeId)
+                .append(productId, purchase.productId)
+                .isEquals();
     }
 
-    public void setStoreId(String storeId) {
-        this.storeId = storeId;
-    }
-
-    public String getStorePassword() {
-        return storePassword;
-    }
-
-    public void setStorePassword(String storePassword) {
-        this.storePassword = storePassword;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerPassword() {
-        return customerPassword;
-    }
-
-    public void setCustomerPassword(String customerPassword) {
-        this.customerPassword = customerPassword;
-    }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(customerId)
+                .append(storeId)
+                .append(productId)
+                .toHashCode();
     }
 }
