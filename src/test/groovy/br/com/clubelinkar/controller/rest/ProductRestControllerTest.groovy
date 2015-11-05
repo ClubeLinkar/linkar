@@ -20,7 +20,7 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
 
         def airFilter = new Product()
 
-        def result = mockMvc.perform(post("/product")
+        def result = mockMvc.perform(post("/api/v1/product")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(airFilter))
         ).andExpect(status().isOk()).andReturn()
@@ -38,7 +38,7 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
     @Test
     public void "Deve listar corretamente todas os produtos de todas as lojas cadastradas no sistema"() {
 
-        def result = mockMvc.perform(get("/product")).andExpect(status().isOk()).andReturn()
+        def result = mockMvc.perform(get("/api/v1/product")).andExpect(status().isOk()).andReturn()
 
         def stores = new Gson().fromJson(result.response.contentAsString, List)
 
