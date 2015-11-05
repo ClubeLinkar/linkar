@@ -23,11 +23,6 @@ angular.module("linkar")
 
 
         $scope.checkout = function () {
-            // verificar se userId e userPass coincidem
-            // verificar se storeId e storePass coincidem
-            // verificar se storeId e productStoreId coincidem
-            // verificar se nao existe um purchase by userId + storeId + productId
-
             $http.post("/api/v1/checkout", $scope.purchase).then(function () {
                 $scope.mensagem = "Purchase adicionada com sucesso!";
             }, function (error) {
