@@ -1,0 +1,23 @@
+{
+  "name": "linkar-frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Lennon Jesus <lennon.jesus@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.5"
+  }
+}
