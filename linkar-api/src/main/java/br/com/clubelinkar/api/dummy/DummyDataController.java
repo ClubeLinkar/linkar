@@ -1,18 +1,16 @@
-package br.com.clubelinkar.dummy;
+package br.com.clubelinkar.api.dummy;
 
-import br.com.clubelinkar.repository.CustomerRepository;
-import br.com.clubelinkar.repository.ProductRepository;
-import br.com.clubelinkar.repository.PurchaseRepository;
-import br.com.clubelinkar.repository.StoreRepository;
+import br.com.clubelinkar.api.user.CustomerRepository;
+import br.com.clubelinkar.api.product.ProductRepository;
+import br.com.clubelinkar.api.purchase.PurchaseRepository;
+import br.com.clubelinkar.api.store.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static br.com.clubelinkar.dummy.DummyDomainObjectMother.getCustomer;
-import static br.com.clubelinkar.dummy.DummyDomainObjectMother.getProduct;
-import static br.com.clubelinkar.dummy.DummyDomainObjectMother.getStore;
+import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getCustomer;
+import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getProduct;
+import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getStore;
 
 /**
  * @author Lennon Jesus

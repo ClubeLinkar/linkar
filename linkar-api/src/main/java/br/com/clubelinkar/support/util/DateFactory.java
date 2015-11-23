@@ -1,4 +1,4 @@
-package br.com.clubelinkar.util;
+package br.com.clubelinkar.support.util;
 
 import org.springframework.stereotype.Component;
 

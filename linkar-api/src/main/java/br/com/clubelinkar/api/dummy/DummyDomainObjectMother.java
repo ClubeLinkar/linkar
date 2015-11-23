@@ -1,8 +1,8 @@
-package br.com.clubelinkar.dummy;
+package br.com.clubelinkar.api.dummy;
 
-import br.com.clubelinkar.domain.Customer;
-import br.com.clubelinkar.domain.Product;
-import br.com.clubelinkar.domain.Store;
+import br.com.clubelinkar.api.user.Customer;
+import br.com.clubelinkar.api.product.Product;
+import br.com.clubelinkar.api.store.Store;
 
 import java.math.BigDecimal;
 

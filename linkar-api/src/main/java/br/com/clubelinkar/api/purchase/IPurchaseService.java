@@ -1,6 +1,6 @@
-package br.com.clubelinkar.service;
+package br.com.clubelinkar.api.purchase;
 
-import br.com.clubelinkar.domain.Purchase;
+import br.com.clubelinkar.api.purchase.Purchase;
 
 /**
  * @author Lennon Jesus

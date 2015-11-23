@@ -1,8 +1,7 @@
-package br.com.clubelinkar.repository;
+package br.com.clubelinkar.api.product;
 
-import br.com.clubelinkar.domain.Product;
+import br.com.clubelinkar.api.product.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

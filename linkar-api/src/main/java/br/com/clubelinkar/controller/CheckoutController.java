@@ -1,11 +1,11 @@
 package br.com.clubelinkar.controller;
 
-import br.com.clubelinkar.domain.Product;
-import br.com.clubelinkar.domain.Purchase;
-import br.com.clubelinkar.domain.Store;
-import br.com.clubelinkar.repository.ProductRepository;
-import br.com.clubelinkar.repository.PurchaseRepository;
-import br.com.clubelinkar.repository.StoreRepository;
+import br.com.clubelinkar.api.product.Product;
+import br.com.clubelinkar.api.purchase.Purchase;
+import br.com.clubelinkar.api.store.Store;
+import br.com.clubelinkar.api.product.ProductRepository;
+import br.com.clubelinkar.api.purchase.PurchaseRepository;
+import br.com.clubelinkar.api.store.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

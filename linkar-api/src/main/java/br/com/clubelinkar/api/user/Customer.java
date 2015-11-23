@@ -1,4 +1,4 @@
-package br.com.clubelinkar.domain;
+package br.com.clubelinkar.api.user;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

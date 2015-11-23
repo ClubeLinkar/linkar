@@ -1,8 +1,6 @@
 package br.com.clubelinkar.controller.rest;
 
-import br.com.clubelinkar.LinkarAdminApplication
-import br.com.clubelinkar.domain.Store
-import com.google.gson.Gson;
+import br.com.clubelinkar.LinkarApplication
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
  * @author Lennon Jesus
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = LinkarAdminApplication.class)
+@SpringApplicationConfiguration(classes = LinkarApplication.class)
 @WebAppConfiguration
 public class BaseRestControllerTest {
 

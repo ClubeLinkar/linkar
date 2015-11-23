@@ -1,7 +1,8 @@
 package br.com.clubelinkar.repository
 
-import br.com.clubelinkar.LinkarAdminApplication
-import br.com.clubelinkar.domain.Purchase
+import br.com.clubelinkar.LinkarApplication
+import br.com.clubelinkar.api.purchase.Purchase
+import br.com.clubelinkar.api.purchase.PurchaseRepository
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -17,7 +18,7 @@ import static org.junit.Assert.*
  * @author Lennon Jesus
  */
 @RunWith(SpringJUnit4ClassRunner)
-@SpringApplicationConfiguration(classes = LinkarAdminApplication)
+@SpringApplicationConfiguration(classes = LinkarApplication)
 @WebIntegrationTest
 class PurchaseRepositoryIntegrationTest {
 

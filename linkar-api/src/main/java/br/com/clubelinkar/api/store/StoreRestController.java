@@ -1,8 +1,5 @@
-package br.com.clubelinkar.controller.rest;
+package br.com.clubelinkar.api.store;
 
-import br.com.clubelinkar.domain.Product;
-import br.com.clubelinkar.domain.Store;
-import br.com.clubelinkar.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

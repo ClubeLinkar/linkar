@@ -1,6 +1,6 @@
-package br.com.clubelinkar.repository;
+package br.com.clubelinkar.api.user;
 
-import br.com.clubelinkar.domain.Customer;
+import br.com.clubelinkar.api.user.Customer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
