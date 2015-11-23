@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist',
-    apiUrl: 'aaaa'
+    apiUrl: 'api'
   };
 
   // Define the configuration for all the tasks
