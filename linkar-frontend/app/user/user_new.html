@@ -1,36 +1,43 @@
 <div class="container">
 
-  <div id="pnl_message">{{message}}</div>
+    <h1>Registrar User</h1>
 
-  <div class="container">
-      <div class="form-group">
-          <label for="name" >Nome:</label>
-          <input type="text" id="name" ng-model="store.name" class="form-control"/>
-      </div>
-
-      <div class="form-group">
-          <label for="description">Descrição:</label>
-          <input type="text" id="description" ng-model="store.description" class="form-control" required />
-      </div>
-
-      <div class="form-group">
-          <label for="address">Endereço:</label>
-          <input type="text" id="address" ng-model="store.address" class="form-control"/>
-      </div>
-      <div class="form-group">
-          <label for="phones">Telefone:</label>
-          <input type="text" id="phones" ng-model="store.phones" class="form-control"/>
-      </div>
-      <div class="form-group">
-          <label for="email">E-mail:</label>
-          <input type="text" id="email" ng-model="store.email" class="form-control"/>
-      </div>
-      <div class="form-group">
-          <label for="url">Site:</label>
-          <input type="text" id="url" ng-model="store.url" class="form-control"/>
-      </div>
-
-      <input value="Salvar" type="submit" ng-click="vm.save()" class="btn btn-primary" />
+    <div class="form-group">
+        <label for="name" >Nome:</label>
+        <input type="text" id="name" ng-model="customer.name" class="form-control"/>
     </div>
+
+    <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" ng-model="customer.email" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" ng-model="customer.cpf" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" ng-model="customer.password" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="district">Bairro:</label>
+        <input type="text" id="district" ng-model="customer.district" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="city">Cidade:</label>
+        <input type="text" id="city" ng-model="customer.city" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label for="state">Estado:</label>
+        <uf id="state" ng-model="customer.state" class="form-control" />
+    </div>
+
+    <button ng-click="vm.save()" class="btn btn-primary">salvar</button>
+
+    <div id="pnl_message">{{mensagem}}</div>
 
 </div>
