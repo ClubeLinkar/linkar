@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author Lennon Jesus
  */
-@Controller
+//@Controller
+@Deprecated
 public class HomeController {
 
     @RequestMapping("/")
