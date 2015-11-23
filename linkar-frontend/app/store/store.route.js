@@ -11,6 +11,10 @@
       templateUrl: 'store/store.html',
       controller: 'Store',
       controllerAs: 'vm'
+    }).when('/store/new', {
+      templateUrl: 'store/store_new.html',
+      controller: 'Store',
+      controllerAs: 'vm'
     });
   }
 })();
