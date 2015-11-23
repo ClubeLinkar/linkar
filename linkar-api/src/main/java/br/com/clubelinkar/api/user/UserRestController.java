@@ -14,17 +14,17 @@ import java.util.List;
  * @author Lennon Jesus
  */
 @RestController
-public class CustomerRestController {
+public class UserRestController {
 
     @Autowired
     private CustomerRepository customerRepository;
 
-    @RequestMapping(value = "/api/v1/customer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Customer create(@RequestBody @Valid Customer customer) {
         return customerRepository.save(customer);
     }
 
-    @RequestMapping(value = "/api/v1/customer", method = RequestMethod.GET)
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
