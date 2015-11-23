@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * @author Lennon Jesus
  */
-@Controller
+//@Controller
+@Deprecated
 public class StoreController {
 
     @Autowired

@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * @author Lennon Jesus
  */
-@Controller
+//@Controller
+@Deprecated
 public class UserController {
 
     @RequestMapping(value = "/user/new", method = RequestMethod.GET)
