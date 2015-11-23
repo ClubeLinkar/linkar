@@ -4,36 +4,36 @@
 
     <div class="form-group">
         <label for="name" >Nome:</label>
-        <input type="text" id="name" ng-model="customer.name" class="form-control"/>
+        <input type="text" id="name" ng-model="user.name" class="form-control"/>
     </div>
 
     <div class="form-group">
         <label for="email">E-mail:</label>
-        <input type="text" id="email" ng-model="customer.email" class="form-control"/>
+        <input type="text" id="email" ng-model="user.email" class="form-control"/>
     </div>
 
     <div class="form-group">
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" ng-model="customer.cpf" class="form-control" />
+        <input type="text" id="cpf" ng-model="user.cpf" class="form-control" />
     </div>
 
     <div class="form-group">
         <label for="password">Senha:</label>
-        <input type="password" id="password" ng-model="customer.password" class="form-control" />
+        <input type="password" id="password" ng-model="user.password" class="form-control" />
     </div>
 
     <div class="form-group">
         <label for="district">Bairro:</label>
-        <input type="text" id="district" ng-model="customer.district" class="form-control"/>
+        <input type="text" id="district" ng-model="user.district" class="form-control"/>
     </div>
     <div class="form-group">
         <label for="city">Cidade:</label>
-        <input type="text" id="city" ng-model="customer.city" class="form-control"/>
+        <input type="text" id="city" ng-model="user.city" class="form-control"/>
     </div>
 
     <div class="form-group">
         <label for="state">Estado:</label>
-        <uf id="state" ng-model="customer.state" class="form-control" />
+        <uf id="state" ng-model="user.state" class="form-control" />
     </div>
 
     <button ng-click="vm.save()" class="btn btn-primary">salvar</button>
