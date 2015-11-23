@@ -10,23 +10,23 @@ import java.util.List;
 /**
  * @author Lennon Jesus
  */
-@RestController("/api/v1/store")
+@RestController("/store")
 public class StoreRestController {
 
     @Autowired
     private StoreRepository storeRepository;
 
-    @RequestMapping(value = "/api/v1/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Store create(@RequestBody @Valid Store store) {
         return storeRepository.save(store);
     }
 
-    @RequestMapping(value = "/api/v1/store", method = RequestMethod.GET)
+    @RequestMapping(value = "/store", method = RequestMethod.GET)
     public List<Store> findAll() {
         return storeRepository.findAll();
     }
 
-    @RequestMapping(value = "/api/v1/store/{id}")
+    @RequestMapping(value = "/store/{id}")
     public Store getById(@PathVariable("id") String id) {
         return storeRepository.findOne(id);
     }
