@@ -1,4 +1,4 @@
-package br.com.clubelinkar.controller;
+package br.com.clubelinkar.support.qrcode;
 
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
