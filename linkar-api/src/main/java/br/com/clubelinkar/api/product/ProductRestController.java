@@ -10,28 +10,28 @@ import java.util.List;
 /**
  * @author Lennon Jesus
  */
-@RestController("/api/v1/product")
+@RestController("/product")
 public class ProductRestController {
 
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(value = "/api/v1/product", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Product create(@RequestBody @Valid Product product) {
         return productRepository.save(product);
     }
 
-    @RequestMapping(value = "/api/v1/product", method = RequestMethod.GET)
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    @RequestMapping(value = "/api/v1/product/{id}")
+    @RequestMapping(value = "/product/{id}")
     public Product getById(@PathVariable("id") String id) {
         return productRepository.findOne(id);
     }
 
-    @RequestMapping(value = "/api/v1/product/store/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/store/{id}", method = RequestMethod.GET)
     public List<Product> findByStoreId(@PathVariable("id") String id) {
         return productRepository.findByStoreId(id);
     }
