@@ -1,15 +1,15 @@
 package br.com.clubelinkar.service.impl
 
 import br.com.clubelinkar.api.purchase.PurchaseService
-import br.com.clubelinkar.api.user.Customer
+import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.api.product.Product
 import br.com.clubelinkar.api.purchase.Purchase
 import br.com.clubelinkar.api.store.Store
-import br.com.clubelinkar.exception.InvalidCustomerException
+import br.com.clubelinkar.exception.InvalidUserException
 import br.com.clubelinkar.exception.InvalidProductException
 import br.com.clubelinkar.exception.InvalidStoreException
 import br.com.clubelinkar.exception.RepeatedPurchaseException
-import br.com.clubelinkar.api.user.CustomerRepository
+import br.com.clubelinkar.api.user.UserRepository
 import br.com.clubelinkar.api.product.ProductRepository
 import br.com.clubelinkar.api.purchase.PurchaseRepository
 import br.com.clubelinkar.api.store.StoreRepository
@@ -44,7 +44,7 @@ class PurchaseServiceUnitTest {
     private PurchaseRepository purchaseRepositoryMock
 
     @Mock
-    private CustomerRepository customerRepositoryMock
+    private UserRepository customerRepositoryMock
 
     @InjectMocks
     @Spy
@@ -69,7 +69,7 @@ class PurchaseServiceUnitTest {
         verify(purchaseRepositoryMock).save(purchase)
     }
 
-    @Test(expected = InvalidCustomerException)
+    @Test(expected = InvalidUserException)
     public void "Não deve concretizar compra se as credenciais do usuários forem inválidas"() {
         when(customerRepositoryMock.findByEmailAndPassword(purchase.customerEmail, purchase.customerPassword)).thenReturn(null)
         purchaseServiceSpy.validate(purchase)
@@ -93,8 +93,8 @@ class PurchaseServiceUnitTest {
         purchaseServiceSpy.validate(purchase)
     }
 
-    def Customer getCustomer() {
-        new Customer(id: "customer_1", name: "Lennon Jesus", email: "lennon.jesus@gmail.com", password: "123456")
+    def User getCustomer() {
+        new User(id: "customer_1", name: "Lennon Jesus", email: "lennon.jesus@gmail.com", password: "123456")
     }
 
     def Product getProduct() {

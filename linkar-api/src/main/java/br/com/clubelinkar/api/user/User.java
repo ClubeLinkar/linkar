@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Lennon Jesus
  */
 @Document
-public class Customer {
+public class User {
 
     @Id
     private String id;

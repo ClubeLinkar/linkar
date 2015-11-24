@@ -17,15 +17,15 @@ import java.util.List;
 public class UserRestController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository userRepository;
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Customer create(@RequestBody @Valid Customer customer) {
-        return customerRepository.save(customer);
+    public User create(@RequestBody @Valid User user) {
+        return userRepository.save(user);
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public List<Customer> findAll() {
-        return customerRepository.findAll();
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

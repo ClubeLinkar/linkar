@@ -1,6 +1,6 @@
 package br.com.clubelinkar.api.dummy;
 
-import br.com.clubelinkar.api.user.Customer;
+import br.com.clubelinkar.api.user.User;
 import br.com.clubelinkar.api.product.Product;
 import br.com.clubelinkar.api.store.Store;
 
@@ -11,17 +11,17 @@ import java.math.BigDecimal;
  */
 public class DummyDomainObjectMother {
 
-    public static Customer getCustomer() {
-        Customer customer = new Customer();
+    public static User getCustomer() {
+        User user = new User();
 
-        customer.setId("customer_1");
-        customer.setEmail("lennon.jesus@gmail.com");
-        customer.setCpf("099.743.617-45");
-        customer.setName("Lennon Jesus");
-        customer.setPassword("123456");
-        customer.setState("RJ");
+        user.setId("user_1");
+        user.setEmail("lennon.jesus@gmail.com");
+        user.setCpf("099.743.617-45");
+        user.setName("Lennon Jesus");
+        user.setPassword("123456");
+        user.setState("RJ");
 
-        return customer;
+        return user;
     }
 
     public static Product getProduct() {

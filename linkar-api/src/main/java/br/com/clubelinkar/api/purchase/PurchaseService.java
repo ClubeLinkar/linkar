@@ -1,18 +1,15 @@
 package br.com.clubelinkar.api.purchase;
 
-import br.com.clubelinkar.api.user.Customer;
+import br.com.clubelinkar.api.user.User;
 import br.com.clubelinkar.api.product.Product;
-import br.com.clubelinkar.api.purchase.Purchase;
 import br.com.clubelinkar.api.store.Store;
-import br.com.clubelinkar.exception.InvalidCustomerException;
+import br.com.clubelinkar.exception.InvalidUserException;
 import br.com.clubelinkar.exception.InvalidProductException;
 import br.com.clubelinkar.exception.InvalidStoreException;
 import br.com.clubelinkar.exception.RepeatedPurchaseException;
-import br.com.clubelinkar.api.user.CustomerRepository;
+import br.com.clubelinkar.api.user.UserRepository;
 import br.com.clubelinkar.api.product.ProductRepository;
-import br.com.clubelinkar.api.purchase.PurchaseRepository;
 import br.com.clubelinkar.api.store.StoreRepository;
-import br.com.clubelinkar.api.purchase.IPurchaseService;
 import br.com.clubelinkar.support.util.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +33,7 @@ public class PurchaseService implements IPurchaseService {
     private PurchaseRepository purchaseRepository;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository userRepository;
 
     @Override
     public Purchase save(Purchase purchase) {
@@ -50,9 +47,9 @@ public class PurchaseService implements IPurchaseService {
 
     protected void validate(Purchase purchase) {
         // verificar se userId e userPass coincidem
-        Customer customer = customerRepository.findByEmailAndPassword(purchase.getCustomerEmail(), purchase.getCustomerPassword());
-        if (customer == null) throw new InvalidCustomerException();
-        purchase.setCustomerId(customer.getId());
+        User user = userRepository.findByEmailAndPassword(purchase.getCustomerEmail(), purchase.getCustomerPassword());
+        if (user == null) throw new InvalidUserException();
+        purchase.setCustomerId(user.getId());
 
         // verificar se storeId e storePass coincidem
         Store store = storeRepository.findByIdAndPassword(purchase.getStoreId(), purchase.getStorePassword());
@@ -63,7 +60,7 @@ public class PurchaseService implements IPurchaseService {
         if (product == null || !store.getId().equals(product.getStoreId())) throw new InvalidProductException();
 
         // verificar se nao existe um purchase by userId + storeId + productId
-        Purchase existingPurchase = purchaseRepository.findByCustomerIdAndStoreIdAndProductId(customer.getId(), store.getId(), product.getId());
+        Purchase existingPurchase = purchaseRepository.findByCustomerIdAndStoreIdAndProductId(user.getId(), store.getId(), product.getId());
         if (existingPurchase != null) throw new RepeatedPurchaseException();
     }
 

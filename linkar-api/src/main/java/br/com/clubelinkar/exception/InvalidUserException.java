@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * @author Lennon Jesus
  */
-@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Customer nao existe    ")
-public class InvalidCustomerException extends RuntimeException {
+@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="User nao existe    ")
+public class InvalidUserException extends RuntimeException {
 
-    public InvalidCustomerException() {
+    public InvalidUserException() {
         super();
     }
 
