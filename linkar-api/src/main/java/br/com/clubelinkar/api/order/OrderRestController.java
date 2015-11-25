@@ -7,18 +7,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author Lennon Jesus
  */
 @RestController
-public class CheckoutRestController {
+public class OrderRestController {
 
     @Autowired
-    private IOrderService purchaseService;
+    private IOrderService orderService;
 
-    @RequestMapping(value = "/api/v1/checkout", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) // FIXME melhorar essa url
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Order checkout(@RequestBody Order order) {
-        return purchaseService.save(order);
+        return orderService.save(order);
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public List<Order> findAll() {
+        return orderRepository.findAll(); // FIXME REMOVER ACESSO A ESTE METODO
     }
 
 }

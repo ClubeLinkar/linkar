@@ -35,8 +35,6 @@ public class Order {
 
     private BigDecimal purchasePrice;
 
-    private Long earnedPoints;
-
     private Date dateTime;
 
     public Order() {
@@ -104,14 +102,6 @@ public class Order {
 
     public void setPurchasePrice(BigDecimal purchasePrice) {
         this.purchasePrice = purchasePrice;
-    }
-
-    public Long getEarnedPoints() {
-        return earnedPoints;
-    }
-
-    public void setEarnedPoints(Long earnedPoints) {
-        this.earnedPoints = earnedPoints;
     }
 
     public Date getDateTime() {
