@@ -1,11 +1,4 @@
-// Generated on 2014-09-30 using generator-angular 0.9.8
 'use strict';
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
 
@@ -19,7 +12,10 @@ module.exports = function (grunt) {
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist',
-    apiUrl: 'aaaa'
+    apiUrl: 'h-apps.mprj.mp.br',
+
+    e2e: 'coverage/e2e',
+    instrumentedE2E: 'coverage/e2e/instrumented'
   };
 
   // Define the configuration for all the tasks
@@ -34,21 +30,7 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/conponents/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
-      jsTest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
-      },
-      css: {
-        files: ['<%= yeoman.app %>/css/{,*/}*.css'],
-        tasks: ['newer:copy:css', 'autoprefixer']
-      },
+
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -57,10 +39,8 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/css/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.app %>/fonts/**'
+          '<%= yeoman.app %>/**/*.{html,js,css,png,jpg,jpeg,gif,webp,svg}',
+          '.tmp/css/{,*/}*.css'
         ]
       }
     },
@@ -80,7 +60,7 @@ module.exports = function (grunt) {
             return [
               require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
-              connect().use('/bower_components',connect.static('./bower_components')),
+              connect().use('/bower_components', connect.static('./bower_components')),
               connect.static(appConfig.app)
             ];
           }
@@ -95,10 +75,10 @@ module.exports = function (grunt) {
           changeOrigin: false,
           xforward: false,
           headers: {
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Max-Age":"3600",
-            "Access-Control-Expose-Headers": "title, message"
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Max-Age': '3600',
+            'Access-Control-Expose-Headers': 'title, message'
           }
         }
       ],
@@ -109,12 +89,24 @@ module.exports = function (grunt) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
-              connect().use('/bower_components',connect.static('./bower_components')),
+              connect().use('/bower_components', connect.static('./bower_components')),
               connect.static(appConfig.app)
             ];
           }
         }
       },
+
+      runtime: {
+        options: {
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '<%= yeoman.instrumentedE2E% >')
+            ];
+          }
+        }
+      },
+
       dist: {
         options: {
           open: true,
@@ -122,6 +114,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     // Make sure code css are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -131,17 +124,17 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/components/{,*/}*.js'
+          '<%= yeoman.app %>/modules/{,*/}*.js'
         ]
       },
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/unit/{,*/}*.js']
       }
     },
+
 
     // Empties folders to start fresh
     clean: {
@@ -177,8 +170,7 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath: /\.\.\//,
-        exclude: ['bower_components/moment/moment.js', 'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js']
+        ignorePath: /\.\.\//
       }
     },
 
@@ -188,8 +180,11 @@ module.exports = function (grunt) {
         src: [
           '<%= yeoman.dist %>/scripts/*{,*/}*.js',
           '<%= yeoman.dist %>/css/{,*/}*.css',
+          '!<%= yeoman.dist %>/bower_components/pdfjs-dist/build/pdf.js',
+          '!<%= yeoman.dist %>/bower_components/pdfjs-dist/build/pdf.worker.js',
           '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           '<%= yeoman.dist %>/css/fonts/*'
+
         ]
       }
     },
@@ -213,12 +208,12 @@ module.exports = function (grunt) {
       }
     },
 
-    // Performs rewrites based on filerev and   the useminPrepare configuration
+    // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/css/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
       }
     },
 
@@ -242,55 +237,27 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/scripts.js'
           ]
         }
+      },
+      flipbook_serve: {
+        files: {
+          '<%= yeoman.app %>/flipbook/js/pdf_and_turn.min.js' : [
+            'flipbook_components/js/pdf.js',
+            'flipbook_components/js/turn.js'
+          ]
+        }
+      },
+      flipbook_dist: {
+        files: {
+          '<%= yeoman.dist %>/flipbook/js/pdf_and_turn.min.js' : [
+            'flipbook_components/js/pdf.js',
+            'flipbook_components/js/turn.js'
+          ]
+        }
       }
     },
     concat: {
       dist: {}
     },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-
-    //load configuration data from our environment specific json files, inject them into a copy of config.js and
-    //copy the file into our application.
-    // http://newtriks.com/2013/11/29/environment-specific-configuration-in-angularjs-using-grunt/
-    replace:{
-      local: {
-        options: {
-          patterns: [{
-            json: grunt.file.readJSON('./config/environments/local.json')
-          }]
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.js'],
-          dest: '<%= yeoman.app %>/scripts/service/'
-        }]
-      },
-      dist: {
-        options: {
-          patterns: [{
-            json: grunt.file.readJSON('./config/environments/dist.json')
-          }]
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.js'],
-          dest: '<%= yeoman.app %>/scripts/service/'
-        }]
-      }
-    },
-
     htmlmin: {
       dist: {
         options: {
@@ -304,7 +271,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html','components/*{,*/}*.html'],
+          src: ['**/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -332,39 +299,84 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            '*.{ico,png,txt,json}',
+            '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            '*.json',
-            'views/**/*.html',
-            'views/*.html',
+
+            './**/*.html',
+            './*.html',
             'components/**/*.html',
             'components/*.html',
-            'images/**/*.*',
-            'fonts/*'
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
+          cwd: '.tmp/imagens',
+          dest: '<%= yeoman.dist %>/imagens',
           src: ['generated/*']
-        }, {
+        } , {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
+          cwd: '<%= yeoman.app %>/layout',
+          src: 'images/**/*.*',
           dest: '<%= yeoman.dist %>'
-        }, {
+        } , {
           expand: true,
-          cwd: 'bower_components/fontawesome',
-          src: 'fonts/*',
+          cwd: '<%= yeoman.app %>/layout',
+          src: 'fonts/**/*.*',
           dest: '<%= yeoman.dist %>'
-        }]
+        }
+          , {
+            expand: true,
+            cwd: '<%= yeoman.app %>',
+            src: 'i18n/*',
+            dest: '<%= yeoman.dist %>'
+          }
+          ,{
+            expand : true,
+            cwd : 'bower_components/bootstrap-material-design/',
+            src: 'fonts/*',
+            dest : '<%= yeoman.dist %>'
+          },
+          {
+            expand : true,
+            cwd : 'bower_components/mdi/',
+            src: 'fonts/*',
+            dest : '<%= yeoman.dist %>'
+          },
+
+          {
+            expand: true,
+            cwd: 'bower_components/bootstrap/dist',
+            src: 'fonts/*',
+            dest: '<%= yeoman.dist %>'
+          }, {
+            expand: true,
+            cwd: 'bower_components/angular-ui-grid/',
+            src: ['*.woff', '*.ttf'],
+            dest: '<%= yeoman.dist %>/css'
+          }, {
+            expand: true,
+            cwd: 'bower_components/pdfjs-dist/build/',
+            src: 'pdf.worker.js',
+            dest: '<%= yeoman.dist %>/bower_components/pdfjs-dist/build/'
+          }
+          , {
+            expand: true,
+            cwd: 'bower_components/fontawesome',
+            src: 'fonts/*',
+            dest: '<%= yeoman.dist %>'
+          }]
       },
       css: {
         expand: true,
-        cwd: '<%= yeoman.app %>/css',
+        cwd: '<%= yeoman.app %>/layout/css',
         dest: '.tmp/css/',
         src: '{,*/}*.css'
+      },
+      flipbook: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/flipbook',
+        dest: '<%= yeoman.dist %>/flipbook/',
+        src: '**/*.*'
       }
     },
 
@@ -377,26 +389,19 @@ module.exports = function (grunt) {
         'copy:css'
       ],
       dist: [
-        'copy:css',
-        'svgmin'
+        'copy:css'
       ]
-    },
-
-    // Test settings
-    karma: {
-      unit: {
-        configFile: 'test/karma.conf.js',
-        singleRun: true
-      }
     },
 
     scp: {
       options: {
         host: 'd-webcacheapp01.pgj.rj.gov.br',
-        username: 'ronaldo.farrapo',
+        username: 'thiago.procaci',
         password: ''
+        //username: 'linkar',
+        //password: 'xeequa7aiB4a'
       },
-      your_target: {
+      yourTarget: {
         files: [{
           cwd: '<%= yeoman.dist %>',
           src: '**/*',
@@ -404,12 +409,108 @@ module.exports = function (grunt) {
           // path on the server
           dest: '/srv/sistema/linkar'
         }]
-      },
-    }
+      }
+    },
 
+    replace:{
+      local: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/local.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/app.env.config.js'],
+          dest: '<%= yeoman.app %>'
+        }]
+      },
+      dist: {
+        options: {
+          patterns: [{
+            json: grunt.file.readJSON('./config/environments/dist.json')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: ['./config/app.env.config.js'],
+          dest: '<%= yeoman.app %>'
+        }]
+      }
+    },
+
+    // unit tests settings
+    karma: {
+      unit: {
+        configFile: 'test/karma.conf.js',
+        singleRun: true
+      }
+    },
+
+    // e2e tests settings
+    protractor: {
+      options: {
+        noColor: false,
+        keepAlive: true
+      },
+      e2e: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
+        options: {
+          configFile: "test/protractor.conf.js", // Target-specific config file
+          args: {} // Target-specific arguments
+        }
+      }
+    },
+
+    instrument: {
+      files: 'app/**/*.js',
+      options: {
+        lazy: true,
+        basePath: "<%= yeoman.instrumentedE2E %>"
+      }
+    },
+    protractor_coverage: {
+      options: {
+        configFile: 'test/protractor.conf.js',
+        keepAlive: true,
+        noColor: false,
+        coverageDir: '<%= yeoman.instrumentedE2E %>',
+        args: {
+          baseUrl: 'http://localhost:9000'
+        },
+        run: {}
+      },
+      local: {
+        options: {
+          configFile: 'test/protractor.conf.js'
+        }
+      },
+      remote: {
+        options: {
+          configFile: 'test/protractor.conf.remote.js',
+          browser: 'phantomjs'
+        }
+      }
+    },
+    makeReport: {
+      src: '<%= yeoman.instrumentedE2E %>/*.json',
+      options: {
+        type: 'lcov',
+        dir: 'coverage/e2e/reports',
+        print: 'detail'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-karma');
+
+  grunt.loadNpmTasks('grunt-protractor-runner');
+
+  grunt.loadNpmTasks('grunt-protractor-coverage');
+
+  grunt.loadNpmTasks('grunt-istanbul');
+
   grunt.loadNpmTasks('grunt-replace');
 
 
@@ -421,6 +522,8 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'replace:local',
+      'uglify:flipbook_serve',
+      'copy:flipbook',
       'wiredep',
       'configureProxies:server',
       'concurrent:server',
@@ -430,17 +533,20 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
 
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma' //,
+    //'protractor:e2e'
+  ]);
+
+  grunt.registerTask('e2e-test', [
+    'instrument',
+    'protractor_coverage:local',
+    'makeReport'
   ]);
 
   grunt.registerTask('build', [
@@ -448,6 +554,7 @@ module.exports = function (grunt) {
     'replace:dist',
     'wiredep',
     'useminPrepare',
+    'copy:css',
     'concurrent:dist',
     'autoprefixer',
     'concat',
@@ -455,9 +562,11 @@ module.exports = function (grunt) {
     'copy:dist',
     'cssmin',
     'uglify',
+    'copy:flipbook',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'test'
   ]);
 
   grunt.registerTask('default', [
@@ -467,9 +576,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('deploy-desenv', [
-    'replace:dist',
     'build',
     'scp'
   ]);
-
 };
