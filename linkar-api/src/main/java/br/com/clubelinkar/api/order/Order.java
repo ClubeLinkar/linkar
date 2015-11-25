@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.purchase;
+package br.com.clubelinkar.api.order;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -13,18 +13,18 @@ import java.util.Date;
  * @author Lennon Jesus
  */
 @Document
-public class Purchase {
+public class Order {
 
     @Id
     private String id;
 
-    private String customerId;
+    private String userId;
 
     @Transient
-    private String customerEmail;
+    private String userEmail;
 
     @Transient
-    private String customerPassword;
+    private String userPassword;
 
     private String storeId;
 
@@ -39,7 +39,7 @@ public class Purchase {
 
     private Date dateTime;
 
-    public Purchase() {
+    public Order() {
     }
 
     public String getId() {
@@ -50,28 +50,28 @@ public class Purchase {
         this.id = id;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getCustomerPassword() {
-        return customerPassword;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setCustomerPassword(String customerPassword) {
-        this.customerPassword = customerPassword;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public String getStoreId() {
@@ -128,19 +128,19 @@ public class Purchase {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Purchase purchase = (Purchase) o;
+        Order order = (Order) o;
 
         return new EqualsBuilder()
-                .append(customerId, purchase.customerId)
-                .append(storeId, purchase.storeId)
-                .append(productId, purchase.productId)
+                .append(userId, order.userId)
+                .append(storeId, order.storeId)
+                .append(productId, order.productId)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(customerId)
+                .append(userId)
                 .append(storeId)
                 .append(productId)
                 .toHashCode();

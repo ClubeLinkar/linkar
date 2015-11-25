@@ -1,10 +1,10 @@
 package br.com.clubelinkar.controller;
 
 import br.com.clubelinkar.api.product.Product;
-import br.com.clubelinkar.api.purchase.Purchase;
+import br.com.clubelinkar.api.order.Order;
 import br.com.clubelinkar.api.store.Store;
 import br.com.clubelinkar.api.product.ProductRepository;
-import br.com.clubelinkar.api.purchase.PurchaseRepository;
+import br.com.clubelinkar.api.order.OrderRepository;
 import br.com.clubelinkar.api.store.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class CheckoutController {
     private StoreRepository storeRepository;
 
     @Autowired
-    private PurchaseRepository purchaseRepository;
+    private OrderRepository orderRepository;
 
     @RequestMapping(value = "/checkout/{storeId}/{productId}", method = RequestMethod.GET)
     public String create(Model model, @PathVariable("storeId") String storeId,
@@ -40,9 +40,9 @@ public class CheckoutController {
         Optional<Store> store = Optional.ofNullable(storeRepository.findOne(storeId));
 
         if (product.isPresent() && store.isPresent()) {
-            Purchase purchase = new Purchase();
+            Order order = new Order();
 
-            purchase.setProductId(productId);
+            order.setProductId(productId);
 
         }
 

@@ -1,8 +1,8 @@
 package br.com.clubelinkar.repository
 
 import br.com.clubelinkar.LinkarApplication
-import br.com.clubelinkar.api.purchase.Purchase
-import br.com.clubelinkar.api.purchase.PurchaseRepository
+import br.com.clubelinkar.api.order.Order
+import br.com.clubelinkar.api.order.OrderRepository
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -20,15 +20,15 @@ import static org.junit.Assert.*
 @RunWith(SpringJUnit4ClassRunner)
 @SpringApplicationConfiguration(classes = LinkarApplication)
 @WebIntegrationTest
-class PurchaseRepositoryIntegrationTest {
+class OrderRepositoryIntegrationTest {
 
     @Autowired
-    private PurchaseRepository purchaseRepository
+    private OrderRepository purchaseRepository
 
     @Before
     public void setupData() {
-        purchaseRepository.save(new Purchase(customerId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
-        purchaseRepository.save(new Purchase(customerId: "customer_id_2", storeId: "store_id_2", productId: "product_id_2"))
+        purchaseRepository.save(new Order(userId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
+        purchaseRepository.save(new Order(userId: "customer_id_2", storeId: "store_id_2", productId: "product_id_2"))
     }
 
     @After
@@ -42,10 +42,10 @@ class PurchaseRepositoryIntegrationTest {
         String storeId = "store_id_1"
         String productId = "product_id_1"
 
-        Purchase existingPurchase = purchaseRepository.findByCustomerIdAndStoreIdAndProductId(customerId, storeId, productId)
+        Order existingPurchase = purchaseRepository.findByUserIdAndStoreIdAndProductId(customerId, storeId, productId)
 
         assertNotNull existingPurchase
-        assertEquals customerId, existingPurchase.customerId
+        assertEquals customerId, existingPurchase.userId
         assertEquals storeId, existingPurchase.storeId
         assertEquals productId, existingPurchase.productId
     }
@@ -56,7 +56,7 @@ class PurchaseRepositoryIntegrationTest {
         String storeId = "store_id_1"
         String productId = "product_id_1"
 
-        Purchase existingPurchase = purchaseRepository.findByCustomerIdAndStoreIdAndProductId(customerId, storeId, productId)
+        Order existingPurchase = purchaseRepository.findByUserIdAndStoreIdAndProductId(customerId, storeId, productId)
 
         assertNull existingPurchase
     }

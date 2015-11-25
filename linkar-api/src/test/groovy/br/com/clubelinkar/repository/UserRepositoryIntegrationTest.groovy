@@ -1,9 +1,9 @@
 package br.com.clubelinkar.repository
 
 import br.com.clubelinkar.LinkarApplication
-import br.com.clubelinkar.api.purchase.PurchaseRepository
+import br.com.clubelinkar.api.order.OrderRepository
 import br.com.clubelinkar.api.user.User
-import br.com.clubelinkar.api.purchase.Purchase
+import br.com.clubelinkar.api.order.Order
 import br.com.clubelinkar.api.user.UserRepository
 import org.junit.After
 import org.junit.Before
@@ -27,13 +27,13 @@ class UserRepositoryIntegrationTest {
     def UserRepository customerRepository
 
     @Autowired
-    def PurchaseRepository purchaseRepository
+    def OrderRepository purchaseRepository
 
     @Before
     public void setupData() {
         customerRepository.save(new User(id: "customer_id_1", name: "Lennon Jesus", email: "lennon.jesus@gmail.com", password: "123456"))
 
-        purchaseRepository.save(new Purchase(customerId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
+        purchaseRepository.save(new Order(userId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
     }
 
     @After

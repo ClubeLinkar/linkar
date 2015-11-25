@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.purchase;
+package br.com.clubelinkar.api.order;
 
 import br.com.clubelinkar.api.user.User;
 import br.com.clubelinkar.api.product.Product;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @author Lennon Jesus
  */
 @Service
-public class PurchaseService implements IPurchaseService {
+public class OrderService implements IOrderService {
 
     @Autowired
     private DateFactory dateFactory;
@@ -30,38 +30,38 @@ public class PurchaseService implements IPurchaseService {
     private StoreRepository storeRepository;
 
     @Autowired
-    private PurchaseRepository purchaseRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public Purchase save(Purchase purchase) {
+    public Order save(Order order) {
 
-        validate(purchase);
+        validate(order);
 
-        purchase.setDateTime(dateFactory.now());
+        order.setDateTime(dateFactory.now());
 
-        return purchaseRepository.save(purchase);
+        return orderRepository.save(order);
     }
 
-    protected void validate(Purchase purchase) {
+    protected void validate(Order order) {
         // verificar se userId e userPass coincidem
-        User user = userRepository.findByEmailAndPassword(purchase.getCustomerEmail(), purchase.getCustomerPassword());
+        User user = userRepository.findByEmailAndPassword(order.getUserEmail(), order.getUserPassword());
         if (user == null) throw new InvalidUserException();
-        purchase.setCustomerId(user.getId());
+        order.setUserId(user.getId());
 
         // verificar se storeId e storePass coincidem
-        Store store = storeRepository.findByIdAndPassword(purchase.getStoreId(), purchase.getStorePassword());
+        Store store = storeRepository.findByIdAndPassword(order.getStoreId(), order.getStorePassword());
         if (store == null) throw new InvalidStoreException();
 
         // verificar se storeId e productStoreId coincidem
-        Product product = productRepository.findByIdAndStoreId(purchase.getProductId(), purchase.getStoreId());
+        Product product = productRepository.findByIdAndStoreId(order.getProductId(), order.getStoreId());
         if (product == null || !store.getId().equals(product.getStoreId())) throw new InvalidProductException();
 
-        // verificar se nao existe um purchase by userId + storeId + productId
-        Purchase existingPurchase = purchaseRepository.findByCustomerIdAndStoreIdAndProductId(user.getId(), store.getId(), product.getId());
-        if (existingPurchase != null) throw new RepeatedPurchaseException();
+        // verificar se nao existe um order by userId + storeId + productId
+        Order existingOrder = orderRepository.findByUserIdAndStoreIdAndProductId(user.getId(), store.getId(), product.getId());
+        if (existingOrder != null) throw new RepeatedPurchaseException();
     }
 
 }

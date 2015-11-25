@@ -2,7 +2,7 @@ package br.com.clubelinkar.api.dummy;
 
 import br.com.clubelinkar.api.user.UserRepository;
 import br.com.clubelinkar.api.product.ProductRepository;
-import br.com.clubelinkar.api.purchase.PurchaseRepository;
+import br.com.clubelinkar.api.order.OrderRepository;
 import br.com.clubelinkar.api.store.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +26,7 @@ public class DummyDataController {
     private StoreRepository storeRepository;
 
     @Autowired
-    private PurchaseRepository purchaseRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -51,7 +51,7 @@ public class DummyDataController {
     private void clearDatabase() {
         productRepository.deleteAll();
         storeRepository.deleteAll();
-        purchaseRepository.deleteAll();
+        orderRepository.deleteAll();
         userRepository.deleteAll();
     }
 

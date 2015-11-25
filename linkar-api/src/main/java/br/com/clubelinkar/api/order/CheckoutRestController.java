@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.purchase;
+package br.com.clubelinkar.api.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CheckoutRestController {
 
     @Autowired
-    private IPurchaseService purchaseService;
+    private IOrderService purchaseService;
 
     @RequestMapping(value = "/api/v1/checkout", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE) // FIXME melhorar essa url
-    public Purchase checkout(@RequestBody Purchase purchase) {
-        return purchaseService.save(purchase);
+    public Order checkout(@RequestBody Order order) {
+        return purchaseService.save(order);
     }
 
 }

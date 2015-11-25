@@ -1,9 +1,9 @@
 package br.com.clubelinkar.service.impl
 
-import br.com.clubelinkar.api.purchase.PurchaseService
+import br.com.clubelinkar.api.order.OrderService
 import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.api.product.Product
-import br.com.clubelinkar.api.purchase.Purchase
+import br.com.clubelinkar.api.order.Order
 import br.com.clubelinkar.api.store.Store
 import br.com.clubelinkar.exception.InvalidUserException
 import br.com.clubelinkar.exception.InvalidProductException
@@ -11,7 +11,7 @@ import br.com.clubelinkar.exception.InvalidStoreException
 import br.com.clubelinkar.exception.RepeatedPurchaseException
 import br.com.clubelinkar.api.user.UserRepository
 import br.com.clubelinkar.api.product.ProductRepository
-import br.com.clubelinkar.api.purchase.PurchaseRepository
+import br.com.clubelinkar.api.order.OrderRepository
 import br.com.clubelinkar.api.store.StoreRepository
 import br.com.clubelinkar.support.util.DateFactory
 import org.junit.Before
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when
  * @author Lennon Jesus
  */
 @RunWith(MockitoJUnitRunner)
-class PurchaseServiceUnitTest {
+class OrderServiceUnitTest {
 
     @Mock
     private DateFactory dateFactoryMock
@@ -41,21 +41,21 @@ class PurchaseServiceUnitTest {
     private StoreRepository storeRepositoryMock
 
     @Mock
-    private PurchaseRepository purchaseRepositoryMock
+    private OrderRepository purchaseRepositoryMock
 
     @Mock
     private UserRepository customerRepositoryMock
 
     @InjectMocks
     @Spy
-    def PurchaseService purchaseServiceSpy = new PurchaseService()
+    def OrderService purchaseServiceSpy = new OrderService()
 
     @Before
     public void setup() {
-        when(customerRepositoryMock.findByEmailAndPassword(purchase.customerEmail, purchase.customerPassword)).thenReturn(customer)
+        when(customerRepositoryMock.findByEmailAndPassword(purchase.userEmail, purchase.userPassword)).thenReturn(customer)
         when(storeRepositoryMock.findByIdAndPassword(purchase.storeId, purchase.storePassword)).thenReturn(store)
         when(productRepositoryMock.findByIdAndStoreId(purchase.productId, purchase.storeId)).thenReturn(product)
-        when(purchaseRepositoryMock.findByCustomerIdAndStoreIdAndProductId(customer.id, store.id, product.id)).thenReturn(null)
+        when(purchaseRepositoryMock.findByUserIdAndStoreIdAndProductId(customer.id, store.id, product.id)).thenReturn(null)
         when(purchaseRepositoryMock.save(purchase)).thenReturn(purchase);
     }
 
@@ -71,7 +71,7 @@ class PurchaseServiceUnitTest {
 
     @Test(expected = InvalidUserException)
     public void "Não deve concretizar compra se as credenciais do usuários forem inválidas"() {
-        when(customerRepositoryMock.findByEmailAndPassword(purchase.customerEmail, purchase.customerPassword)).thenReturn(null)
+        when(customerRepositoryMock.findByEmailAndPassword(purchase.userEmail, purchase.userPassword)).thenReturn(null)
         purchaseServiceSpy.validate(purchase)
     }
 
@@ -89,7 +89,7 @@ class PurchaseServiceUnitTest {
 
     @Test(expected = RepeatedPurchaseException)
     public void "Não deve concretizar compra já existir uma compra anterior para o mesmo produto, na mesma loja, para o mesmo usuário"() {
-        when(purchaseRepositoryMock.findByCustomerIdAndStoreIdAndProductId(customer.id, store.id, product.id)).thenReturn(purchase)
+        when(purchaseRepositoryMock.findByUserIdAndStoreIdAndProductId(customer.id, store.id, product.id)).thenReturn(purchase)
         purchaseServiceSpy.validate(purchase)
     }
 
@@ -105,11 +105,11 @@ class PurchaseServiceUnitTest {
         new Store(id: "store_1", name: "All Motos", password: "654321")
     }
 
-    def Purchase getPurchase() {
-        new Purchase(
-                customerId: customer.id,
-                customerEmail: customer.email,
-                customerPassword: customer.password,
+    def Order getPurchase() {
+        new Order(
+                userId: customer.id,
+                userEmail: customer.email,
+                userPassword: customer.password,
                 storeId: store.id,
                 storePassword: store.password,
                 productId: product.id
