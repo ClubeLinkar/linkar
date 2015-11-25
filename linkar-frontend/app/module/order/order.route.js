@@ -8,7 +8,7 @@
     console.log('order::route');
 
     $routeProvider.when('/order/:storeId/:productId', {
-      templateUrl: 'order/order_new.html',
+      templateUrl: 'module/order/order_new.html',
       controller: 'Order',
       controllerAs: 'vm'
     });

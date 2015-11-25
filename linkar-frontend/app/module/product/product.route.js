@@ -8,11 +8,11 @@
     console.log('product::route');
 
     $routeProvider.when('/product', {
-      templateUrl: 'product/product.html',
+      templateUrl: 'module/product/product.html',
       controller: 'Product',
       controllerAs: 'vm'
     }).when('/product/new', {
-      templateUrl: 'product/product_new.html',
+      templateUrl: 'module/product/product_new.html',
       controller: 'Product',
       controllerAs: 'vm'
     });

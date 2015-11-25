@@ -2,6 +2,6 @@
 
 angular.module('services.config', [])
   .constant('configuration', {
-    baseURL: '/',
+    baseURL: '/sistema/linkar/',
     preferredLanguage: 'pt-BR'
   });

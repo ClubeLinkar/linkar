@@ -8,11 +8,11 @@
     console.log('tag::route');
 
     $routeProvider.when('/product/tag/:storeId', {
-      templateUrl: 'product/tag/tag.html',
+      templateUrl: 'module/product/tag/tag.html',
       controller: 'Tag',
       controllerAs: 'vm'
     }).when('/product/tag', {
-      templateUrl: 'product/tag/tag.html',
+      templateUrl: 'module/product/tag/tag.html',
       controller: 'Tag',
       controllerAs: 'vm'
     });
