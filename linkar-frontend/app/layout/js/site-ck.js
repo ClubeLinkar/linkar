@@ -16,14 +16,16 @@ jQuery(document).ready(function () {
     });
     $("#work").height($(window).height());
     $(window).resize(function () {
-        $("#work").minHeight($(window).height());
+        $("#work").css("min-height", $(window).height());
+
+        // minHeight($(window).height());
         $(".showcase-info").css("min-height", "360px")
     });
     $("#networks").height($(window).height());
     $(window).resize(function () {
         $("#networks").height($(window).height());
         $("#networks").css("min-height", "600px")
-    })
+    });
 });
 jQuery(document).ready(function (e) {
     e(".scroll").click(function (t) {
