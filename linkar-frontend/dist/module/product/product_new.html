@@ -1,1 +1,36 @@
-<div class="container"> <div id="pnl_message">{{message}}</div> <form name="productForm" ng-submit="vm.save()"> <div class="form-group has-feedback" ng-class="{'has-error' : productForm.name.$dirty && productForm.name.$invalid}"> <label for="name">Nome:</label> <input type="text" id="name" name="name" ng-model="product.name" class="form-control" placeholder="Nome do Produto" required> <i class="glyphicon glyphicon-grain form-control-feedback"></i> </div> <div class="form-group has-feedback" ng-class="{'has-error' : productForm.description.$dirty && productForm.description.$invalid}"> <label for="description">Descrição:</label> <input type="text" id="description" name="description" ng-model="product.description" class="form-control" placeholder="Alguma descrição"> <i class="glyphicon glyphicon-align-justify form-control-feedback"></i> </div> <div class="form-group has-feedback" ng-class="{'has-error' : productForm.price.$dirty && productForm.price.$invalid}"> <label for="url">Preço:</label> <input type="number" id="price" name="price" ng-model="product.price" class="form-control" placeholder="98,76" required> <i class="glyphicon glyphicon-usd form-control-feedback"></i> </div> <div class="form-group has-feedback" ng-class="{'has-error' : productForm.storeId.$dirty && productForm.storeId.$invalid}"> <label for="storeId">loja:</label> <select id="storeId" name="storeId" ng-model="product.storeId" class="form-control"> <option value="{{store.id}}" ng-repeat="store in storeList">{{store.name}} </select> </div> <input value="Salvar" type="submit" class="btn btn-primary"> </form> </div>
+<div class="container">
+
+  <div id="pnl_message">{{message}}</div>
+
+  <form name="productForm" ng-submit="vm.save()">
+
+      <div class="form-group has-feedback" ng-class="{'has-error' : productForm.name.$dirty && productForm.name.$invalid}">
+          <label for="name" >Nome:</label>
+          <input type="text" id="name" name="name" ng-model="product.name" class="form-control" placeholder="Nome do Produto" required="required" />
+          <i class="glyphicon glyphicon-grain form-control-feedback"></i>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{'has-error' : productForm.description.$dirty && productForm.description.$invalid}">
+          <label for="description">Descrição:</label>
+          <input type="text" id="description" name="description" ng-model="product.description" class="form-control" placeholder="Alguma descrição" />
+          <i class="glyphicon glyphicon-align-justify form-control-feedback"></i>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{'has-error' : productForm.price.$dirty && productForm.price.$invalid}">
+          <label for="url">Preço:</label>
+          <input type="number" id="price" name="price" ng-model="product.price" class="form-control" placeholder="98,76" required="required" />
+          <i class="glyphicon glyphicon-usd form-control-feedback"></i>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{'has-error' : productForm.storeId.$dirty && productForm.storeId.$invalid}">
+        <label for="storeId">loja:</label>
+        <select id="storeId" name="storeId" ng-model="product.storeId" class="form-control">
+            <option value="{{store.id}}" ng-repeat="store in storeList">{{store.name}}</option>
+        </select>
+    </div>
+
+      <input value="Salvar" type="submit" class="btn btn-primary" />
+
+  </form>
+
+</div>

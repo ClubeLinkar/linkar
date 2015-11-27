@@ -1,1 +1,62 @@
-<div id="scrollArea" ng-controller="HomeController" class="home"> <div class="nav"> <a ng-click="scrollPageTo('hero')" class="scroll">section one</a> <a ng-click="scrollPageTo('work')" class="scroll">section two</a> <a ng-click="scrollPageTo('networks')" class="scroll">section three</a> </div> <section id="hero"> <div class="hero-block"> <img src="layout/images/logo_linkar.png" width="200" height="200" class="mb-7 hero-image"> <p>Acumule pontos e troque de graça por ofertas!</p> <p> <a href="#/user/new" class="btn-primary btn">Começar!</a> </p> </div> <a ng-click="scrollPageTo('work')" class="scroll"><span class="down-arrow"></span></a> </section> <section id="work"> <div class="showcase"> <div class="showcase-info"> <h2 class="mb-7">Aqui poderia entrar alguma coisa com imagens, textos explicativos e etc...</h2> </div> <a ng-click="scrollPageTo('networks')" class="scroll"><span class="down-arrow"></span></a> </div> </section> <section id="networks"> <div class="container"> <p> Fale conosco! </p> <p> <a href="http://facebook.com/clubelinkar"><i class="facebook fa fa-facebook"></i></a> <a href="http://twitter.com/clubelinkar"><i class="twitter fa fa-twitter"></i></a> <a href="mailto:comerciallinkar@gmail.com"><i class="mail fa fa-envelope"></i></a> </p> <p> <a href="#/store/new">nova loja</a> | <a href="#/store">lojas</a> | <a href="#/product/new">novo produto</a> | <a href="#/product">produtos</a> | <a href="#/product/tag">tags</a> | <a href="#/user/new">novo usuário</a> | <a href="#/user">usuários</a> </p> </div> </section> </div>
+<div id="scrollArea" ng-controller="HomeController" class="home">
+
+  <div class="nav">
+    <a ng-click="scrollPageTo('hero')" class="scroll">section one</a>
+    <a ng-click="scrollPageTo('work')" class="scroll">section two</a>
+    <a ng-click="scrollPageTo('networks')" class="scroll">section three</a>
+  </div>
+
+  <section id="hero">
+      <div class="hero-block">
+        <img src="layout/images/logo_linkar.png" width="200" height="200" class="mb-7 hero-image">
+        <p>Acumule pontos e troque de graça por ofertas!</p>
+        <p>
+          <a href="#/user/new" class="btn-primary btn">Começar!</a>
+        </p>
+      </div>
+    <a ng-click="scrollPageTo('work')" class="scroll"><span class="down-arrow"></span></a>
+  </section>
+
+  <section id="work">
+    <div class="showcase">
+
+      <div class="showcase-info">
+        <h2 class="mb-7">Aqui poderia entrar alguma coisa com imagens, textos explicativos e etc...</h2>
+      </div>
+
+      <a ng-click="scrollPageTo('networks')" class="scroll"><span class="down-arrow"></span></a>
+    </div>
+  </section>
+
+  <section id="networks">
+    <div class="container">
+      <p>
+        Fale conosco!
+      </p>
+
+      <p>
+        <a href="http://facebook.com/clubelinkar"><i class="facebook fa fa-facebook"></i></a>
+        <a href="http://twitter.com/clubelinkar"><i class="twitter fa fa-twitter"></i></a>
+        <a href="mailto:comerciallinkar@gmail.com"><i class="mail fa fa-envelope"></i></a>
+      </p>
+
+      <p>
+        <a href="#/store/new">nova loja</a>
+        |
+        <a href="#/store">lojas</a>
+        |
+        <a href="#/product/new">novo produto</a>
+        |
+        <a href="#/product">produtos</a>
+        |
+        <a href="#/product/tag">tags</a>
+        |
+        <a href="#/user/new">novo usuário</a>
+        |
+        <a href="#/user">usuários</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+

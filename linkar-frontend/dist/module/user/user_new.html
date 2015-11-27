@@ -1,1 +1,49 @@
-<div class="container"> <form name="userForm" ng-submit="vm.save()" class="form-horizontal"> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.name.$dirty && userForm.name.$invalid}"> <label for="name">Nome:</label> <input type="text" id="name" name="name" ng-model="user.name" class="form-control" placeholder="Seu Nome e Sobrenome" required> <i class="glyphicon glyphicon-user form-control-feedback"></i> </div> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.email.$dirty && userForm.email.$invalid}"> <label for="email">E-mail:</label> <input type="text" id="email" name="email" ng-model="user.email" class="form-control" placeholder="seu@email.com" required> <i class="glyphicon glyphicon-envelope form-control-feedback"></i> </div> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.password.$dirty && userForm.password.$invalid}"> <label for="password">Senha:</label> <input type="password" id="password" name="password" ng-model="user.password" class="form-control" placeholder="**********" required> <i class="glyphicon glyphicon-lock form-control-feedback"></i> </div> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.cpf.$dirty && userForm.cpf.$invalid}"> <label for="cpf">CPF:</label> <input type="text" id="cpf" name="cpf" ng-model="user.cpf" class="form-control" placeholder="123.456.789-10" required> </div> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.district.$dirty && userForm.district.$invalid}"> <label for="district">Bairro:</label> <input type="text" id="district" name="district" ng-model="user.district" class="form-control" placeholder="Bairro onde mora" required> </div> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.city.$dirty && userForm.city.$invalid}"> <label for="city">Cidade:</label> <input type="text" id="city" name="city" ng-model="user.city" class="form-control" placeholder="Cidade em que mora" required> </div> <div class="form-group has-feedback" ng-class="{'has-error' : userForm.state.$dirty && userForm.state.$invalid}"> <label for="state">Estado:</label> <uf id="state" name="state" ng-model="user.state" class="form-control" required> </div> <input type="submit" class="btn btn-primary" value="Salvar"> <div id="pnl_message">{{mensagem}}</div> </form> </div>
+<div class="container">
+
+  <form name="userForm" ng-submit="vm.save()" class="form-horizontal" >
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.name.$dirty && userForm.name.$invalid}">
+        <label for="name" >Nome:</label>
+        <input type="text" id="name" name="name" ng-model="user.name" class="form-control" placeholder="Seu Nome e Sobrenome" required="required" />
+        <i class="glyphicon glyphicon-user form-control-feedback"></i>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.email.$dirty && userForm.email.$invalid}">
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email" ng-model="user.email" class="form-control" placeholder="seu@email.com" required="required" />
+        <i class="glyphicon glyphicon-envelope form-control-feedback"></i>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.password.$dirty && userForm.password.$invalid}">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" ng-model="user.password" class="form-control" placeholder="**********" required="required" />
+        <i class="glyphicon glyphicon-lock form-control-feedback"></i>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.cpf.$dirty && userForm.cpf.$invalid}">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" ng-model="user.cpf" class="form-control" placeholder="123.456.789-10" required="required" />
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.district.$dirty && userForm.district.$invalid}">
+        <label for="district">Bairro:</label>
+        <input type="text" id="district" name="district" ng-model="user.district" class="form-control" placeholder="Bairro onde mora" required="required"/>
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.city.$dirty && userForm.city.$invalid}">
+        <label for="city">Cidade:</label>
+        <input type="text" id="city" name="city" ng-model="user.city" class="form-control" placeholder="Cidade em que mora" required="required" />
+    </div>
+
+    <div class="form-group has-feedback" ng-class="{'has-error' : userForm.state.$dirty && userForm.state.$invalid}">
+        <label for="state">Estado:</label>
+        <uf id="state" name="state" ng-model="user.state" class="form-control" required="required" />
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Salvar"/>
+
+    <div id="pnl_message">{{mensagem}}</div>
+
+  </form>
+
+</div>

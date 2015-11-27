@@ -1,1 +1,14 @@
-<div class="container"> <div class="list-group"> <a href="#" ng-click="detail(product)" ng-repeat="product in productList" class="list-group-item">{{product.name}}</a> </div> <div id="pnl_message">{{message}}</div> <h1>{{product.name}}</h1> <ul class="list-group"> <li ng-repeat="product in productProductList" class="list-group-item">{{product.name}}</li> </ul> </div>
+<div class="container">
+
+    <div class="list-group">
+        <a href="#" ng-click="detail(product)" ng-repeat="product in productList" class="list-group-item" >{{product.name}}</a>
+    </div>
+
+    <div id="pnl_message">{{message}}</div>
+
+    <h1>{{product.name}}</h1>
+    <ul class="list-group">
+        <li ng-repeat="product in productProductList" class="list-group-item">{{product.name}}</li>
+    </ul>
+
+</div>
