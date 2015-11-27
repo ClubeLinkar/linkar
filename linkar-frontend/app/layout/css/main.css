@@ -8,16 +8,16 @@
  */
 
 /* FONTS */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800);
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800);*/
 
-body {
+.home {
   font-family: 'Open Sans', sans-serif;
   background: #f5f6f7;
   color: #f5f6f7;
   font-size: 20px;
   line-height: 36px;
   text-align: center;
-  font-weight: 300; }
+  font-weight: 300;  }
 
 
 nav ul {
@@ -113,7 +113,8 @@ a:active {
 #hero,
 #work,
 #networks {
-  position: relative; }
+  position: relative;
+  height: 100vh; }
 
 .hero-block,
 .footer-block {
@@ -168,7 +169,8 @@ a:active {
   display: table-row; }
 
 .showcase-info {
-  display: table-row; }
+  display: table-row;
+}
 
 .showcase-info {
   text-align: center; }

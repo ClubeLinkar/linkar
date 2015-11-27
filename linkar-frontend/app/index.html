@@ -46,7 +46,7 @@
     <script src="app.module.js"></script>
     <script src="app.route.js"></script>
 
-    <script src="layout/js/site-ck.js"></script>
+    <!-- <script src="layout/js/site-ck.js"></script> -->
 
     <!-- End General -->
 
@@ -86,6 +86,27 @@
     <!-- End Order -->
 
     <!-- endbuild -->
+
+    <script type="text/javascript">
+
+      $(function() {
+
+        console.log("jquery ready");
+
+        $(".scroll").click(function() {
+          console.log("scroll");
+        });
+      });
+
+//       $(document).ready(function (e) {
+//           e(".scroll").click(function (t) {
+//             console.log("scroll");
+//               t.preventDefault();
+//               e("html,body").animate({scrollTop: e(this.hash).offset().top}, 1e3)
+//           })
+//       });
+
+    </script>
 
   </body>
 </html>
