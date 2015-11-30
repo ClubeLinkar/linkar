@@ -2,8 +2,11 @@ package br.com.clubelinkar.api.user;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Lennon Jesus
@@ -14,19 +17,26 @@ public final class User {
     @Id
     private String id;
 
+    @NotNull
     private String name;
 
+    @NotNull
+    @Email
     private String email;
 
-    private String cpf;
+    @NotNull
+    private String cpf; //FIXME Adicionar validacao de CPF (tem algo diferente do Stella jah implementado?)
 
     private String district;
 
+    @NotNull
     private String city;
 
+    @NotNull
     private String state;
 
-    private String password; // FIXME HASH!!!!!!!
+    @NotNull
+    private String password; // FIXME HASH!!!!!!! + Regras de forca de senha
 
     public String getId() {
         return id;
