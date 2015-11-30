@@ -128,12 +128,12 @@ class UserRestControllerTest extends BaseRestControllerTest {
 
     @Test
     public void "Não deve permitir usuário com mesmo e-mail"() {
-
+        // TODO Implementar
     }
 
     @Test
     public void "Não deve permitir usuário com mesmo cpf"() {
-
+        // TODO Implementar
     }
 
     @Test

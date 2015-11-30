@@ -25,7 +25,7 @@ public final class User {
     private String email;
 
     @NotNull
-    private String cpf; //FIXME Adicionar validacao de CPF (tem algo diferente do Stella jah implementado?)
+    private String cpf; //TODO Adicionar validacao de CPF (tem algo diferente do Stella jah implementado?)
 
     private String district;
 
