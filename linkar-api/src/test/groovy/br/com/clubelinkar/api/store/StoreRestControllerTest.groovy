@@ -24,7 +24,7 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
                 url: 'allmotos.com.br',
                 email: 'allmotos@allmotos.com.br')
 
-        def result = mockMvc.perform(post("/api/v1/store")
+        def result = mockMvc.perform(post("/store")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(allMotos))
         ).andExpect(status().isOk()).andReturn()
@@ -44,7 +44,7 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
     @Test
     public void "Deve listar corretamente todas as lojas cadastradas no sistema"() {
 
-        def result = mockMvc.perform(get("/api/v1/store")).andExpect(status().isOk()).andReturn()
+        def result = mockMvc.perform(get("/store")).andExpect(status().isOk()).andReturn()
 
         def stores = new Gson().fromJson(result.response.contentAsString, List)
 
