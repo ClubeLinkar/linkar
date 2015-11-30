@@ -1,5 +1,7 @@
 package br.com.clubelinkar.api.user;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Lennon Jesus
  */
 @Document
-public class User {
+public final class User {
 
     @Id
     private String id;
@@ -88,5 +90,25 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+
+        if (other == null || getClass() != other.getClass()) return false;
+
+        User user = (User) other;
+
+        return new EqualsBuilder()
+                .append(email, user.email)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(email)
+                .toHashCode();
     }
 }
