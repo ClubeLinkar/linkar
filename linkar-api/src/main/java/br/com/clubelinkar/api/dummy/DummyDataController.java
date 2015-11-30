@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getCustomer;
+import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getUser;
 import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getProduct;
 import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.getStore;
 
@@ -40,7 +40,7 @@ public class DummyDataController {
     }
 
     private void loadData() {
-        userRepository.save(getCustomer());
+        userRepository.save(getUser());
 
         storeRepository.save(getStore());
 

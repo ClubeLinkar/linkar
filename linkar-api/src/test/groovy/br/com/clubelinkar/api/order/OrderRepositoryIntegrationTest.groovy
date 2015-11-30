@@ -25,8 +25,8 @@ class OrderRepositoryIntegrationTest {
 
     @Before
     public void setupData() {
-        purchaseRepository.save(new Order(userId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
-        purchaseRepository.save(new Order(userId: "customer_id_2", storeId: "store_id_2", productId: "product_id_2"))
+        purchaseRepository.save(new Order(userId: "order_id_1", storeId: "store_id_1", productId: "product_id_1"))
+        purchaseRepository.save(new Order(userId: "order_id_2", storeId: "store_id_2", productId: "product_id_2"))
     }
 
     @After
@@ -36,25 +36,25 @@ class OrderRepositoryIntegrationTest {
 
     @Test
     public void "Deve encontrar purchase preexistente"() {
-        String customerId = "customer_id_1"
+        String orderId = "order_id_1"
         String storeId = "store_id_1"
         String productId = "product_id_1"
 
-        Order existingPurchase = purchaseRepository.findByUserIdAndStoreIdAndProductId(customerId, storeId, productId)
+        Order existingPurchase = purchaseRepository.findByUserIdAndStoreIdAndProductId(orderId, storeId, productId)
 
         assertNotNull existingPurchase
-        assertEquals customerId, existingPurchase.userId
+        assertEquals orderId, existingPurchase.userId
         assertEquals storeId, existingPurchase.storeId
         assertEquals productId, existingPurchase.productId
     }
 
     @Test
     public void "Não deve encontrar purchase que não corresponda aos parâmetros informados"() {
-        String customerId = "blah"
+        String orderId = "blah"
         String storeId = "store_id_1"
         String productId = "product_id_1"
 
-        Order existingPurchase = purchaseRepository.findByUserIdAndStoreIdAndProductId(customerId, storeId, productId)
+        Order existingPurchase = purchaseRepository.findByUserIdAndStoreIdAndProductId(orderId, storeId, productId)
 
         assertNull existingPurchase
     }

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 public class DummyDomainObjectMother {
 
-    public static User getCustomer() {
+    public static User getUser() {
         User user = new User();
 
         user.setId("user_1");

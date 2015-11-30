@@ -22,21 +22,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 class UserRepositoryIntegrationTest {
 
     @Autowired
-    def UserRepository customerRepository
+    def UserRepository userRepository
 
     @Autowired
     def OrderRepository purchaseRepository
 
     @Before
     public void setupData() {
-        customerRepository.save(new User(id: "customer_id_1", name: "Lennon Jesus", email: "lennon.jesus@gmail.com", password: "123456"))
+        userRepository.save(new User(id: "user_id_1", name: "Lennon Jesus", email: "lennon.jesus@gmail.com", password: "123456"))
 
-        purchaseRepository.save(new Order(userId: "customer_id_1", storeId: "store_id_1", productId: "product_id_1"))
+        purchaseRepository.save(new Order(userId: "user_id_1", storeId: "store_id_1", productId: "product_id_1"))
     }
 
     @After
     public void destroyData() {
-        customerRepository.deleteAll()
+        userRepository.deleteAll()
     }
 
 }
