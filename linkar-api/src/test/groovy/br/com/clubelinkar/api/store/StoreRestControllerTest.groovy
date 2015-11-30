@@ -1,14 +1,11 @@
-package br.com.clubelinkar.controller.rest
+package br.com.clubelinkar.api.store
 
-import br.com.clubelinkar.api.store.Store
+import br.com.clubelinkar.test.BaseRestControllerTest
 import com.google.gson.Gson
 import org.junit.Test
 import org.springframework.http.MediaType
 
-import static org.junit.Assert.assertEquals
-import static org.junit.Assert.assertFalse
-import static org.junit.Assert.assertNotNull
-import static org.junit.Assert.assertTrue
+import static org.junit.Assert.*
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -22,10 +19,10 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
     public void "Deve cadastrar uma loja corretamente"() {
 
         def allMotos = new Store(name: 'All Motos',
-                                address: 'Rua Siqueira Campos, 243, loja B, Copacaban, Rio de Janeiro - RJ',
-                                phones: '(21) 3442-3584 - WhatsApp (21) 98081-0033',
-                                url: 'allmotos.com.br',
-                                email: 'allmotos@allmotos.com.br')
+                address: 'Rua Siqueira Campos, 243, loja B, Copacaban, Rio de Janeiro - RJ',
+                phones: '(21) 3442-3584 - WhatsApp (21) 98081-0033',
+                url: 'allmotos.com.br',
+                email: 'allmotos@allmotos.com.br')
 
         def result = mockMvc.perform(post("/api/v1/store")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -54,7 +51,6 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
         assertFalse stores.empty
 
     }
-
 
 
 }

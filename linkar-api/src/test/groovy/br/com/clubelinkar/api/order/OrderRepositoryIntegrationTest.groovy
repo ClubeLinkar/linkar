@@ -1,8 +1,6 @@
-package br.com.clubelinkar.repository
+package br.com.clubelinkar.api.order
 
 import br.com.clubelinkar.LinkarApplication
-import br.com.clubelinkar.api.order.Order
-import br.com.clubelinkar.api.order.OrderRepository
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

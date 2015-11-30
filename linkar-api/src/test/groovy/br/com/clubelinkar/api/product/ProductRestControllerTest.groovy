@@ -1,6 +1,6 @@
-package br.com.clubelinkar.controller.rest
+package br.com.clubelinkar.api.product
 
-import br.com.clubelinkar.api.product.Product
+import br.com.clubelinkar.test.BaseRestControllerTest
 import com.google.gson.Gson
 import org.junit.Test
 import org.springframework.http.MediaType

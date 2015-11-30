@@ -1,18 +1,15 @@
-package br.com.clubelinkar.service.impl
+package br.com.clubelinkar.api.order
 
-import br.com.clubelinkar.api.order.OrderService
-import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.api.product.Product
-import br.com.clubelinkar.api.order.Order
+import br.com.clubelinkar.api.product.ProductRepository
 import br.com.clubelinkar.api.store.Store
-import br.com.clubelinkar.exception.InvalidUserException
+import br.com.clubelinkar.api.store.StoreRepository
+import br.com.clubelinkar.api.user.User
+import br.com.clubelinkar.api.user.UserRepository
 import br.com.clubelinkar.exception.InvalidProductException
 import br.com.clubelinkar.exception.InvalidStoreException
+import br.com.clubelinkar.exception.InvalidUserException
 import br.com.clubelinkar.exception.RepeatedPurchaseException
-import br.com.clubelinkar.api.user.UserRepository
-import br.com.clubelinkar.api.product.ProductRepository
-import br.com.clubelinkar.api.order.OrderRepository
-import br.com.clubelinkar.api.store.StoreRepository
 import br.com.clubelinkar.support.util.DateFactory
 import org.junit.Before
 import org.junit.Test
@@ -113,7 +110,7 @@ class OrderServiceUnitTest {
                 storeId: store.id,
                 storePassword: store.password,
                 productId: product.id
-            )
+        )
     }
 
 }
