@@ -65,28 +65,28 @@ class UserRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar usuário com nome nulo"() {
         def invalidUser = anUser
         invalidUser.name = null
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com email nulo"() {
         def invalidUser = anUser
         invalidUser.email = null
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com email inválido"() {
         def invalidUser = anUser
         invalidUser.email = "email.inválido"
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com cpf nulo"() {
         def invalidUser = anUser
         invalidUser.cpf = null
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
@@ -94,28 +94,28 @@ class UserRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar usuário com cpf inválido"() {
         def invalidUser = anUser
         invalidUser.cpf = "abc123"
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com cidade nula"() {
         def invalidUser = anUser
         invalidUser.city = null
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com uf nulo"() {
         def invalidUser = anUser
         invalidUser.state = null
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com password nula"() {
         def invalidUser = anUser
         invalidUser.password = null
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
@@ -123,7 +123,7 @@ class UserRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar usuário com password inválida"() {
         def invalidUser = anUser
         invalidUser.password = "123"
-        postAndExpectBadRequest(invalidUser)
+        postAndExpectBadRequest("/user", invalidUser)
     }
 
     @Test
@@ -154,14 +154,6 @@ class UserRestControllerTest extends BaseRestControllerTest {
         assertFalse userList.empty
         assertEquals 2, userList.size()
         assertEquals userListMock, userList
-    }
-
-
-    def postAndExpectBadRequest(User user) {
-        mockMvc.perform(post("/user")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(user))
-        ).andExpect(status().isBadRequest()).andReturn()
     }
 
     def User getAnUser() {
