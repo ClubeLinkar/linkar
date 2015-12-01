@@ -1,5 +1,7 @@
 package br.com.clubelinkar.api.user
 
+import br.com.clubelinkar.exception.RepeatedUserCPFException
+import br.com.clubelinkar.exception.RepeatedUserEmailException
 import br.com.clubelinkar.test.BaseRestControllerTest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -27,6 +29,9 @@ class UserRestControllerTest extends BaseRestControllerTest {
 
     @Mock
     def UserRepository userRepositoryMock
+
+    @Mock
+    def UserValidator userValidatorMock
 
     @InjectMocks
     def UserRestController userRestController
@@ -90,7 +95,8 @@ class UserRestControllerTest extends BaseRestControllerTest {
     }
 
     @Test
-    @Ignore // implementar validacao de cpf
+    @Ignore
+    // implementar validacao de cpf
     public void "Deve criticar usuário com cpf inválido"() {
         def invalidUser = anUser
         invalidUser.cpf = "abc123"
@@ -119,7 +125,8 @@ class UserRestControllerTest extends BaseRestControllerTest {
     }
 
     @Test
-    @Ignore // definir e implementar regras de seguranca
+    @Ignore
+    // definir e implementar regras de seguranca
     public void "Deve criticar usuário com password inválida"() {
         def invalidUser = anUser
         invalidUser.password = "123"
@@ -127,13 +134,15 @@ class UserRestControllerTest extends BaseRestControllerTest {
     }
 
     @Test
-    public void "Não deve permitir usuário com mesmo e-mail"() {
-        // TODO Implementar
+    public void "Não deve permitir novo usuário com e-mail já existente"() {
+        when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserEmailException());
+        postAndExpectBadRequest("/user", anUser)
     }
 
     @Test
-    public void "Não deve permitir usuário com mesmo cpf"() {
-        // TODO Implementar
+    public void "Não deve permitir novo usuário com cpf já existente"() {
+        when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserCPFException());
+        postAndExpectBadRequest("/user", anUser)
     }
 
     @Test

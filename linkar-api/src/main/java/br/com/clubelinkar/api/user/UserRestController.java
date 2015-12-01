@@ -19,8 +19,14 @@ public class UserRestController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserValidator userValidator;
+
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User create(@RequestBody @Valid User user) {
+
+        userValidator.validate(user, null);
+
         return userRepository.save(user);
     }
 
