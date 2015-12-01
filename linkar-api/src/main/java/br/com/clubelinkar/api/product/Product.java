@@ -5,6 +5,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
@@ -16,14 +19,20 @@ public final class Product {
     @Id
     private String id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String description;
 
+    @NotNull
     private String brand;
 
+    @NotNull
+    @Min(1)
     private BigDecimal price;
 
+    @NotNull
     private String storeId;
 
     public Product() {
