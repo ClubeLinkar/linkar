@@ -1,27 +1,42 @@
 package br.com.clubelinkar.api.store;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Lennon Jesus
  */
 @Document
-public class Store {
+public final class Store {
 
     @Id
     private String id;
 
+    @NotNull
+    private String cnpj;
+
+    @NotNull
     private String password; // FIXME HASH!!!!!!!
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String description;
 
+    @NotNull
     private String address;
 
+    @NotNull
     private String phones;
 
+    @NotNull
+    @Email
     private String email;
 
     private String url;
@@ -35,6 +50,22 @@ public class Store {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -85,11 +116,23 @@ public class Store {
         this.url = url;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Store store = (Store) o;
+
+        return new EqualsBuilder()
+                .append(cnpj, store.cnpj)
+                .isEquals();
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(cnpj)
+                .toHashCode();
     }
 }
