@@ -29,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class StoreRestControllerTest extends BaseRestControllerTest {
 
+    private static final String BASE_ENDPOINT = "/store"
+
     @Mock
     def StoreRepository storeRepositoryMock
 
@@ -50,7 +52,7 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
 
         when(storeRepositoryMock.save(aStore)).thenReturn(aStore);
 
-        def result = mockMvc.perform(post("/store")
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(aStore))
         ).andExpect(status().isOk()).andReturn()
@@ -71,14 +73,14 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar loja com cnpj nulo"() {
         def invalidStore = aStore
         invalidStore.cnpj = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com password nulo"() {
         def invalidStore = aStore
         invalidStore.password = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
@@ -87,61 +89,61 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar loja com password inválido"() {
         def invalidStore = aStore
         invalidStore.password = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com name nulo"() {
         def invalidStore = aStore
         invalidStore.name = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com description nulo"() {
         def invalidStore = aStore
         invalidStore.description = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com address nulo"() {
         def invalidStore = aStore
         invalidStore.address = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com phones nulo"() {
         def invalidStore = aStore
         invalidStore.phones = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com email nulo"() {
         def invalidStore = aStore
         invalidStore.email = null
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar loja com email inválido"() {
         def invalidStore = aStore
         invalidStore.email = "email.invalido"
-        postAndExpectBadRequest("/store", invalidStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Não deve permitir loja com mesmo e-mail"() {
         when(storeValidatorMock.validate(aStore, null)).thenThrow(new RepeatedStoreEmailException());
-        postAndExpectBadRequest("/store", aStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, aStore)
     }
 
     @Test
     public void "Não deve permitir loja com mesmo cnpj"() {
         when(storeValidatorMock.validate(aStore, null)).thenThrow(new RepeatedStoreCNPJException());
-        postAndExpectBadRequest("/store", aStore)
+        postAndExpectBadRequest(BASE_ENDPOINT, aStore)
     }
 
     @Test
@@ -151,7 +153,7 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
 
         when(storeRepositoryMock.findAll()).thenReturn(storeListMock)
 
-        def result = mockMvc.perform(get("/store")).andExpect(status().isOk()).andReturn()
+        def result = mockMvc.perform(get(BASE_ENDPOINT)).andExpect(status().isOk()).andReturn()
 
         Type dummyListType = new TypeToken<ArrayList<Store>>() {}.getType();
 

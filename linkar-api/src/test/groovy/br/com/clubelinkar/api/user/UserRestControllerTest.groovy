@@ -29,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 class UserRestControllerTest extends BaseRestControllerTest {
 
+    private static final String BASE_ENDPOINT = "/user"
+
     @Mock
     def UserRepository userRepositoryMock
 
@@ -50,7 +52,7 @@ class UserRestControllerTest extends BaseRestControllerTest {
 
         when(userRepositoryMock.save(anUser)).thenReturn(anUser);
 
-        def result = mockMvc.perform(post("/user")
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(anUser))
         ).andExpect(status().isOk()).andReturn()
@@ -72,28 +74,28 @@ class UserRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar usuário com nome nulo"() {
         def invalidUser = anUser
         invalidUser.name = null
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com email nulo"() {
         def invalidUser = anUser
         invalidUser.email = null
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com email inválido"() {
         def invalidUser = anUser
         invalidUser.email = "email.inválido"
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com cpf nulo"() {
         def invalidUser = anUser
         invalidUser.cpf = null
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
@@ -102,28 +104,28 @@ class UserRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar usuário com cpf inválido"() {
         def invalidUser = anUser
         invalidUser.cpf = "abc123"
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com cidade nula"() {
         def invalidUser = anUser
         invalidUser.city = null
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com uf nulo"() {
         def invalidUser = anUser
         invalidUser.state = null
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Deve criticar usuário com password nula"() {
         def invalidUser = anUser
         invalidUser.password = null
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
@@ -132,19 +134,19 @@ class UserRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar usuário com password inválida"() {
         def invalidUser = anUser
         invalidUser.password = "123"
-        postAndExpectBadRequest("/user", invalidUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
     }
 
     @Test
     public void "Não deve permitir novo usuário com e-mail já existente"() {
         when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserEmailException());
-        postAndExpectBadRequest("/user", anUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, anUser)
     }
 
     @Test
     public void "Não deve permitir novo usuário com cpf já existente"() {
         when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserCPFException());
-        postAndExpectBadRequest("/user", anUser)
+        postAndExpectBadRequest(BASE_ENDPOINT, anUser)
     }
 
     @Test
@@ -154,7 +156,7 @@ class UserRestControllerTest extends BaseRestControllerTest {
 
         when(userRepositoryMock.findAll()).thenReturn(userListMock)
 
-        def result = mockMvc.perform(get("/user")
+        def result = mockMvc.perform(get(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn()
 
