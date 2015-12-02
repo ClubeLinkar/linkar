@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
+import static br.com.clubelinkar.test.ProductObjectMother.aProduct
+import static br.com.clubelinkar.test.ProductObjectMother.anotherProduct
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -102,7 +104,8 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
     }
 
     @Test
-    @Ignore // TODO Implementar
+    @Ignore
+    // TODO Implementar
     public void "Deve criticar loja com storeId inválido"() {
         def invalidProduct = aProduct
         invalidProduct.storeId = "blah"
@@ -127,29 +130,9 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
 
         List<Product> productsList = new Gson().fromJson(result.response.contentAsString, dummyListType)
 
-        assertFalse productsList .empty
-        assertEquals productListMock , productsList
+        assertFalse productsList.empty
+        assertEquals productListMock, productsList
 
-    }
-
-    def getaProduct() {
-        new Product(
-                name: "Riser de Guidão",
-                description: "Riser de guidão preto fosco",
-                brand: "ANKER",
-                price: 99.00,
-                storeId: "idAllMotos"
-        )
-    }
-
-    def getAnotherProduct() {
-        new Product(
-                name: "Kit Relação Top",
-                description: "Kit Coroa, Corrente e Pinhão Top Aço 1049",
-                brand: "Riffel",
-                price: 543.21,
-                storeId: "idHomaMotos"
-        )
     }
 
 }
