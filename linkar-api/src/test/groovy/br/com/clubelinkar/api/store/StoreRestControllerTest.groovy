@@ -1,5 +1,7 @@
 package br.com.clubelinkar.api.store
 
+import br.com.clubelinkar.exception.RepeatedStoreCNPJException
+import br.com.clubelinkar.exception.RepeatedStoreEmailException
 import br.com.clubelinkar.test.BaseRestControllerTest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -14,6 +16,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
+import static br.com.clubelinkar.test.StoreObjectMother.aStore
+import static br.com.clubelinkar.test.StoreObjectMother.getAnotherStore
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -27,6 +31,9 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
 
     @Mock
     def StoreRepository storeRepositoryMock
+
+    @Mock
+    def StoreValidator storeValidatorMock
 
     @InjectMocks
     def StoreRestController storeRestController
@@ -75,7 +82,8 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
     }
 
     @Test
-    @Ignore // TODO implementar validacao de passwrod
+    @Ignore
+    // TODO implementar validacao de passwrod
     public void "Deve criticar loja com password inválido"() {
         def invalidStore = aStore
         invalidStore.password = null
@@ -126,12 +134,14 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
 
     @Test
     public void "Não deve permitir loja com mesmo e-mail"() {
-        // TODO Implementar
+        when(storeValidatorMock.validate(aStore, null)).thenThrow(new RepeatedStoreEmailException());
+        postAndExpectBadRequest("/store", aStore)
     }
 
     @Test
     public void "Não deve permitir loja com mesmo cnpj"() {
-        // TODO Implementar
+        when(storeValidatorMock.validate(aStore, null)).thenThrow(new RepeatedStoreCNPJException());
+        postAndExpectBadRequest("/store", aStore)
     }
 
     @Test
@@ -152,26 +162,5 @@ public class StoreRestControllerTest extends BaseRestControllerTest {
 
     }
 
-    def getaStore() {
-        new Store(name: 'All Motos',
-                description: 'All Motos',
-                cnpj: "123.456.789/0001-23",
-                password: "654321",
-                address: 'Rua Siqueira Campos, 243, loja B, Copacabana, Rio de Janeiro - RJ',
-                phones: '(21) 3442-3584 - WhatsApp (21) 98081-0033',
-                url: 'allmotos.com.br',
-                email: 'allmotos@allmotos.com.br')
-    }
-
-    def getAnotherStore() {
-        new Store(name: 'Homa Motos',
-                description: 'Homa Motos',
-                cnpj: "987.654.321-0001-23",
-                password: "654321",
-                address: 'Rua do Riachuelo, Centro, Rio de Janeiro - RJ',
-                phones: '(21) 1111-2222',
-                url: 'homamotos.com.br',
-                email: 'contato@homamotos.com.br')
-    }
 
 }

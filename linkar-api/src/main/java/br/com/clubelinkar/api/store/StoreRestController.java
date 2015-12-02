@@ -16,8 +16,14 @@ public class StoreRestController {
     @Autowired
     private StoreRepository storeRepository;
 
+    @Autowired
+    private StoreValidator storeValidator;
+
     @RequestMapping(value = "/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Store create(@RequestBody @Valid Store store) {
+
+        storeValidator.validate(store, null);
+
         return storeRepository.save(store);
     }
 
