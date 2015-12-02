@@ -2,6 +2,7 @@ package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.test.UserObjectMother
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,6 +11,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
+import static br.com.clubelinkar.test.UserObjectMother.anUser
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 
@@ -54,18 +56,6 @@ public class UserValidatorUnitTest {
     public void "Deve criticar usuário com cpf repetido"() {
         when(userRepositoryMock.findByCpf(anUser.cpf)).thenReturn(anUser)
         userValidator.validate(anUser, null)
-    }
-
-    def User getAnUser() {
-        new User(
-                name: "Lennon Jesus",
-                email: "lennon.jesus@gmail.com",
-                cpf: "09974361745",
-                district: "Jardim Primavera",
-                city: "Duque de Caxias",
-                state: "RJ",
-                password: "123456"
-        )
     }
 
 }

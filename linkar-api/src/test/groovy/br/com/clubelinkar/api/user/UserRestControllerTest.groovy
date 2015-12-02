@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
+import static br.com.clubelinkar.test.UserObjectMother.anUser
+import static br.com.clubelinkar.test.UserObjectMother.anotherUser
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -163,30 +165,6 @@ class UserRestControllerTest extends BaseRestControllerTest {
         assertFalse userList.empty
         assertEquals 2, userList.size()
         assertEquals userListMock, userList
-    }
-
-    def User getAnUser() {
-        new User(
-                name: "Lennon Jesus",
-                email: "lennon.jesus@gmail.com",
-                cpf: "09974361745",
-                district: "Jardim Primavera",
-                city: "Duque de Caxias",
-                state: "RJ",
-                password: "123456"
-        )
-    }
-
-    def User getAnotherUser() {
-        new User(
-                name: "Lorem Ipsum Dolor User",
-                email: "anotheruser@domain.com",
-                cpf: "22233344410",
-                district: "São José do Barreiro",
-                city: "Bananal",
-                state: "SP",
-                password: "um2três"
-        )
     }
 
 }
