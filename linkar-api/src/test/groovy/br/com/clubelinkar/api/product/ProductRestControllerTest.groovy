@@ -137,4 +137,23 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
 
     }
 
+
+    @Test
+    public void "Deve listar todos os produtos de uma determinada loja"() {
+
+        def productListMock = [aProduct, anotherProduct]
+
+        when(productRepositoryMock.findByStoreId("id_123456_store")).thenReturn(productListMock)
+
+        def result = mockMvc.perform(get("/product/store/id_123456_store")).andExpect(status().isOk()).andReturn()
+
+        Type dummyListType = new TypeToken<ArrayList<Product>>() {}.getType();
+
+        List<Product> productsList = new Gson().fromJson(result.response.contentAsString, dummyListType)
+
+        assertFalse productsList.empty
+        assertEquals productListMock, productsList
+
+    }
+
 }
