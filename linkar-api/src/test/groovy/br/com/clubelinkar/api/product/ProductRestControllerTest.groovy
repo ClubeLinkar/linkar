@@ -27,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class ProductRestControllerTest extends BaseRestControllerTest {
 
+    private static final String BASE_ENDPOINT = "/product"
+
     @Mock
     def ProductRepository productRepositoryMock
 
@@ -45,7 +47,7 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
 
         when(productRepositoryMock.save(aProduct)).thenReturn(aProduct);
 
-        def result = mockMvc.perform(post("/product")
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(aProduct))
         ).andExpect(status().isOk()).andReturn()
@@ -65,42 +67,42 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar loja com name nulo"() {
         def invalidProduct = aProduct
         invalidProduct.name = null
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com description nulo"() {
         def invalidProduct = aProduct
         invalidProduct.description = null
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com brand nulo"() {
         def invalidProduct = aProduct
         invalidProduct.brand = null
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com price nulo"() {
         def invalidProduct = aProduct
         invalidProduct.price = null
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com price zero"() {
         def invalidProduct = aProduct
         invalidProduct.price = 0
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com storeId nulo"() {
         def invalidProduct = aProduct
         invalidProduct.storeId = null
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
@@ -109,7 +111,7 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
     public void "Deve criticar loja com storeId inválido"() {
         def invalidProduct = aProduct
         invalidProduct.storeId = "blah"
-        postAndExpectBadRequest("/product", invalidProduct)
+        postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
@@ -124,7 +126,7 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
 
         when(productRepositoryMock.findAll()).thenReturn(productListMock)
 
-        def result = mockMvc.perform(get("/product")).andExpect(status().isOk()).andReturn()
+        def result = mockMvc.perform(get(BASE_ENDPOINT)).andExpect(status().isOk()).andReturn()
 
         Type dummyListType = new TypeToken<ArrayList<Product>>() {}.getType();
 
