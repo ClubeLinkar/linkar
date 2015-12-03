@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         "br.com.clubelinkar.api",
         "br.com.clubelinkar.config",
         "br.com.clubelinkar.support",
-        "br.com.clubelinkar.controller", // FIXME
         "br.com.clubelinkar.exception" // FIXME
 })
 @Configuration
