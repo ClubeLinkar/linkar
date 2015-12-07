@@ -2,6 +2,9 @@ package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.support.mail.Mail
+import br.com.clubelinkar.support.mail.MailService
+import br.com.clubelinkar.support.mail.MailTemplate
 import br.com.clubelinkar.test.BaseRestControllerTest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,6 +22,7 @@ import java.lang.reflect.Type
 import static br.com.clubelinkar.test.UserObjectMother.anUser
 import static br.com.clubelinkar.test.UserObjectMother.anotherUser
 import static org.junit.Assert.*
+import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -36,6 +40,9 @@ class UserRestControllerTest extends BaseRestControllerTest {
 
     @Mock
     def UserValidator userValidatorMock
+
+    @Mock
+    def MailService mailServiceMock
 
     @InjectMocks
     def UserRestController userRestController
@@ -67,6 +74,28 @@ class UserRestControllerTest extends BaseRestControllerTest {
         assertEquals anUser.city, savedUser.city
         assertEquals anUser.state, savedUser.state
         assertEquals anUser.password, savedUser.password
+
+    }
+
+    @Test
+    public void "Deve enviar email de boas vindas para novos usuarios cadastrados com sucesso"() {
+
+        when(userRepositoryMock.save(anUser)).thenReturn(anUser);
+
+        mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(anUser))
+        ).andExpect(status().isOk()).andReturn()
+
+
+        def mail = new Mail()
+                .from("noreply@clubelinkar.com.br")
+                .to("lennon.jesus@gmail.com")
+                .subject("Test Mail")
+                .template(MailTemplate.USER_REGISTRATION)
+                .addParameter("blah", "blah blah")
+
+        verify(mailServiceMock).send(mail)
 
     }
 
