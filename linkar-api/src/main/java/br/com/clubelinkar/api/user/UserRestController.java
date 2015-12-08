@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +41,8 @@ public class UserRestController {
                 .to(user.getEmail())
                 .subject("Test Mail") // FIXME
                 .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("blah", "blah blah"); // FIXME
+                .addParameter("name", user.getName()) // FIXME
+                .addParameter("date", new Date()); // FIXME
 
         mailService.send(email);
 
