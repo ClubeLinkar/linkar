@@ -3,6 +3,7 @@ var clean = require('gulp-clean');
 var browserSync = require('browser-sync').create();
 var proxy = require('proxy-middleware');
 var wiredep = require('wiredep').stream;
+var minifyCss = require('gulp-minify-css');
 
 var url = require('url');
 
@@ -32,7 +33,6 @@ gulp.task('wiredep', function () {
     ).pipe(gulp.dest('dist'));
 });
 
-
 gulp.task('browser-sync', function() {
     var proxyOptions = url.parse('http://localhost:8080/linkar/api');
     proxyOptions.route = '/api';
@@ -48,8 +48,6 @@ gulp.task('browser-sync', function() {
     });
 });
 
-
-
 gulp.task('copy', ['clean'], function () {
   return gulp
     .src('app/**/*')
@@ -60,4 +58,10 @@ gulp.task('clean', function () {
   return gulp
     .src('dist')
     .pipe(clean());
+});
+
+gulp.task('minify-css', function() {
+  return gulp.src('app/**/*.css')
+    .pipe(minifyCss({compatibility: 'ie8'}))
+    .pipe(gulp.dest('dist'));
 });
