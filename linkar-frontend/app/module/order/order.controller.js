@@ -3,6 +3,8 @@
 
   angular.module('linkar').controller('Order', OrderController);
 
+  OrderController.$inject = ['$scope', '$routeParams', 'Order', 'Store', 'Product'];
+
   function OrderController($scope, $routeParams, Order, Store, Product) {
 
     console.log('order::controller:init');

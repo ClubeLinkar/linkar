@@ -3,6 +3,8 @@
 
   angular.module('linkar').controller('User', UserController);
 
+  UserController.$inject = ['$scope', 'User'];
+
   function UserController($scope, User) {
 
     console.log('user::controller:init');
