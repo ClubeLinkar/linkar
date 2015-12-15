@@ -1,29 +1,30 @@
-var gulp = require('gulp');
-var clean = require('gulp-clean');
-var browserSync = require('browser-sync').create();
-var proxy = require('proxy-middleware');
-var wiredep = require('wiredep').stream;
-var minifyCss = require('gulp-minify-css');
+var
+  gulp            = require('gulp'),
+  clean           = require('gulp-clean'),
+  browserSync     = require('browser-sync').create(),
+  proxy           = require('proxy-middleware'),
+  wiredep         = require('wiredep').stream,
+  usemin          = require('gulp-usemin'),
+  minifyCss       = require('gulp-minify-css'),
+  minifyHtml      = require('gulp-minify-html'),
+  uglify          = require('gulp-uglify'),
+  url             = require('url')
+;
 
-var url = require('url');
-
-gulp.task('default', ['copy'], function () {
-  gulp.start('wiredep');
+gulp.task('clean', function () {
+  return gulp
+    .src('dist')
+    .pipe(clean());
 });
 
-gulp.task('server', ['copy'], function () {
-  browserSync.init({
-    port: 9000,
-    server: {
-      baseDir: 'dist'
-    }
-  });
-
-  gulp.watch('dist/**/*').on('change', browserSync.reload);
+gulp.task('copy', ['clean'], function () {
+  return gulp
+    .src('app/**/*')
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('wiredep', function () {
-  gulp
+gulp.task('wiredep', ['copy'], function () {
+  return gulp
     .src('app/index.html')
     .pipe(
       wiredep({
@@ -33,35 +34,54 @@ gulp.task('wiredep', function () {
     ).pipe(gulp.dest('dist'));
 });
 
-gulp.task('browser-sync', function() {
-    var proxyOptions = url.parse('http://localhost:8080/linkar/api');
-    proxyOptions.route = '/api';
-    // requests to `/api/x/y/z` are proxied to `http://localhost:3000/secret-api`
-
-    browserSync.init({
-        open: true,
-        port: 9000,
-        server: {
-            baseDir: "dist",
-            middleware: [proxy(proxyOptions)]
-        }
-    });
-});
-
-gulp.task('copy', ['clean'], function () {
-  return gulp
-    .src('app/**/*')
+gulp.task('usemin', ['wiredep'], function() {
+  return gulp.src('app/index.html')
+    .pipe(usemin({
+      css: [ minifyCss() ],
+      vendorcss: [ minifyCss() ],
+      // html: [ minifyHtml({ empty: true }) ],
+      js: [ uglify() ],
+      vendorjs: [ uglify() ],
+      inlinejs: [ uglify() ],
+      inlinecss: [ minifyCss(), 'concat' ]
+    }))
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', function () {
-  return gulp
-    .src('dist')
-    .pipe(clean());
+gulp.task('default', ['copy'], function () {
+  gulp.start('wiredep', 'minify-css');
 });
 
-gulp.task('minify-css', function() {
-  return gulp.src('app/**/*.css')
-    .pipe(minifyCss({compatibility: 'ie8'}))
-    .pipe(gulp.dest('dist'));
+
+gulp.task('server', function () {
+
+  var proxyOptions = url.parse('http://localhost:8080/linkar/api');
+  proxyOptions.route = '/linkar/api';
+
+  browserSync.init({
+    port: 9000,
+    server: {
+      baseDir: 'dist',
+      middleware: [proxy(proxyOptions)]
+    }
+  });
+
+  gulp.watch('dist/**/*').on('change', browserSync.reload);
 });
+
+
+
+// gulp.task('browser-sync', function() {
+//     var proxyOptions = url.parse('http://localhost:8080/linkar/api');
+//     proxyOptions.route = '/linkar/api';
+//     // requests to `/api/x/y/z` are proxied to `http://localhost:3000/secret-api`
+//
+//     browserSync.init({
+//         open: true,
+//         port: 9000,
+//         server: {
+//             baseDir: "dist",
+//             middleware: [proxy(proxyOptions)]
+//         }
+//     });
+// });
