@@ -11,41 +11,46 @@ var
   url             = require('url')
 ;
 
+var basePaths = {
+  src: 'app/',
+  dest: 'dist/'
+}
+
 gulp.task('clean', function () {
   return gulp
-    .src('dist')
+    .src(basePaths.dest)
     .pipe(clean());
 });
 
 gulp.task('copy', ['clean'], function () {
   return gulp
-    .src('app/**/*')
-    .pipe(gulp.dest('dist'));
+    .src(basePaths.src + '**/*')
+    .pipe(gulp.dest(basePaths.dest));
 });
 
 gulp.task('wiredep', ['copy'], function () {
   return gulp
-    .src('app/index.html')
+    .src(basePaths.src + 'index.html')
     .pipe(
       wiredep({
         optional: 'configuration',
         goes: 'here'
       })
-    ).pipe(gulp.dest('dist'));
+    ).pipe(gulp.dest(basePaths.dest));
 });
 
 gulp.task('usemin', ['wiredep'], function() {
-  return gulp.src('app/index.html')
+  return gulp.src(basePaths.src + '/index.html')
     .pipe(usemin({
       css: [ minifyCss() ],
       vendorcss: [ minifyCss() ],
-      // html: [ minifyHtml({ empty: true }) ],
+      html: [ minifyHtml({ empty: true }) ],
       js: [ uglify() ],
       vendorjs: [ uglify() ],
       inlinejs: [ uglify() ],
       inlinecss: [ minifyCss(), 'concat' ]
     }))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(basePaths.dest));
 });
 
 gulp.task('default', ['copy'], function () {
@@ -61,27 +66,10 @@ gulp.task('server', function () {
   browserSync.init({
     port: 9000,
     server: {
-      baseDir: 'dist',
+      baseDir: basePaths.dest,
       middleware: [proxy(proxyOptions)]
     }
   });
 
-  gulp.watch('dist/**/*').on('change', browserSync.reload);
+  gulp.watch(basePaths.dest + '**/*').on('change', browserSync.reload);
 });
-
-
-
-// gulp.task('browser-sync', function() {
-//     var proxyOptions = url.parse('http://localhost:8080/linkar/api');
-//     proxyOptions.route = '/linkar/api';
-//     // requests to `/api/x/y/z` are proxied to `http://localhost:3000/secret-api`
-//
-//     browserSync.init({
-//         open: true,
-//         port: 9000,
-//         server: {
-//             baseDir: "dist",
-//             middleware: [proxy(proxyOptions)]
-//         }
-//     });
-// });
