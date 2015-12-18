@@ -8,6 +8,9 @@ var
   minifyCss       = require('gulp-minify-css'),
   minifyHtml      = require('gulp-minify-html'),
   uglify          = require('gulp-uglify'),
+  jshint          = require('gulp-jshint'),
+  jshintStylish   = require('jshint-stylish'),
+  autoprefixer    = require('gulp-autoprefixer'),
   url             = require('url')
 ;
 
@@ -42,7 +45,7 @@ gulp.task('wiredep', ['copy'], function () {
 gulp.task('usemin', ['wiredep'], function() {
   return gulp.src(basePaths.src + '/index.html')
     .pipe(usemin({
-      css: [ minifyCss() ],
+      css: [ autoprefixer(), minifyCss() ],
       vendorcss: [ minifyCss() ],
       html: [ minifyHtml({ empty: true }) ],
       js: [ uglify() ],
@@ -72,4 +75,12 @@ gulp.task('server', function () {
   });
 
   gulp.watch(basePaths.dest + '**/*').on('change', browserSync.reload);
+
+  gulp.watch(basePaths.src + '**/*.js').on('change', function (event) {
+    console.log('LINT -->> ' + event.path);
+    gulp
+      .src(event.path)
+      .pipe(jshint())
+      .pipe(jshint.reporter(jshintStylish));
+  });
 });

@@ -1,5 +1,5 @@
 (function() {
-  'use strict'
+  'use strict';
 
   angular.module('linkar').controller('User', UserController);
 
@@ -19,7 +19,7 @@
         console.log("user::controller:save");
         $scope.message = "Success!";
       });
-    }
+    };
   }
 
 })();
