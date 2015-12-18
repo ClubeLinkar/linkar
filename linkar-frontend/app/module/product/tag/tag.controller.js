@@ -3,6 +3,8 @@
 
   angular.module('linkar').controller('Tag', TagController);
 
+  TagController.$inject = ['$scope', 'Product', 'Store'];
+
   function TagController($scope, Product, Store) {
 
     console.log('tag::product::controller:init');

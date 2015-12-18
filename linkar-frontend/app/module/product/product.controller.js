@@ -3,6 +3,8 @@
 
   angular.module('linkar').controller('Product', ProductController);
 
+  ProductController.$inject = ['$scope', 'Product', 'Store'];
+
   function ProductController($scope, Product, Store) {
 
     console.log('product::controller:init');
