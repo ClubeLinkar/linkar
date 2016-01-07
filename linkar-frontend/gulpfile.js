@@ -12,7 +12,8 @@ var
   jshintStylish   = require('jshint-stylish'),
   autoprefixer    = require('gulp-autoprefixer'),
   url             = require('url'),
-  inject          = require('gulp-inject');
+  inject          = require('gulp-inject'),
+  zip             = require('gulp-zip');
 ;
 
 var basePaths = {
@@ -99,5 +100,45 @@ gulp.task('server', ['usemin'], function () {
 
   gulp.watch(basePaths.src + '**/*', ['change-src']);
 
+
+});
+
+gulp.task('dist', ['usemin'], function () {
+
+  gulp.src('tmp/**/*.html').pipe(gulp.dest('dist/'));
+  console.log("Copy html files... [OK]");
+
+  gulp.src('tmp/css/*').pipe(gulp.dest('dist/css'));
+  console.log("Copy html files... [OK]");
+
+  gulp.src('tmp/js/*').pipe(gulp.dest('dist/js'));
+  console.log("Copy js files... [OK]");
+
+  gulp.src('tmp/layout/fonts/*').pipe(gulp.dest('dist/layout/fonts'));
+  console.log("Copy font files... [OK]");
+
+  gulp.src('tmp/layout/images/*').pipe(gulp.dest('dist/layout/images'));
+  console.log("Copy image files... [OK]");
+
+});
+
+gulp.task('package', [], function () {
+	return gulp.src('dist/**/*.*')
+		.pipe(zip('linkar-frontend.zip'))
+		.pipe(gulp.dest('zip'));
+});
+
+gulp.task('serve:prod', ['dist'], function () {
+
+  var proxyOptions = url.parse('http://localhost:8080/linkar/api');
+  proxyOptions.route = '/linkar/api';
+
+  browserSync.init({
+    port: 9000,
+    server: {
+      baseDir: 'dist/',
+      middleware: [proxy(proxyOptions)]
+    }
+  });
 
 });
