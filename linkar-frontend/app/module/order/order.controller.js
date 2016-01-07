@@ -1,5 +1,5 @@
 (function() {
-  'use strict'
+  'use strict';
 
   angular.module('linkar').controller('Order', OrderController);
 
@@ -27,7 +27,7 @@
         console.log("order::controller:save");
         $scope.message = "Success!";
       });
-    }
+    };
   }
 
 })();

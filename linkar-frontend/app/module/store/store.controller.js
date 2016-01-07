@@ -1,9 +1,9 @@
 (function() {
-  'use strict'
+  'use strict';
 
   angular.module('linkar').controller('Store', StoreController);
 
-  StoreController.$inject = ['$scope', 'Store']
+  StoreController.$inject = ['$scope', 'Store'];
 
   function StoreController($scope, Store) {
 
@@ -19,7 +19,7 @@
         console.log("store::controller:save");
         $scope.message = "Success!";
       });
-    }
+    };
   }
 
 })();

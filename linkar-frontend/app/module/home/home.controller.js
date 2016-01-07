@@ -12,7 +12,7 @@
       $location.hash(anchor);
 
       $anchorScroll();
-    }
+    };
 
   }
 })();
