@@ -4,6 +4,7 @@
 .mtj.tmp/
 
 .tmp
+tmp/
 
 # Package Files #
 *.war
