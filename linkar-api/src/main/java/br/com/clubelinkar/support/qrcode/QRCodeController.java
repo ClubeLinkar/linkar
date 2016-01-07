@@ -25,7 +25,7 @@ public class QRCodeController {
                          @PathVariable("productId") String productId,
                          HttpServletRequest request) throws IOException {
 
-        String url = String.format("http://%s:%d/checkout/%s/%s", request.getServerName(), request.getServerPort(), storeId, productId);
+        String url = String.format("http://clubelinkar.com.br/#/order/%s/%s", storeId, productId);
 
         ByteArrayOutputStream in = QRCode.from(url).to(ImageType.PNG).stream();
 
