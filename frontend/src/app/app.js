@@ -28,7 +28,7 @@ angular.module('inspinia', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         .state('product.main', {
             url: "/main",
             templateUrl: "app/product/main.html",
-            data: { pageTitle: 'Produtos' }
+            controller: 'Product'
         })
 
         .state('store', {
