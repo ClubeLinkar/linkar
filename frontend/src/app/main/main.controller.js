@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('inspinia')
+angular.module('linkar')
   .controller('MainCtrl', function ($scope) {
 
     this.helloText = 'Linkar';

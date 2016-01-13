@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('inspinia', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap' ])
+angular.module('linkar', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap' ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
@@ -28,7 +28,14 @@ angular.module('inspinia', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         .state('product.main', {
             url: "/main",
             templateUrl: "app/product/main.html",
-            controller: 'Product'
+            controller: 'Product',
+            controllerAs: 'vm'
+        })
+        .state('product.form', {
+            url: "/form",
+            templateUrl: "app/product/form.html",
+            controller: 'Product',
+            controllerAs: 'vm'
         })
 
         .state('store', {
