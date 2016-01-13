@@ -78,6 +78,7 @@ public class ProductRestControllerTest extends BaseRestControllerTest {
     }
 
     @Test
+    @Ignore
     public void "Deve criticar loja com brand nulo"() {
         def invalidProduct = aProduct
         invalidProduct.brand = null

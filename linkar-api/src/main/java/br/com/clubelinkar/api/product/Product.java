@@ -25,7 +25,7 @@ public final class Product {
     @NotNull
     private String description;
 
-    @NotNull
+//    @NotNull
     private String brand;
 
     @NotNull
