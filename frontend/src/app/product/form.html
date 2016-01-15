@@ -24,13 +24,13 @@
 
               </div>
               <div class="ibox-content">
-                  <form class="form-horizontal" ng-submit="vm.save()">
+                  <form name="productForm" class="form-horizontal" ng-submit="vm.save()">
 
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nome</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" ng-model="product.name" />
+                        <div class="col-sm-10" ng-class="{'has-error' : productForm.name.$dirty && productForm.name.$invalid}">
+                          <input type="text" class="form-control" ng-model="product.name" required="required" />
                           <span class="help-block m-b-none">
                             Ex: Riser de guidão Anker para Triumhp 800 XC
                           </span>
@@ -39,10 +39,13 @@
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Descrição</label>
-                        <div class="col-sm-10">
-                          <textarea class="form-control" ng-model="product.description" />
+                        <div class="col-sm-10" ng-class="{'has-error' : productForm.description.$dirty && productForm.description.$invalid}">
+                          <textarea class="form-control" ng-model="product.description" required="required"/>
                           <span class="help-block m-b-none">
-                            Ex: Os Riser’s de guidão Anker Acessórios são projetados para ajustar a altura do guidão, elevando-o para uma postura correta de pilotagem e com isso proporcionando maior conforto. Usinados a partir de alumínio naval com traços que remetem à originalidade da motocicleta, são disponíveis na versão alongador e alongador recuado/avançado.
+                            Ex: Os Riser’s de guidão Anker Acessórios são projetados para ajustar a altura do guidão,
+                            elevando-o para uma postura correta de pilotagem e com isso proporcionando maior conforto.
+                            Usinados a partir de alumínio naval com traços que remetem à originalidade da motocicleta,
+                            são disponíveis na versão alongador e alongador recuado/avançado.
                           </span>
                         </div>
                       </div>
@@ -51,11 +54,11 @@
 
                       <div class="form-group"><label class="col-sm-2 control-label">Preço</label>
 
-                          <div class="col-sm-10">
+                          <div class="col-sm-10" ng-class="{'has-error' : productForm.price.$dirty && productForm.price.$invalid}">
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon">R$</span>
-                                <input type="text" class="form-control" ng-model="product.price">
+                                <input type="text" class="form-control" ng-model="product.price" required="required">
                                 <span class="input-group-addon">,00</span>
                               </div>
                               <span class="help-block m-b-none">Informe apenas números, sem ponto ou vírgula.</span>
@@ -67,8 +70,8 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Loja</label>
 
-                          <div class="col-sm-10">
-                            <select class="form-control m-b" name="store" ng-model="product.storeId">
+                          <div class="col-sm-10" ng-class="{'has-error' : productForm.storeId.$dirty && productForm.storeId.$invalid}">
+                            <select class="form-control m-b" name="store" ng-model="product.storeId" required="required">
                               <option value="{{store.id}}" ng-repeat="store in storeList">{{store.name}}</option>
                             </select>
 
