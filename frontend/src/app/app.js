@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('linkar', [
-  'ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'ngToast' 
+  'ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap', 'ngToast'
 ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -48,7 +48,14 @@ angular.module('linkar', [
         .state('store.main', {
             url: "/main",
             templateUrl: "app/store/main.html",
-            data: { pageTitle: 'Lojas' }
+            controller: 'Store',
+            controllerAs: 'vm'
+        })
+        .state('store.form', {
+            url: "/form",
+            templateUrl: "app/store/form.html",
+            controller: 'Store',
+            controllerAs: 'vm'
         })
 
         .state('user', {

@@ -39,12 +39,34 @@
                 </ul>
 
             </li>
+
+            <li ui-sref-active="active">
+                <a><i class="fa fa-building-o"></i>
+                  <span class="nav-label">Lojas</span>
+                  <span class="fa arrow"></span>
+                </a>
+
+                <ul class="nav nav-second-level">
+                    <li class="active">
+                      <a ui-sref="store.main">
+                        <i class="fa fa-desktop"></i>
+                        Exibir
+                      </a>
+                    </li>
+                    <li>
+                      <a ui-sref="store.form">
+                        <i class="fa fa-cogs"></i>
+                        Cadastrar
+                      </a>
+                    </li>
+                </ul>
+
+            </li>
+
             <li ui-sref-active="active">
                 <a ui-sref="user.main"><i class="fa fa-users"></i> <span class="nav-label">Usuários</span></a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="store.main"><i class="fa fa-building-o"></i> <span class="nav-label">Lojas</span></a>
-            </li>
+
 
 
 
