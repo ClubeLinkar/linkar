@@ -5,7 +5,7 @@ import br.com.clubelinkar.exception.RepeatedUserEmailException
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
-import br.com.clubelinkar.test.BaseRestControllerTest
+import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.junit.Before
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Lennon Jesus
  */
-class UserRestControllerTest extends BaseRestControllerTest {
+class UserRestControllerTest extends BaseRestControllerMock {
 
     private static final String BASE_ENDPOINT = "/user"
 

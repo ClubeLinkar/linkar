@@ -2,7 +2,7 @@ package br.com.clubelinkar.api.store
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
-import br.com.clubelinkar.test.BaseRestControllerTest
+import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.junit.Before
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Lennon Jesus
  */
-public class StoreRestControllerTest extends BaseRestControllerTest {
+public class StoreRestControllerTest extends BaseRestControllerMock {
 
     private static final String BASE_ENDPOINT = "/store"
 
