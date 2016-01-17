@@ -11,8 +11,13 @@
           })
           .state('user.main', {
               url: "/main",
-              templateUrl: "app/user/main.html",
-              data: { pageTitle: 'Usuários' }
+              templateUrl: "app/user/main.html"
+          })
+          .state('user.form', {
+              url: "/new",
+              templateUrl: "app/user/form.html",
+              controller: 'User',
+              controllerAs: 'vm'
           })
       ;
 

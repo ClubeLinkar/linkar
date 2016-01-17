@@ -22,7 +22,7 @@
     this.save = function () {
       Store.save($scope.store, function (data) {
         console.log("store::controller:save");
-        $scope.message = "Success!";
+        ngToast.create('A loja ' + $scope.store.name + ' foi cadastrada com sucesso!');
       });
     };
   }
