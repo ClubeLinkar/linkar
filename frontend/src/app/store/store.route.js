@@ -6,7 +6,7 @@
       $stateProvider
           .state('store', {
               abstract: true,
-              url: "/store",
+              url: "/admin/store",
               templateUrl: "components/common/content.html"
           })
           .state('store.main', {
