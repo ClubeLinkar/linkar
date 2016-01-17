@@ -23,7 +23,7 @@
                       </thead>
                       <tbody>
                       <tr ng-repeat="store in storeList">
-                          <td>{{store.name}}</td>
+                          <td><a ui-sref="store.detail({storeId: store.id})">{{store.name}}</a></td>
                           <td>{{store.description}}</td>
                           <td>{{store.address}}</td>
                           <td>{{store.phones}}</td>

@@ -63,6 +63,12 @@ angular.module('linkar', [
             controller: 'Store',
             controllerAs: 'vm'
         })
+        .state('store.detail', {
+            url: "/detail/:storeId",
+            templateUrl: "app/store/form.html",
+            controller: 'Store',
+            controllerAs: 'vm'
+        })
 
         .state('user', {
             abstract: true,

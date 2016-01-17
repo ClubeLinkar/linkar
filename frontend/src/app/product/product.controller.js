@@ -15,6 +15,7 @@
     });
 
     Product.get({ id: $stateParams.productId }, function(data) {
+      console.log("product::controller:detail");
       $scope.product = data;
     });
 

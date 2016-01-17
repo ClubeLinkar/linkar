@@ -3,11 +3,16 @@
 
   angular.module('linkar').controller('Store', StoreController);
 
-  StoreController.$inject = ['$scope', 'Store'];
+  StoreController.$inject = ['$scope', 'Store', '$stateParams'];
 
-  function StoreController($scope, Store) {
+  function StoreController($scope, Store, $stateParams) {
 
     console.log('store::controller:init');
+
+    Store.get({ id: $stateParams.storeId }, function(data) {
+      console.log("store::controller:detail");
+      $scope.store = data;
+    });
 
     Store.query(function (data) {
       console.log("store::controller:list");
