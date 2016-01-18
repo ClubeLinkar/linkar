@@ -19,7 +19,8 @@
         console.log("user::controller:save");
         ngToast.create('Seu usuário foi criado com sucesso, ' + $scope.user.name + '. Você já pode Linkar!');
       }, function (erro) {
-        ngToast.create("Houve um erro de validação dos dados.");
+        console.log(erro);
+        ngToast.danger("Houve um erro de validação dos dados. " + erro.data.exception);
       });
     };
   }

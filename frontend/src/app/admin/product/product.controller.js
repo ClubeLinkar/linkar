@@ -30,6 +30,9 @@
 
         ngToast.create('O produto ' + $scope.product.name + ' foi cadastrado com sucesso!');
 
+      }, function (erro) {
+        console.log(erro);
+        ngToast.danger("Houve um erro de validação dos dados. " + erro.data.exception);
       });
     };
   }
