@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * @author Lennon Jesus
  */
-@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "CPF de usuario repetido    ")
-public class RepeatedUserCPFException extends RuntimeException {
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class RepeatedUserCPFException extends BusinessException {
 
     public RepeatedUserCPFException() {
-        super();
+        super("CPF já cadastrado.");
     }
 
 }

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Lennon Jesus
  */
 @ResponseStatus(value= HttpStatus.FORBIDDEN, reason="Order repetida")
-public class RepeatedPurchaseException extends RuntimeException {
+public class RepeatedPurchaseException extends BusinessException {
 
     public RepeatedPurchaseException() {
-        super();
+        super("Este produto já foi comprado por este cliente.");
     }
 }

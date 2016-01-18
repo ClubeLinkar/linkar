@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Lennon Jesus
  */
 @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Email de loja repetido    ")
-public class RepeatedStoreEmailException extends RuntimeException {
+public class RepeatedStoreEmailException extends BusinessException {
 
     public RepeatedStoreEmailException() {
-        super();
+        super("E-mail de loja já cadastrado.");
     }
 
 }

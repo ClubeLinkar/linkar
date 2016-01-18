@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * @author Lennon Jesus
  */
-@ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Product nao existe    ")
-public class InvalidProductException extends RuntimeException {
+@ResponseStatus(value= HttpStatus.NOT_FOUND)
+public class InvalidProductException extends BusinessException {
 
     public InvalidProductException() {
-        super();
+        super("Produto inválido ou inexistente!");
     }
 
 }

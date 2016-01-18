@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * @author Lennon Jesus
  */
-@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "CNPJ de loja repetido    ")
-public class RepeatedStoreCNPJException extends RuntimeException {
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class RepeatedStoreCNPJException extends BusinessException {
 
     public RepeatedStoreCNPJException() {
-        super();
+        super("CNPJ de loja já cadastrado.");
     }
 
 }
