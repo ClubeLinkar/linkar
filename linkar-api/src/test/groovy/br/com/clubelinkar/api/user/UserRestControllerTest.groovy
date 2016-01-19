@@ -91,9 +91,9 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def mail = new Mail()
                 .from("noreply@clubelinkar.com.br")
                 .to("lennon.jesus@gmail.com")
-                .subject("Test Mail")
+                .subject("Você se cadastrou na Linkar!")
                 .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("blah", "blah blah")
+                .addParameter("name", anUser.name)
 
         verify(mailServiceMock).send(mail)
 

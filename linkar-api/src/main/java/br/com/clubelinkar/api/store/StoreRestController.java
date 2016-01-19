@@ -1,5 +1,9 @@
 package br.com.clubelinkar.api.store;
 
+import br.com.clubelinkar.api.user.User;
+import br.com.clubelinkar.support.mail.Mail;
+import br.com.clubelinkar.support.mail.MailService;
+import br.com.clubelinkar.support.mail.MailTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +23,26 @@ public class StoreRestController {
     @Autowired
     private StoreValidator storeValidator;
 
+    @Autowired
+    private MailService mailService;
+
     @RequestMapping(value = "/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Store create(@RequestBody @Valid Store store) {
 
         storeValidator.validate(store, null);
 
-        return storeRepository.save(store);
+        Store createdStore = storeRepository.save(store);
+
+        Mail email = new Mail()
+                .from("noreply@clubelinkar.com.br") // FIXME
+                .to(store.getEmail())
+                .subject("Sua loja está na Linkar!") // FIXME
+                .template(MailTemplate.STORE_REGISTRATION)
+                .addParameter("name", store.getName()); // FIXME
+
+        mailService.send(email);
+
+        return createdStore;
     }
 
     @RequestMapping(value = "/store", method = RequestMethod.GET)

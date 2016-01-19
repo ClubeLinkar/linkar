@@ -39,10 +39,9 @@ public class UserRestController {
         Mail email = new Mail()
                 .from("noreply@clubelinkar.com.br") // FIXME
                 .to(user.getEmail())
-                .subject("Test Mail") // FIXME
+                .subject("Você se cadastrou na Linkar!") // FIXME
                 .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("name", user.getName()) // FIXME
-                .addParameter("date", new Date()); // FIXME
+                .addParameter("name", user.getName()); // FIXME
 
         mailService.send(email);
 

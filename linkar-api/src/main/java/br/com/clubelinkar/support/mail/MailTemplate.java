@@ -5,7 +5,8 @@ package br.com.clubelinkar.support.mail;
  */
 public enum MailTemplate {
 
-    USER_REGISTRATION("newuser");
+    USER_REGISTRATION("newuser"),
+    STORE_REGISTRATION("newstore");
 
     private String name;
 

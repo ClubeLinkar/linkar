@@ -2,6 +2,9 @@ package br.com.clubelinkar.api.store
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
+import br.com.clubelinkar.support.mail.Mail
+import br.com.clubelinkar.support.mail.MailService
+import br.com.clubelinkar.support.mail.MailTemplate
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -18,7 +21,11 @@ import java.lang.reflect.Type
 
 import static br.com.clubelinkar.test.StoreObjectMother.aStore
 import static br.com.clubelinkar.test.StoreObjectMother.getAnotherStore
+import static br.com.clubelinkar.test.UserObjectMother.getAnUser
+import static br.com.clubelinkar.test.UserObjectMother.getAnUser
+import static br.com.clubelinkar.test.UserObjectMother.getAnUser
 import static org.junit.Assert.*
+import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -36,6 +43,9 @@ public class StoreRestControllerTest extends BaseRestControllerMock {
 
     @Mock
     def StoreValidator storeValidatorMock
+
+    @Mock
+    def MailService mailServiceMock
 
     @InjectMocks
     def StoreRestController storeRestController
@@ -66,6 +76,28 @@ public class StoreRestControllerTest extends BaseRestControllerMock {
         assertEquals aStore.phones, store.phones
         assertEquals aStore.url, store.url
         assertEquals aStore.email, store.email
+
+    }
+
+    @Test
+    public void "Deve enviar email de boas vindas para novas lojas cadastradas com sucesso"() {
+
+        when(storeRepositoryMock.save(aStore)).thenReturn(aStore);
+
+        mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(aStore))
+        ).andExpect(status().isOk()).andReturn()
+
+
+        def mail = new Mail()
+                .from("noreply@clubelinkar.com.br")
+                .to("allmotos@allmotos.com.br")
+                .subject("Sua loja está na Linkar!")
+                .template(MailTemplate.STORE_REGISTRATION)
+                .addParameter("name", aStore.name)
+
+        verify(mailServiceMock).send(mail)
 
     }
 
