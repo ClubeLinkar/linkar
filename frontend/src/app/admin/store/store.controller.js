@@ -3,9 +3,9 @@
 
   angular.module('linkar').controller('Store', StoreController);
 
-  StoreController.$inject = ['$scope', 'Store', '$stateParams'];
+  StoreController.$inject = ['$scope', 'Store', '$stateParams', 'ngToast'];
 
-  function StoreController($scope, Store, $stateParams) {
+  function StoreController($scope, Store, $stateParams, ngToast) {
 
     console.log('store::controller:init');
 
