@@ -29,42 +29,54 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10" ng-class="{'has-error' : userForm.name.$dirty && userForm.name.$invalid}">
-                          <input type="text" class="form-control" ng-model="user.name" required="required" />
+                          <div class="input-group m-b">
+                            <span class="input-group-addon fa fa-user"></span>
+                            <input type="text" class="form-control" ng-model="user.name" required="required">
+                          </div>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">E-mail</label>
                         <div class="col-sm-10" ng-class="{'has-error' : userForm.email.$dirty && userForm.email.$invalid}">
-                          <input type="email" class="form-control" ng-model="user.email" required="required" />
+                          <div class="input-group m-b">
+                            <span class="input-group-addon fa">@</span>
+                            <input type="text" class="form-control" ng-model="user.email" required="required">
+                          </div>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Senha</label>
                         <div class="col-sm-10" ng-class="{'has-error' : userForm.password.$dirty && userForm.password.$invalid}">
-                          <input type="password" class="form-control" ng-model="user.password" required="required" />
+                          <div class="input-group m-b">
+                            <span class="input-group-addon fa fa-lock"></span>
+                            <input type="password" class="form-control" ng-model="user.password" required="required">
+                          </div>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">CPF</label>
                         <div class="col-sm-10" ng-class="{'has-error' : userForm.cpf.$dirty && userForm.cpf.$invalid}">
-                          <input type="text" class="form-control" ng-model="user.cpf" required="required" />
+                          <div class="input-group m-b">
+                            <span class="input-group-addon fa fa-credit-card"></span>
+                            <input type="text" class="form-control" ng-model="user.cpf" required="required">
+                          </div>
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Bairro</label>
                         <div class="col-sm-10" ng-class="{'has-error' : userForm.district.$dirty && userForm.district.$invalid}">
-                          <input type="text" class="form-control" ng-model="user.district" required="required" />
+                            <input type="text" class="form-control" ng-model="user.district" required="required">
                         </div>
                       </div>
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Cidade</label>
                         <div class="col-sm-10" ng-class="{'has-error' : userForm.city.$dirty && userForm.city.$invalid}">
-                          <input type="text" class="form-control" ng-model="user.city" required="required" />
+                            <input type="text" class="form-control" ng-model="user.city" required="required">
                         </div>
                       </div>
 
@@ -72,7 +84,7 @@
                         <label class="col-sm-2 control-label">Estado</label>
 
                           <div class="col-sm-10" ng-class="{'has-error' : userForm.state.$dirty && userForm.state.$invalid}">
-                            <uf id="state" name="state" ng-model="user.state" class="form-control m-b" required="required" />
+                              <uf id="state" name="state" ng-model="user.state" class="form-control m-b" required="required" />
                           </div>
                       </div>
 
