@@ -24,6 +24,8 @@ public final class User {
     @Email
     private String email;
 
+    private String gender; // FIXME teste
+
     @NotNull
     private String cpf; //TODO Adicionar validacao de CPF (tem algo diferente do Stella jah implementado?)
 
@@ -60,6 +62,14 @@ public final class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getCpf() {
