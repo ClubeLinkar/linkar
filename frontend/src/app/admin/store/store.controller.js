@@ -3,9 +3,9 @@
 
   angular.module('linkar').controller('Store', StoreController);
 
-  StoreController.$inject = ['$scope', 'Store', '$stateParams', 'ngToast'];
+  StoreController.$inject = ['$scope', 'Store', '$stateParams', 'ngToast', '$state'];
 
-  function StoreController($scope, Store, $stateParams, ngToast) {
+  function StoreController($scope, Store, $stateParams, ngToast, $state) {
 
     console.log('store::controller:init');
 
@@ -23,6 +23,7 @@
       Store.save($scope.store, function (data) {
         console.log("store::controller:save");
         ngToast.create('A loja ' + $scope.store.name + ' foi cadastrada com sucesso!');
+        $state.go('store.main');
       }, function (erro) {
         console.log(erro);
         ngToast.danger("Houve um erro de validação dos dados. " + erro.data.exception);

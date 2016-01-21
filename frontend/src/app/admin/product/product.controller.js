@@ -3,9 +3,9 @@
 
   angular.module('linkar').controller('Product', ProductController);
 
-  ProductController.$inject = ['$scope', 'Product', 'Store', 'ngToast', '$stateParams'];
+  ProductController.$inject = ['$scope', 'Product', 'Store', 'ngToast', '$stateParams', '$state'];
 
-  function ProductController($scope, Product, Store, ngToast, $stateParams) {
+  function ProductController($scope, Product, Store, ngToast, $stateParams, $state) {
 
     console.log('product::controller:init');
 
@@ -29,6 +29,7 @@
         console.log("product::controller:save");
 
         ngToast.create('O produto ' + $scope.product.name + ' foi cadastrado com sucesso!');
+        $state.go('product.main');
 
       }, function (erro) {
         console.log(erro);
