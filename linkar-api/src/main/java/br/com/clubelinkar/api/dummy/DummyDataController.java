@@ -45,10 +45,13 @@ public class DummyDataController {
 
     private void loadData() {
         userRepository.save(getUser());
+        userRepository.save(getAnotherUser());
 
         storeRepository.save(getStore());
+        storeRepository.save(getAnotherStore());
 
         productRepository.save(getProduct());
+        productRepository.save(getAnotherProduct());
 
     }
 
