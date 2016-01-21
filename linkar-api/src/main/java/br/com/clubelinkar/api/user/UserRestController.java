@@ -1,14 +1,12 @@
 package br.com.clubelinkar.api.user;
 
+import br.com.clubelinkar.api.store.Store;
 import br.com.clubelinkar.support.mail.Mail;
 import br.com.clubelinkar.support.mail.MailService;
 import br.com.clubelinkar.support.mail.MailTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -51,5 +49,10 @@ public class UserRestController {
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/user/{id}")
+    public User getById(@PathVariable("id") String id) {
+        return userRepository.findOne(id);
     }
 }
