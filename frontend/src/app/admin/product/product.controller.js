@@ -25,6 +25,9 @@
     });
 
     this.save = function () {
+
+      $scope.product.photos = $scope.photos;
+
       Product.save($scope.product, function (data) {
         console.log("product::controller:save");
 
@@ -35,6 +38,25 @@
         console.log(erro);
         ngToast.danger("Houve um erro de validação dos dados. " + erro.data.exception);
       });
+    };
+
+    $scope.photos = [];
+
+    // FIXME DROPZONE OUT HERE
+    $scope.dropzoneConfig = {
+      'options': { // passed into the Dropzone constructor
+        'url': '/linkar/api/upload'
+      },
+      'eventHandlers': {
+        'sending': function (file, xhr, formData) {
+          console.log('dropzone sending...');
+        },
+        'success': function (file, response) {
+          console.log('dropzone success...');
+
+          $scope.photos.push(response.filePath);
+        }
+      }
     };
   }
 

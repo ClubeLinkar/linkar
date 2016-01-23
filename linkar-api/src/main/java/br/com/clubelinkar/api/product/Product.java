@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author Lennon Jesus
@@ -34,6 +35,8 @@ public final class Product {
 
     @NotNull
     private String storeId;
+
+    private List<String> photos;
 
     public Product() {
     }
@@ -84,6 +87,14 @@ public final class Product {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 
     @Override
