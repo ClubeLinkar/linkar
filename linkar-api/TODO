@@ -1,5 +1,172 @@
-- hash password
-- testes unitarios controller
-- dashboard
-- regra pontos linkar
-- ng-flow
+Alimentícios
+
+    Restaurantes
+
+        Restaurante japonês
+        Comida à quilo
+        Self-service sem balança
+        Churrascaria
+        Restaurante estrelado
+        Rodízios
+        Rodízios de pizza
+        Rodízios de churrasco
+        Restaurantes de fruto do mar
+        Restaurantes típicos
+
+    Lanchonete e bares
+
+        Bar e restaurante
+        Depósitos de bebidas
+        Lanchonetes
+        Empórios
+        Fast food
+        Pizzaria
+        Depósito de bebidas
+
+    Casas de Doces
+
+        Depósito de doces
+        Loja de biscoitos
+        Loja de chocolate
+        Confeitaria
+        Delicatessen
+
+    Mercados
+
+        Supermercados
+        Hipermercados
+        Minimercado
+        Açougue
+        Padaria
+        Hortifruti
+
+Roupas e Acessórios
+
+    Masculina
+
+        Marca Própria
+        Multimarca
+        Magazines
+        Roupa social
+        Religiosa
+        Especiais
+        Peças íntimas
+        Estilista
+
+
+    Feminina
+
+        Marca Própria
+        Multimarca
+        Magazines
+        Roupa social
+        Religiosa
+        Especiais
+        Peças íntimas
+        Estilista
+
+    Acessórios
+
+        Bijuteria
+        Sexy shop
+        Perfumaria
+        Material para costura ou acabamento
+        Loja de jóias
+        Loja de tecidos
+        Calçados Masculinos
+        Calçados Femininos
+
+Serviços
+
+    Reparos e Consertos
+
+        Marido de Aluguel
+        Desentupidora
+        Eletricista
+        Construção
+        Encanador
+        Oficina Mecânica
+        Luthier
+        Marcenaria
+        Costura e reparos
+        Pintura
+        Ferreiro
+        Manutenção e conserto de maquinas e equipamentos
+        Estofador
+        Sapateiro
+
+    Academias
+
+        Geral
+        Especializada em mulheres
+        Especializada em crianças
+        especializada em idosos
+        academias de lutas
+        academias de dança de salão
+        academias de balé e jazz
+        academias de street dance
+
+    Esportes
+
+        Escolas de futebol
+        Aluguel de campos
+        Esportes olímpicos
+        Esportes artísticos
+        Natação
+        Escolas de vôlei
+        Escolas de Basquete
+        Escolas de tênis de mesa
+
+    Clínicas
+
+        Clínicas de estética
+        Clínicas de fisioterapia
+        Clínicas de medicina em geral
+        Clínicas de medicina do trabalho
+        Clínica dentária
+
+    Escolas
+
+        Escola de idiomas
+        Ensino comum
+        Preparatórios
+        Pré-vestibulares
+        Ensino superior e pós-graduação
+        Cursos livres
+        Cursos Online
+
+    Estética e beleza
+
+        Salões unissex
+        Barbearias
+        Bar barbearias
+        Salão feminino
+        Esteticista
+        Casa de massagem e acupunturara
+
+Varejo 
+
+    Pets/Floriculturas
+
+        Floricultura
+        Materiais de jardinagem
+        Pets shop
+        casas de ração
+        Acessórios para casa e jardim
+
+    Móveis/Eletrodomésticos
+
+        Linha branca
+        Móveis e utensílios
+        Móveis de escritório
+        Redes de móveis e eletrodomésticos
+        Móveis para Jardim e acessórios
+
+    Feminina
+
+        Materiais escolares
+        Locadoras
+        Loja de instrumento musical
+        Loja de ferragem
+        Banca de jornal
+        Material de Construção
