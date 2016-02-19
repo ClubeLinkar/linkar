@@ -63,3 +63,14 @@ GULP
 ```
 $ npm install -g gulp
 ```
+
+GIT FLOW
+
+Um modelo de trabalho com branches: http://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html
+
+Um cheatsheet do git glow: http://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html
+
+```
+$ curl -L -O https://raw.github.com/nvie/gitflow/develop/contrib/gitflow-installer.sh
+$ sudo bash gitflow-installer.sh
+```
