@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.dummy;
 
+import br.com.clubelinkar.api.category.CategoryRepository;
 import br.com.clubelinkar.api.order.OrderRepository;
 import br.com.clubelinkar.api.product.ProductRepository;
 import br.com.clubelinkar.api.store.StoreRepository;
@@ -30,6 +31,9 @@ public class DummyDataController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @RequestMapping("/dummy")
     public String prepareDatabase() {
         clearDatabase();
@@ -53,6 +57,9 @@ public class DummyDataController {
         productRepository.save(getProduct());
         productRepository.save(getAnotherProduct());
 
+        categoryRepository.save(getCategory());
+        categoryRepository.save(getAnotherCategory());
+
     }
 
     private void clearDatabase() {
@@ -60,6 +67,7 @@ public class DummyDataController {
         storeRepository.deleteAll();
         orderRepository.deleteAll();
         userRepository.deleteAll();
+        categoryRepository.deleteAll();
     }
 
 }
