@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.dummy;
 
+import br.com.clubelinkar.api.category.Category;
 import br.com.clubelinkar.api.user.User;
 import br.com.clubelinkar.api.product.Product;
 import br.com.clubelinkar.api.store.Store;
@@ -102,6 +103,26 @@ public class DummyDomainObjectMother {
         store.setPassword("987654321");
 
         return store;
+    }
+
+    public static Category getCategory() {
+        Category category = new Category();
+
+        category.setId("category_1");
+        category.setName("Serviços de mecânica");
+
+
+        return category;
+    }
+
+    public static Category getAnotherCategory() {
+        Category category = new Category();
+
+        category.setId("product_2");
+        category.setName("Peças de moto");
+
+
+        return category;
     }
 
 
