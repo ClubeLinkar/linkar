@@ -1,0 +1,189 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-success pull-right">Mensal</span>
+                  <h5>Vendas</h5>
+              </div>
+              <div class="ibox-content">
+                  <h1 class="no-margins">886.200,00</h1>
+
+                  <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                  <small>Total de vendas</small>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-info pull-right">Anual</span>
+                  <h5>Lucro</h5>
+              </div>
+              <div class="ibox-content">
+                  <h1 class="no-margins">275.800,00</h1>
+
+                  <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                  <small>Lucro líquido</small>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-primary pull-right">Mensal</span>
+                  <h5>Clientes</h5>
+              </div>
+              <div class="ibox-content">
+                  <h1 class="no-margins">32</h1>
+
+                  <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i></div>
+                  <small>Novos clientes</small>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-3">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <span class="label label-danger pull-right">Low value</span>
+                  <h5>Prejuízo</h5>
+              </div>
+              <div class="ibox-content">
+                  <h1 class="no-margins">100,00</h1>
+
+                  <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i></div>
+                  <small>Prejuízos diversos</small>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5>Vendas</h5>
+
+
+              </div>
+              <div class="ibox-content">
+                  <div class="row">
+
+                      <div class="col-lg-3">
+                          <ul class="stat-list">
+                              <li>
+                                  <h2 class="no-margins">2.346</h2>
+                                  <small>Pedidos no total</small>
+                                  <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                  <div class="progress progress-mini">
+                                      <div style="width: 48%;" class="progress-bar"></div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <h2 class="no-margins ">4.422</h2>
+                                  <small>Pedidos no último mês</small>
+                                  <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                  <div class="progress progress-mini">
+                                      <div style="width: 60%;" class="progress-bar"></div>
+                                  </div>
+                              </li>
+                              <li>
+                                  <h2 class="no-margins ">9.180</h2>
+                                  <small>Monthly income from orders</small>
+                                  <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                  <div class="progress progress-mini">
+                                      <div style="width: 22%;" class="progress-bar"></div>
+                                  </div>
+                              </li>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+  <div class="row">
+  <div class="col-lg-4">
+      <div class="ibox float-e-margins">
+          <div class="ibox-title">
+              <h5>Mensagens dos clientes</h5>
+              <div ibox-tools></div>
+          </div>
+          <div class="ibox-content ibox-heading">
+              <h3><i class="fa fa-envelope-o"></i> Novas mensagens</h3>
+              <small><i class="fa fa-tim"></i> Você tem 4 mensagens novas enviadas por seus clientes.</small>
+          </div>
+          <div class="ibox-content">
+              <div class="feed-activity-list">
+
+                  <div class="feed-element" ng-repeat="message in vm.incomingMessagesList">
+                      <div>
+                          <small class="pull-right text-navy">{{message.timeAgo}}</small>
+                          <strong>{{message.from}}</strong>
+
+                          <div>
+                            {{message.message}}
+                          </div>
+                          <small class="text-muted">{{message.date}}</small>
+                      </div>
+                  </div>
+
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-lg-8">
+
+
+  <div class="row">
+      <div class="col-lg-6">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5>Desempenho de categorias nos últimos 60 dias</h5>
+                  <div ibox-tools></div>
+              </div>
+              <div class="ibox-content">
+
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <table class="table table-hover margin bottom">
+                              <thead>
+                              <tr>
+                                  <th style="width: 1%" class="text-center">
+                                    <i class="fa fa-tag"></i>
+                                  </th>
+                                  <th>Categoria</th>
+                                  <th class="text-center">Vendas</th>
+                                  <th class="text-center">Valor acumulado</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr ng-repeat="categoria in vm.rankCategorias">
+                                  <td class="text-center">1</td>
+                                  <td>{{categoria.name}}</small></td>
+                                  <td class="text-center small">{{categoria.quant}}</td>
+                                  <td class="text-center"><span class="label label-primary">R$ {{categoria.totalValue}}</span></td>
+
+                              </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="col-lg-6">
+                          <div vector-map style="height: 300px;" my-map-data="map.data"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  </div>
+
+
+  </div>
+  </div>
