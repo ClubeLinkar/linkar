@@ -3,9 +3,13 @@ git clone https://gitlab.com/lennonjesus/linkar.git
 ```
 
 ### /linkar-api
-  Backend construído com Maven e SpringBoot
+  Backend construído com Maven, SpringBoot e MongoDB.
   ```
-  Deixa o IntelliJ trabalhar.
+  Antes de rodar a API, é necessário ter o MongoDB instalado. Para isso, você pode usar o homebrew (se você usa Mac).
+
+  Uma vez o MongoDB instalado, pra testar o funcionamento da API, rode a classe `LinkarApplication` (via sua IDE preferida) ou entre no diretório `/linkar-api` e rode `mvn spring-boot:run`, via linha de comando.
+
+  Com a aplicação iniciada, você pode fazer uma chamada GET `http://localhost:8080/linkar/api/dummy/`. Esta chamada vai criar massa de teste na sua base local. Você deveria receber uma mensagem de retorno dizendo `Dumyy Loaded!`.
   ```
 
 ### /frontend
