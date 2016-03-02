@@ -1,6 +1,32 @@
 ```
 git clone https://gitlab.com/lennonjesus/linkar.git
 ```
+### Configuração do ambiente
+
+Necessário ter instalado Java 8, Maven, MongoDB, NodeJS.
+
+#### NVM
+```
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+```
+
+NODE
+```
+$ nvm install stable
+$ nvm use stable
+```
+
+BOWER
+```
+$ npm install -g bower
+```
+
+GULP
+```
+$ npm install -g gulp
+```
+
+#### COMPONENTES
 
 ### /linkar-api
   Backend construído com Maven, SpringBoot e MongoDB.
@@ -41,34 +67,7 @@ git clone https://gitlab.com/lennonjesus/linkar.git
 ### /linkar-frontend
   Isso é uma versão mais antiga. Migrei o que tinha feito aqui para o /frontend. Em breve será apagado.
 
-Necessário ter instalado Java 8, Maven, MongoDB, NodeJS.
-
-Configuração do ambiente
-
-### Configuração do ambiente
-
-#### NVM
-```
-$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-```
-
-NODE
-```
-$ nvm install stable
-$ nvm use stable
-```
-
-BOWER
-```
-$ npm install -g bower
-```
-
-GULP
-```
-$ npm install -g gulp
-```
-
-GIT FLOW
+#### GIT FLOW
 
 Um modelo de trabalho com branches: http://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html
 
