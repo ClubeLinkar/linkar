@@ -51,6 +51,8 @@ public class DummyDomainObjectMother {
         product.setBrand("ANKER");
         product.setPrice(new BigDecimal(189));
         product.setStoreId("store_1");
+        product.addCategory("cat 1");
+        product.addCategory("cat funda");
 
         return product;
     }
@@ -69,6 +71,7 @@ public class DummyDomainObjectMother {
         product.setBrand("Azaléia");
         product.setPrice(new BigDecimal(189));
         product.setStoreId("store_2");
+        product.addCategory("cat 2");
 
         return product;
     }
@@ -111,7 +114,6 @@ public class DummyDomainObjectMother {
         category.setId("category_1");
         category.setName("Serviços de mecânica");
 
-
         return category;
     }
 
@@ -120,7 +122,6 @@ public class DummyDomainObjectMother {
 
         category.setId("product_2");
         category.setName("Peças de moto");
-
 
         return category;
     }

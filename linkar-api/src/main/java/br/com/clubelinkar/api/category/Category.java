@@ -15,6 +15,7 @@ public class Category {
 
     @Id
     private String id;
+
     @NotNull
     private String name;
 

@@ -14,8 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.ProductObjectMother.aProduct
-import static br.com.clubelinkar.test.ProductObjectMother.anotherProduct
+import static br.com.clubelinkar.test.ProductObjectMother.*
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -60,6 +59,54 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
         assertEquals aProduct.brand, product.brand
         assertEquals aProduct.price, product.price
         assertEquals aProduct.storeId, product.storeId
+
+    }
+
+    @Test
+    public void "Deve cadastrar um produto corretamente com categorias"() {
+
+        when(productRepositoryMock.save(aProductWithCategories)).thenReturn(aProductWithCategories);
+
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(aProductWithCategories))
+        ).andExpect(status().isOk()).andReturn()
+
+        def product = new Gson().fromJson(result.response.contentAsString, Product)
+
+        assertNotNull product
+        assertEquals aProductWithCategories.name, product.name
+        assertEquals aProductWithCategories.description, product.description
+        assertEquals aProductWithCategories.brand, product.brand
+        assertEquals aProductWithCategories.price, product.price
+        assertEquals aProductWithCategories.storeId, product.storeId
+        assertEquals aProductWithCategories.categories, product.categories
+    }
+
+    @Test
+    public void "Deve cadastrar um produto corretamente com categorias e eliminar categorias repetidas"() {
+
+        when(productRepositoryMock.save(aProductWithRepeatedCategories)).thenReturn(aProductWithRepeatedCategories);
+
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(aProductWithRepeatedCategories))
+        ).andExpect(status().isOk()).andReturn()
+
+        def product = new Gson().fromJson(result.response.contentAsString, Product)
+
+        assertNotNull product
+        assertEquals aProductWithRepeatedCategories.name, product.name
+        assertEquals aProductWithRepeatedCategories.description, product.description
+        assertEquals aProductWithRepeatedCategories.brand, product.brand
+        assertEquals aProductWithRepeatedCategories.price, product.price
+        assertEquals aProductWithRepeatedCategories.storeId, product.storeId
+        assertEquals aProductWithRepeatedCategories.categories, product.categories
+        assertEquals 2, product.categories.size()
+
+        assertEquals aProductWithCategories.categories, product.categories
+        // a comparacao com aProductWithCategories, diferente das anteriores eh de proposito, pois queremos garantir
+        // que o produto retornado so tem 2 categorias, e nao 3, como as associadas ao aProductWithRepeatedCategories
 
     }
 

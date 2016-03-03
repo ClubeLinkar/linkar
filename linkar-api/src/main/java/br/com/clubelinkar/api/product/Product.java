@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * @author Lennon Jesus
@@ -35,7 +38,9 @@ public final class Product {
     @NotNull
     private String storeId;
 
-    private List<String> photos;
+    private List<String> photos = new ArrayList<>();
+
+    private SortedSet<String> categories = new TreeSet<>();
 
     public Product() {
     }
@@ -94,6 +99,18 @@ public final class Product {
 
     public void setPhotos(List<String> photos) {
         this.photos = photos;
+    }
+
+    public SortedSet<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(SortedSet<String> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(String c) {
+        categories.add(c);
     }
 
     @Override

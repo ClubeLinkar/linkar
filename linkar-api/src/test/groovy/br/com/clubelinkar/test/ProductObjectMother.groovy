@@ -17,6 +17,18 @@ class ProductObjectMother {
         )
     }
 
+    def static getaProductWithCategories() {
+        Product product = aProduct
+        product.categories = ["cat1", "cat2"] as SortedSet
+        return product
+    }
+
+    def static getaProductWithRepeatedCategories() {
+        Product product = aProductWithCategories
+        product.addCategory("cat2")
+        return product
+    }
+
     def static getAnotherProduct() {
         new Product(
                 name: "Kit Relação Top",
