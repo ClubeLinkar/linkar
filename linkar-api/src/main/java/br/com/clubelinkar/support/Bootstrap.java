@@ -1,9 +1,9 @@
 package br.com.clubelinkar.support;
 
 import br.com.clubelinkar.api.category.CategoryRepository;
+import br.com.clubelinkar.api.company.CompanyRepository;
 import br.com.clubelinkar.api.order.OrderRepository;
 import br.com.clubelinkar.api.product.ProductRepository;
-import br.com.clubelinkar.api.store.StoreRepository;
 import br.com.clubelinkar.api.user.UserRepository;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +25,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private ProductRepository productRepository;
 
     @Autowired
-    private StoreRepository storeRepository;
+    private CompanyRepository storeRepository;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -66,8 +66,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         userRepository.save(getUser());
         userRepository.save(getAnotherUser());
 
-        storeRepository.save(getStore());
-        storeRepository.save(getAnotherStore());
+        storeRepository.save(getCompany());
+        storeRepository.save(getAnotherCompany());
 
         productRepository.save(getProduct());
         productRepository.save(getAnotherProduct());
