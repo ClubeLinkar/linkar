@@ -10,7 +10,7 @@ import br.com.clubelinkar.exception.RepeatedPurchaseException
 import br.com.clubelinkar.api.user.UserRepository
 import br.com.clubelinkar.api.product.ProductRepository
 import br.com.clubelinkar.api.store.StoreRepository
-import br.com.clubelinkar.support.util.DateFactory
+import br.com.clubelinkar.support.date.IDateFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service
 public class OrderService implements IOrderService {
 
     @Autowired
-    private DateFactory dateFactory
+    private IDateFactory dateFactory
 
     @Autowired
     private ProductRepository productRepository
@@ -45,7 +45,8 @@ public class OrderService implements IOrderService {
         return orderRepository.save(order)
     }
 
-    protected void validate(Order order) {
+    // TODO [felipe] nao seria melhor ter essa logica toda de validacao numa classe a parte?
+    private void validate(Order order) {
         // verificar se userId e userPass coincidem
         User user = userRepository.findByEmailAndPassword(order.getUserEmail(), order.getUserPassword())
         if (user == null) throw new InvalidUserException()
