@@ -13,8 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.CategoryObjectMother.aCategory
-import static br.com.clubelinkar.test.CategoryObjectMother.anotherCategory
+import static br.com.clubelinkar.test.CategoryObjectMother.*
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
