@@ -2,6 +2,7 @@ package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -35,16 +36,16 @@ class UserRestControllerTest extends BaseRestControllerMock {
     private static final String BASE_ENDPOINT = "/user"
 
     @Mock
-    def UserRepository userRepositoryMock
+    UserRepository userRepositoryMock
 
     @Mock
-    def UserValidator userValidatorMock
+    IUserValidator userValidatorMock
 
     @Mock
-    def MailService mailServiceMock
+    IMailService mailServiceMock
 
     @InjectMocks
-    def UserRestController userRestController
+    UserRestController userRestController
 
     @Before
     public void setup() {

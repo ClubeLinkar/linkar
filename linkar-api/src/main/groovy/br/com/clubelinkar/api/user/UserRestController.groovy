@@ -1,6 +1,7 @@
 package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.api.store.Store
+import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -22,10 +23,10 @@ public class UserRestController {
     private UserRepository userRepository
 
     @Autowired
-    private UserValidator userValidator
+    private IUserValidator userValidator
 
     @Autowired
-    private MailService mailService
+    private IMailService mailService
 
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User create(@RequestBody @Valid User user) {

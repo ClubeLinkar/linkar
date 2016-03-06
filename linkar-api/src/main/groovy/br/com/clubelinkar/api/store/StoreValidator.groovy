@@ -11,7 +11,7 @@ import org.springframework.validation.Validator
  * @author Lennon Jesus
  */
 @Component
-public class StoreValidator implements Validator {
+public class StoreValidator implements IStoreValidator {
 
     @Autowired
     private StoreRepository storeRepository

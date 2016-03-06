@@ -2,6 +2,7 @@ package br.com.clubelinkar.api.store
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
+import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -35,16 +36,16 @@ public class StoreRestControllerTest extends BaseRestControllerMock {
     private static final String BASE_ENDPOINT = "/store"
 
     @Mock
-    def StoreRepository storeRepositoryMock
+    StoreRepository storeRepositoryMock
 
     @Mock
-    def StoreValidator storeValidatorMock
+    IStoreValidator storeValidatorMock
 
     @Mock
-    def MailService mailServiceMock
+    IMailService mailServiceMock
 
     @InjectMocks
-    def StoreRestController storeRestController
+    StoreRestController storeRestController
 
     @Before
     public void setup() {

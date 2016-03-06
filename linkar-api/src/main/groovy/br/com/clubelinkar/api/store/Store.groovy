@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.store
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.hibernate.validator.constraints.Email
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
+@EqualsAndHashCode
 public final class Store {
 
     @Id
@@ -116,22 +118,4 @@ public final class Store {
         this.url = url
     }
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (o == null || getClass() != o.getClass()) return false
-
-        Store store = (Store) o
-
-        return new EqualsBuilder()
-                .append(cnpj, store.cnpj)
-                .isEquals()
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(cnpj)
-                .toHashCode()
-    }
 }

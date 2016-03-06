@@ -1,5 +1,6 @@
 package br.com.clubelinkar.support.mail
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.thymeleaf.context.Context
@@ -10,6 +11,7 @@ import java.util.Locale
 /**
  * @author Lennon Jesus
  */
+@EqualsAndHashCode
 public class Mail {
 
     private String subject
@@ -76,29 +78,4 @@ public class Mail {
         return this
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true
-
-        if (o == null || getClass() != o.getClass()) return false
-
-        Mail mail = (Mail) o
-
-        return new EqualsBuilder()
-                .append(subject, mail.subject)
-                .append(from, mail.from)
-                .append(to, mail.to)
-                .append(template, mail.template)
-                .isEquals()
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(subject)
-                .append(from)
-                .append(to)
-                .append(template)
-                .toHashCode()
-    }
 }

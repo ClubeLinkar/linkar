@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage
  * @author Lennon Jesus
  */
 @Service
-public class MailService {
+public class MailService implements IMailService {
 
     private final Log logger = LogFactory.getLog(this.getClass())
 

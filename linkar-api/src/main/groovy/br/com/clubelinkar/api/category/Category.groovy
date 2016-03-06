@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.category
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.springframework.data.annotation.Id
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
+@EqualsAndHashCode
 public class Category {
 
     @Id
@@ -39,22 +41,4 @@ public class Category {
         this.name = name
     }
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (o == null || getClass() != o.getClass()) return false
-
-        Category category = (Category) o
-
-        return new EqualsBuilder()
-                .append(name, category.name)
-                .isEquals()
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(name)
-                .toHashCode()
-    }
 }

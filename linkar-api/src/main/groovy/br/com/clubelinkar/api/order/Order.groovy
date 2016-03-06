@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.order
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.springframework.data.annotation.Id
@@ -13,6 +14,7 @@ import java.util.Date
  * @author Lennon Jesus
  */
 @Document
+@EqualsAndHashCode
 public class Order {
 
     @Id
@@ -112,26 +114,4 @@ public class Order {
         this.dateTime = dateTime
     }
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (o == null || getClass() != o.getClass()) return false
-
-        Order order = (Order) o
-
-        return new EqualsBuilder()
-                .append(userId, order.userId)
-                .append(storeId, order.storeId)
-                .append(productId, order.productId)
-                .isEquals()
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(userId)
-                .append(storeId)
-                .append(productId)
-                .toHashCode()
-    }
 }

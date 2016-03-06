@@ -1,5 +1,6 @@
-package br.com.clubelinkar.api.product;
+package br.com.clubelinkar.api.product
 
+import groovy.transform.EqualsAndHashCode;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,7 @@ import java.util.TreeSet;
  * @author Lennon Jesus
  */
 @Document
+@EqualsAndHashCode
 public final class Product {
 
     @Id
@@ -113,26 +115,4 @@ public final class Product {
         categories.add(c);
     }
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Product product = (Product) o;
-
-        return new EqualsBuilder()
-                .append(name, product.name)
-                .append(brand, product.brand)
-                .append(storeId, product.storeId)
-                .isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(name)
-                .append(brand)
-                .append(storeId)
-                .toHashCode();
-    }
 }

@@ -1,6 +1,7 @@
 package br.com.clubelinkar.api.store
 
 import br.com.clubelinkar.api.user.User
+import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -21,10 +22,10 @@ public class StoreRestController {
     private StoreRepository storeRepository
 
     @Autowired
-    private StoreValidator storeValidator
+    private IStoreValidator storeValidator
 
     @Autowired
-    private MailService mailService
+    private IMailService mailService
 
     @RequestMapping(value = "/store", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Store create(@RequestBody @Valid Store store) {

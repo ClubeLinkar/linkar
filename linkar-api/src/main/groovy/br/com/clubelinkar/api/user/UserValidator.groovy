@@ -11,7 +11,7 @@ import org.springframework.validation.Validator
  * @author Lennon Jesus
  */
 @Component
-public class UserValidator implements Validator {
+public class UserValidator implements IUserValidator {
 
     @Autowired
     private UserRepository userRepository

@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.user
 
+import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.hibernate.validator.constraints.Email
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
+@EqualsAndHashCode
 public final class User {
 
     @Id
@@ -112,22 +114,4 @@ public final class User {
         this.password = password
     }
 
-    @Override
-    public boolean equals(Object other) {
-
-        if (other == null || getClass() != other.getClass()) return false
-
-        User user = (User) other
-
-        return new EqualsBuilder()
-                .append(email, user.email)
-                .isEquals()
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(email)
-                .toHashCode()
-    }
 }
