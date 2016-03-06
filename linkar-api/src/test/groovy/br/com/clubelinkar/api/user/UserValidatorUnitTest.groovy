@@ -2,7 +2,6 @@ package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
-import br.com.clubelinkar.test.UserObjectMother.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,6 +12,7 @@ import org.mockito.MockitoAnnotations
 
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
+import static br.com.clubelinkar.test.UserObjectMother.*
 
 /**
  * @author Lennon Jesus
