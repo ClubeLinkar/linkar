@@ -13,7 +13,6 @@ import org.mockito.MockitoAnnotations
 import static br.com.clubelinkar.test.CompanyObjectMother.aStore
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
-import static br.com.clubelinkar.test.StoreObjectMother.*
 
 /**
  * @author Lennon Jesus

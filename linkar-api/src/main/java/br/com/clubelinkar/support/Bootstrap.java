@@ -25,7 +25,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     private ProductRepository productRepository;
 
     @Autowired
-    private CompanyRepository storeRepository;
+    private CompanyRepository companyRepository;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -56,7 +56,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private void clearDatabase() {
         productRepository.deleteAll();
-        storeRepository.deleteAll();
+        companyRepository.deleteAll();
         orderRepository.deleteAll();
         userRepository.deleteAll();
         categoryRepository.deleteAll();
@@ -66,8 +66,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
         userRepository.save(getUser());
         userRepository.save(getAnotherUser());
 
-        storeRepository.save(getCompany());
-        storeRepository.save(getAnotherCompany());
+        companyRepository.save(getCompany());
+        companyRepository.save(getAnotherCompany());
 
         productRepository.save(getProduct());
         productRepository.save(getAnotherProduct());
