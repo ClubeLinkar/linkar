@@ -17,6 +17,7 @@ import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.*;
  */
 
 @RestController
+@Deprecated // @see Bootstrap
 public class DummyDataController {
 
     @Autowired
@@ -39,7 +40,7 @@ public class DummyDataController {
         clearDatabase();
         loadData();
 
-        return "Dumyy Loaded!";
+        return "Dummy Loaded!. IMPORTANT: this controller will be discontinued! See Bootstrap class!";
     }
 
     @RequestMapping("/exception")
