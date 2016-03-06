@@ -2,7 +2,7 @@ package br.com.clubelinkar.api.store
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
-import br.com.clubelinkar.test.StoreObjectMother
+import br.com.clubelinkar.test.StoreObjectMother.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,7 +11,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import static br.com.clubelinkar.test.StoreObjectMother.aStore
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 

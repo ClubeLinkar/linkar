@@ -19,11 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.StoreObjectMother.aStore
-import static br.com.clubelinkar.test.StoreObjectMother.getAnotherStore
-import static br.com.clubelinkar.test.UserObjectMother.getAnUser
-import static br.com.clubelinkar.test.UserObjectMother.getAnUser
-import static br.com.clubelinkar.test.UserObjectMother.getAnUser
+import static br.com.clubelinkar.test.StoreObjectMother.*
 import static org.junit.Assert.*
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when

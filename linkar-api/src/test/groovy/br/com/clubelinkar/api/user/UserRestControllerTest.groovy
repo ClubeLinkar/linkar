@@ -19,8 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.UserObjectMother.anUser
-import static br.com.clubelinkar.test.UserObjectMother.anotherUser
+import static br.com.clubelinkar.test.UserObjectMother.*
 import static org.junit.Assert.*
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
