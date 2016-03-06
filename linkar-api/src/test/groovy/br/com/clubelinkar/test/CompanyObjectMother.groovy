@@ -1,14 +1,14 @@
 package br.com.clubelinkar.test
 
-import br.com.clubelinkar.api.store.Store
+import br.com.clubelinkar.api.company.Company
 
 /**
  * @author Lennon Jesus
  */
-class StoreObjectMother {
+class CompanyObjectMother {
 
     def static getaStore() {
-        new Store(name: 'All Motos',
+        new Company(name: 'All Motos',
                 description: 'All Motos',
                 cnpj: "123.456.789/0001-23",
                 password: "654321",
@@ -19,7 +19,7 @@ class StoreObjectMother {
     }
 
     def static getAnotherStore() {
-        new Store(name: 'Homa Motos',
+        new Company(name: 'Homa Motos',
                 description: 'Homa Motos',
                 cnpj: "987.654.321-0001-23",
                 password: "654321",
