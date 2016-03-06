@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.store
+package br.com.clubelinkar.api.company
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
@@ -19,11 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.StoreObjectMother.aStore
-import static br.com.clubelinkar.test.StoreObjectMother.getAnotherStore
-import static br.com.clubelinkar.test.UserObjectMother.getAnUser
-import static br.com.clubelinkar.test.UserObjectMother.getAnUser
-import static br.com.clubelinkar.test.UserObjectMother.getAnUser
+import static br.com.clubelinkar.test.CompanyObjectMother.aStore
+import static br.com.clubelinkar.test.CompanyObjectMother.getAnotherStore
 import static org.junit.Assert.*
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
@@ -34,21 +31,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Lennon Jesus
  */
-public class StoreRestControllerTest extends BaseRestControllerMock {
+public class CompanyRestControllerTest extends BaseRestControllerMock {
 
-    private static final String BASE_ENDPOINT = "/store"
-
-    @Mock
-    def StoreRepository storeRepositoryMock
+    private static final String BASE_ENDPOINT = "/company"
 
     @Mock
-    def StoreValidator storeValidatorMock
+    def CompanyRepository storeRepositoryMock
+
+    @Mock
+    def CompanyValidator storeValidatorMock
 
     @Mock
     def MailService mailServiceMock
 
     @InjectMocks
-    def StoreRestController storeRestController
+    def CompanyRestController storeRestController
 
     @Before
     public void setup() {
@@ -67,7 +64,7 @@ public class StoreRestControllerTest extends BaseRestControllerMock {
                 .content(new Gson().toJson(aStore))
         ).andExpect(status().isOk()).andReturn()
 
-        def store = new Gson().fromJson(result.response.contentAsString, Store)
+        def store = new Gson().fromJson(result.response.contentAsString, Company)
 
         assertNotNull store
         assertEquals aStore.name, store.name
@@ -187,9 +184,9 @@ public class StoreRestControllerTest extends BaseRestControllerMock {
 
         def result = mockMvc.perform(get(BASE_ENDPOINT)).andExpect(status().isOk()).andReturn()
 
-        Type dummyListType = new TypeToken<ArrayList<Store>>() {}.getType();
+        Type dummyListType = new TypeToken<ArrayList<Company>>() {}.getType();
 
-        List<Store> storesList = new Gson().fromJson(result.response.contentAsString, dummyListType)
+        List<Company> storesList = new Gson().fromJson(result.response.contentAsString, dummyListType)
 
         assertFalse storesList.empty
         assertEquals storeListMock, storesList

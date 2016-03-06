@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.store;
+package br.com.clubelinkar.api.company;
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException;
 import br.com.clubelinkar.exception.RepeatedStoreEmailException;
@@ -11,27 +11,27 @@ import org.springframework.validation.Validator;
  * @author Lennon Jesus
  */
 @Component
-public class StoreValidator implements Validator {
+public class CompanyValidator implements Validator {
 
     @Autowired
-    private StoreRepository storeRepository;
+    private CompanyRepository companyRepository;
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Store.class.isAssignableFrom(clazz);
+        return Company.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        Store existentStore = storeRepository.findByEmail(((Store) target).getEmail());
+        Company existentCompany = companyRepository.findByEmail(((Company) target).getEmail());
 
-        if (existentStore != null) {
+        if (existentCompany != null) {
             throw new RepeatedStoreEmailException();
         }
 
-        existentStore = storeRepository.findByCnpj(((Store) target).getCnpj());
+        existentCompany = companyRepository.findByCnpj(((Company) target).getCnpj());
 
-        if (existentStore != null) {
+        if (existentCompany != null) {
             throw new RepeatedStoreCNPJException();
         }
     }

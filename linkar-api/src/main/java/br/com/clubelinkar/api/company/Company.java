@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.store;
+package br.com.clubelinkar.api.company;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * @author Lennon Jesus
  */
 @Document
-public final class Store {
+public final class Company {
 
     @Id
     private String id;
@@ -41,7 +41,7 @@ public final class Store {
 
     private String url;
 
-    public Store() {
+    public Company() {
     }
 
     public String getId() {
@@ -122,10 +122,10 @@ public final class Store {
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        Store store = (Store) o;
+        Company company = (Company) o;
 
         return new EqualsBuilder()
-                .append(cnpj, store.cnpj)
+                .append(cnpj, company.cnpj)
                 .isEquals();
     }
 

@@ -3,7 +3,7 @@ package br.com.clubelinkar.api.dummy;
 import br.com.clubelinkar.api.category.CategoryRepository;
 import br.com.clubelinkar.api.order.OrderRepository;
 import br.com.clubelinkar.api.product.ProductRepository;
-import br.com.clubelinkar.api.store.StoreRepository;
+import br.com.clubelinkar.api.company.CompanyRepository;
 import br.com.clubelinkar.api.user.UserRepository;
 import br.com.clubelinkar.exception.RepeatedUserCPFException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class DummyDataController {
     private ProductRepository productRepository;
 
     @Autowired
-    private StoreRepository storeRepository;
+    private CompanyRepository companyRepository;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -51,8 +51,8 @@ public class DummyDataController {
         userRepository.save(getUser());
         userRepository.save(getAnotherUser());
 
-        storeRepository.save(getStore());
-        storeRepository.save(getAnotherStore());
+        companyRepository.save(getCompany());
+        companyRepository.save(getAnotherCompany());
 
         productRepository.save(getProduct());
         productRepository.save(getAnotherProduct());
@@ -64,7 +64,7 @@ public class DummyDataController {
 
     private void clearDatabase() {
         productRepository.deleteAll();
-        storeRepository.deleteAll();
+        companyRepository.deleteAll();
         orderRepository.deleteAll();
         userRepository.deleteAll();
         categoryRepository.deleteAll();

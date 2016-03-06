@@ -3,7 +3,7 @@ package br.com.clubelinkar.api.dummy;
 import br.com.clubelinkar.api.category.Category;
 import br.com.clubelinkar.api.user.User;
 import br.com.clubelinkar.api.product.Product;
-import br.com.clubelinkar.api.store.Store;
+import br.com.clubelinkar.api.company.Company;
 
 import java.math.BigDecimal;
 
@@ -76,36 +76,36 @@ public class DummyDomainObjectMother {
         return product;
     }
 
-    public static Store getStore() {
-        Store store = new Store();
+    public static Company getCompany() {
+        Company company = new Company();
 
-        store.setId("store_1");
-        store.setName("All Motos");
-        store.setDescription("A All Motos é uma loja de comércio eletrônico de peças e acessórios para motos. Selcionamos os melhores produtos para você e buscamos agilidade no atendimento.");
-        store.setAddress("Rua Siqueira Campos, 243 Loja B, Copacabana, 22031-071, Rio de Janeiro - RJ");
-        store.setPhones("(21) 3442-3584");
-        store.setEmail("allmotos@allmotos.com.br");
-        store.setUrl("http://www.allmotos.com.br");
-        store.setCnpj("XX.XXX.XXX/YYYY-ZZ");
-        store.setPassword("654321");
+        company.setId("store_1");
+        company.setName("All Motos");
+        company.setDescription("A All Motos é uma loja de comércio eletrônico de peças e acessórios para motos. Selcionamos os melhores produtos para você e buscamos agilidade no atendimento.");
+        company.setAddress("Rua Siqueira Campos, 243 Loja B, Copacabana, 22031-071, Rio de Janeiro - RJ");
+        company.setPhones("(21) 3442-3584");
+        company.setEmail("allmotos@allmotos.com.br");
+        company.setUrl("http://www.allmotos.com.br");
+        company.setCnpj("XX.XXX.XXX/YYYY-ZZ");
+        company.setPassword("654321");
 
-        return store;
+        return company;
     }
 
-    public static Store getAnotherStore() {
-        Store store = new Store();
+    public static Company getAnotherCompany() {
+        Company company = new Company();
 
-        store.setId("store_2");
-        store.setName("Mulher na Moda");
-        store.setDescription("A casa da mulher bem resolvida.");
-        store.setAddress("Av. Brigadeiro Lima e Silva, 1590, Centro, Duque de Caxias, RJ");
-        store.setPhones("(21) 2771-1114");
-        store.setEmail("mulhernamoda@blah123.com");
-        store.setUrl("http://www.blahblahblah123.com.br");
-        store.setCnpj("XX.XXX.XXX/YYYY-ZZ");
-        store.setPassword("987654321");
+        company.setId("store_2");
+        company.setName("Mulher na Moda");
+        company.setDescription("A casa da mulher bem resolvida.");
+        company.setAddress("Av. Brigadeiro Lima e Silva, 1590, Centro, Duque de Caxias, RJ");
+        company.setPhones("(21) 2771-1114");
+        company.setEmail("mulhernamoda@blah123.com");
+        company.setUrl("http://www.blahblahblah123.com.br");
+        company.setCnpj("XX.XXX.XXX/YYYY-ZZ");
+        company.setPassword("987654321");
 
-        return store;
+        return company;
     }
 
     public static Category getCategory() {

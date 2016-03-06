@@ -71,9 +71,9 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Loja</label>
 
-                          <div class="col-sm-10" ng-class="{'has-error' : productForm.storeId.$dirty && productForm.storeId.$invalid}">
-                            <select class="form-control m-b" name="store" ng-model="product.storeId" required="required">
-                              <option value="{{store.id}}" ng-repeat="store in storeList">{{store.name}}</option>
+                          <div class="col-sm-10" ng-class="{'has-error' : productForm.companyId.$dirty && productForm.companyId.$invalid}">
+                            <select class="form-control m-b" name="company" ng-model="product.companyId" required="required">
+                              <option value="{{company.id}}" ng-repeat="company in companyList">{{company.name}}</option>
                             </select>
 
 

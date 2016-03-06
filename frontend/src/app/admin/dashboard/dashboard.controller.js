@@ -3,7 +3,7 @@
 
   angular.module('linkar').controller('Dashboard', DashboardController);
 
-  StoreController.$inject = ['$scope', '$stateParams', 'ngToast', '$state'];
+  DashboardController.$inject = ['$scope', '$stateParams', 'ngToast', '$state'];
 
   function DashboardController($scope, $stateParams, ngToast, $state) {
 

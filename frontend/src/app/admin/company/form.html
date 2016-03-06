@@ -3,7 +3,7 @@
         <h2>linkar</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html">Lojas</a>
+                <a href="index.html">Empresa</a>
             </li>
             <li class="active">
                 <strong>Cadastro</strong>
@@ -20,17 +20,17 @@
       <div class="col-lg-12">
           <div class="ibox float-e-margins">
               <div class="ibox-title">
-                  <h5>Dados da loja <small>Todos os campos são obrigatórios.</small></h5>
+                  <h5>Dados da empressa <small>Todos os campos são obrigatórios.</small></h5>
 
               </div>
               <div class="ibox-content">
-                  <form name="storeForm" class="form-horizontal" ng-submit="vm.save()">
+                  <form name="companyForm" class="form-horizontal" ng-submit="vm.save()">
 
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nome</label>
-                        <div class="col-sm-10" ng-class="{'has-error' : storeForm.name.$dirty && storeForm.name.$invalid}">
-                          <input type="text" class="form-control" ng-model="store.name" required="required" />
+                        <div class="col-sm-10" ng-class="{'has-error' : companyForm.name.$dirty && companyForm.name.$invalid}">
+                          <input type="text" class="form-control" ng-model="company.name" required="required" />
                           <span class="help-block m-b-none">
                             Ex: All Motos
                           </span>
@@ -39,8 +39,8 @@
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Descrição</label>
-                        <div class="col-sm-10" ng-class="{'has-error' : storeForm.description.$dirty && storeForm.description.$invalid}">
-                          <textarea class="form-control" ng-model="store.description" required="required"/>
+                        <div class="col-sm-10" ng-class="{'has-error' : companyForm.description.$dirty && companyForm.description.$invalid}">
+                          <textarea class="form-control" ng-model="company.description" required="required"/>
                           <span class="help-block m-b-none">
                             Ex: A All Motos é uma loja de comércio eletrônico de peças e acessórios para motos.
                             Selcionamos os melhores produtos para você e buscamos agilidade no atendimento.
@@ -50,8 +50,8 @@
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Endereço</label>
-                        <div class="col-sm-10" ng-class="{'has-error' : storeForm.address.$dirty && storeForm.address.$invalid}">
-                          <textarea class="form-control" ng-model="store.address" required="required"/>
+                        <div class="col-sm-10" ng-class="{'has-error' : companyForm.address.$dirty && companyForm.address.$invalid}">
+                          <textarea class="form-control" ng-model="company.address" required="required"/>
                           <span class="help-block m-b-none">
                             Ex: Rua Siqueira Campos, 243 Loja B, Copacabana, 22031-071, Rio de Janeiro - RJ
                           </span>
@@ -62,11 +62,11 @@
 
                       <div class="form-group"><label class="col-sm-2 control-label">Telefone</label>
 
-                          <div class="col-sm-10" ng-class="{'has-error' : storeForm.phones.$dirty && storeForm.phones.$invalid}">
+                          <div class="col-sm-10" ng-class="{'has-error' : companyForm.phones.$dirty && companyForm.phones.$invalid}">
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-phone"></span>
-                                <input type="text" class="form-control" ng-model="store.phones" required="required">
+                                <input type="text" class="form-control" ng-model="company.phones" required="required">
                               </div>
                               <span class="help-block m-b-none">Ex: (21) 3442-3584</span>
                           </div>
@@ -76,11 +76,11 @@
 
                       <div class="form-group"><label class="col-sm-2 control-label">E-mail</label>
 
-                          <div class="col-sm-10" ng-class="{'has-error' : storeForm.email.$dirty && storeForm.email.$invalid}">
+                          <div class="col-sm-10" ng-class="{'has-error' : companyForm.email.$dirty && companyForm.email.$invalid}">
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon">@</span>
-                                <input type="text" class="form-control" ng-model="store.email" required="required">
+                                <input type="text" class="form-control" ng-model="company.email" required="required">
                               </div>
                               <span class="help-block m-b-none">Ex: allmotos@allmotos.com.br</span>
                           </div>
@@ -90,11 +90,11 @@
 
                       <div class="form-group"><label class="col-sm-2 control-label">Senha</label>
 
-                          <div class="col-sm-10" ng-class="{'has-error' : storeForm.password.$dirty && storeForm.password.$invalid}">
+                          <div class="col-sm-10" ng-class="{'has-error' : companyForm.password.$dirty && companyForm.password.$invalid}">
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-lock"></span>
-                                <input type="password" class="form-control" ng-model="store.password" required="required">
+                                <input type="password" class="form-control" ng-model="company.password" required="required">
                               </div>
                           </div>
                       </div>
@@ -103,11 +103,11 @@
 
                       <div class="form-group"><label class="col-sm-2 control-label">Site</label>
 
-                          <div class="col-sm-10" ng-class="{'has-error' : storeForm.url.$dirty && storeForm.url.$invalid}">
+                          <div class="col-sm-10" ng-class="{'has-error' : companyForm.url.$dirty && companyForm.url.$invalid}">
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-paperclip"></span>
-                                <input type="text" class="form-control" ng-model="store.url" required="required">
+                                <input type="text" class="form-control" ng-model="company.url" required="required">
                               </div>
                               <span class="help-block m-b-none">Ex: http://www.allmotos.com.br</span>
                           </div>
@@ -117,11 +117,11 @@
 
                       <div class="form-group"><label class="col-sm-2 control-label">CNPJ</label>
 
-                          <div class="col-sm-10" ng-class="{'has-error' : storeForm.cnpj.$dirty && storeForm.cnpj.$invalid}">
+                          <div class="col-sm-10" ng-class="{'has-error' : companyForm.cnpj.$dirty && companyForm.cnpj.$invalid}">
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-credit-card"></span>
-                                <input type="text" class="form-control" ng-model="store.cnpj" required="required">
+                                <input type="text" class="form-control" ng-model="company.cnpj" required="required">
                               </div>
                               <span class="help-block m-b-none">Informe apenas números, sem traços, pontos ou vírgulas.</span>
                           </div>

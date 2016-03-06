@@ -3,9 +3,9 @@
 
   angular.module('linkar').controller('Product', ProductController);
 
-  ProductController.$inject = ['$scope', 'Product', 'Store', 'ngToast', '$stateParams', '$state'];
+  ProductController.$inject = ['$scope', 'Product', 'Company', 'ngToast', '$stateParams', '$state'];
 
-  function ProductController($scope, Product, Store, ngToast, $stateParams, $state) {
+  function ProductController($scope, Product, Company, ngToast, $stateParams, $state) {
 
     console.log('product::controller:init');
 
@@ -19,9 +19,9 @@
       $scope.product = data;
     });
 
-    Store.query(function (data) {
-      console.log("product::controller:list:storeList");
-      $scope.storeList = data;
+    Company.query(function (data) {
+      console.log("product::controller:list:companyList");
+      $scope.companyList = data;
     });
 
     this.save = function () {

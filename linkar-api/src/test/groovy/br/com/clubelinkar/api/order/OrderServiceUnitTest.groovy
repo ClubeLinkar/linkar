@@ -2,8 +2,8 @@ package br.com.clubelinkar.api.order
 
 import br.com.clubelinkar.api.product.Product
 import br.com.clubelinkar.api.product.ProductRepository
-import br.com.clubelinkar.api.store.Store
-import br.com.clubelinkar.api.store.StoreRepository
+import br.com.clubelinkar.api.company.Company
+import br.com.clubelinkar.api.company.CompanyRepository
 import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.api.user.UserRepository
 import br.com.clubelinkar.exception.InvalidProductException
@@ -35,7 +35,7 @@ class OrderServiceUnitTest {
     private ProductRepository productRepositoryMock
 
     @Mock
-    private StoreRepository storeRepositoryMock
+    private CompanyRepository storeRepositoryMock
 
     @Mock
     private OrderRepository purchaseRepositoryMock
@@ -98,8 +98,8 @@ class OrderServiceUnitTest {
         new Product(id: "product_1", name: "Produto 1", storeId: store.id)
     }
 
-    def Store getStore() {
-        new Store(id: "store_1", name: "All Motos", password: "654321")
+    def Company getStore() {
+        new Company(id: "store_1", name: "All Motos", password: "654321")
     }
 
     def Order getPurchase() {
