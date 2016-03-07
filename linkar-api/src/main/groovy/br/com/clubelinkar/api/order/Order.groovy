@@ -9,104 +9,29 @@ import org.springframework.data.mongodb.core.mapping.Document
  * @author Lennon Jesus
  */
 @Document
-@EqualsAndHashCode
-public class Order {
+@EqualsAndHashCode(includes = ["id", "userId", "storeId", "productId", "purchasePrice"])
+final class Order {
 
     @Id
-    private String id
+    String id
 
-    private String userId
-
-    @Transient
-    private String userEmail
+    String userId
 
     @Transient
-    private String userPassword
-
-    private String storeId
+    String userEmail
 
     @Transient
-    private String storePassword
+    String userPassword
 
-    private String productId
+    String storeId
 
-    private BigDecimal purchasePrice
+    @Transient
+    String storePassword
 
-    private Date dateTime
+    String productId
 
-    public Order() {
-    }
+    BigDecimal purchasePrice
 
-    public String getId() {
-        return id
-    }
-
-    public void setId(String id) {
-        this.id = id
-    }
-
-    public String getUserId() {
-        return userId
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId
-    }
-
-    public String getUserEmail() {
-        return userEmail
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail
-    }
-
-    public String getUserPassword() {
-        return userPassword
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword
-    }
-
-    public String getStoreId() {
-        return storeId
-    }
-
-    public void setStoreId(String storeId) {
-        this.storeId = storeId
-    }
-
-    public String getStorePassword() {
-        return storePassword
-    }
-
-    public void setStorePassword(String storePassword) {
-        this.storePassword = storePassword
-    }
-
-    public String getProductId() {
-        return productId
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId
-    }
-
-    public BigDecimal getPurchasePrice() {
-        return purchasePrice
-    }
-
-    public void setPurchasePrice(BigDecimal purchasePrice) {
-        this.purchasePrice = purchasePrice
-    }
-
-    public Date getDateTime() {
-        return dateTime
-    }
-
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime
-    }
+    Date dateTime
 
 }
