@@ -2,6 +2,7 @@ package br.com.clubelinkar.api.company
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
+import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -42,7 +43,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     ICompanyValidator companyValidatorMock
 
     @Mock
-    MailService mailServiceMock
+    IMailService mailServiceMock
 
     @InjectMocks
     CompanyRestController companyRestController
@@ -85,7 +86,6 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(aCompany))
         ).andExpect(status().isOk()).andReturn()
-
 
         def mail = new Mail()
                 .from("noreply@clubelinkar.com.br")

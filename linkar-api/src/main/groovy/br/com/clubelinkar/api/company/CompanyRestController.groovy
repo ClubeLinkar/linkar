@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.company
 
+import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -22,7 +23,7 @@ public class CompanyRestController {
     private ICompanyValidator companyValidator;
 
     @Autowired
-    private MailService mailService;
+    private IMailService mailService;
 
     @RequestMapping(value = "/company", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Company create(@RequestBody @Valid Company company) {
