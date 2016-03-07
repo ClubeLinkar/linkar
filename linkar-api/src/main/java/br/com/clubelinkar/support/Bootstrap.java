@@ -1,8 +1,11 @@
 package br.com.clubelinkar.support;
 
+import br.com.clubelinkar.api.category.CategoryMother;
 import br.com.clubelinkar.api.category.CategoryRepository;
+import br.com.clubelinkar.api.company.CompanyMother;
 import br.com.clubelinkar.api.company.CompanyRepository;
 import br.com.clubelinkar.api.order.OrderRepository;
+import br.com.clubelinkar.api.product.ProductMother;
 import br.com.clubelinkar.api.product.ProductRepository;
 import br.com.clubelinkar.api.user.UserRepository;
 import org.apache.commons.lang3.BooleanUtils;
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-import static br.com.clubelinkar.api.dummy.DummyDomainObjectMother.*;
+import static br.com.clubelinkar.api.user.UserMother.*;
 
 @Component
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -63,17 +66,17 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private void loadData() {
-        userRepository.save(getUser());
-        userRepository.save(getAnotherUser());
+        userRepository.save(lennonJesus());
+        userRepository.save(carlaVidal());
 
-        companyRepository.save(getCompany());
-        companyRepository.save(getAnotherCompany());
+        companyRepository.save(CompanyMother.allMotos());
+        companyRepository.save(CompanyMother.mulherNaModa());
 
-        productRepository.save(getProduct());
-        productRepository.save(getAnotherProduct());
+        productRepository.save(ProductMother.riserGuidao());
+        productRepository.save(ProductMother.espadrilla());
 
-        categoryRepository.save(getCategory());
-        categoryRepository.save(getAnotherCategory());
+        categoryRepository.save(CategoryMother.servicosMecanica());
+        categoryRepository.save(CategoryMother.pecasMoto());
 
     }
 }
