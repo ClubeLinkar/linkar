@@ -1,8 +1,6 @@
 package br.com.clubelinkar.api.company
 
 import groovy.transform.EqualsAndHashCode
-import org.apache.commons.lang3.builder.EqualsBuilder
-import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.hibernate.validator.constraints.Email
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -17,29 +15,35 @@ import javax.validation.constraints.NotNull
 final class Company {
 
     @Id
-    String id;
+    String id
 
     @NotNull
-    String cnpj;
+    String cnpj
 
     @NotNull
-    String password; // FIXME HASH!!!!!!!
+    String password // FIXME HASH!!!!!!!
 
     @NotNull
-    String name;
+    String name
 
     @NotNull
-    String description;
+    String description
 
     @NotNull
-    String address;
+    String address
 
     @NotNull
-    String phones;
+    String phones
 
     @NotNull
     @Email
-    String email;
+    String email
 
-    String url;
+    String url
+
+    SortedSet<String> categories = new TreeSet<>()
+
+    void addCategory(String c) {
+        categories.add(c)
+    }
 }

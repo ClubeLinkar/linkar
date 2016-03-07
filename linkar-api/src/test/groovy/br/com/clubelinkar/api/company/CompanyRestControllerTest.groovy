@@ -4,7 +4,6 @@ import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
@@ -20,8 +19,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.CompanyObjectMother.getaCompany
-import static br.com.clubelinkar.test.CompanyObjectMother.getAnotherCompany
+import static br.com.clubelinkar.test.CompanyObjectMother.allMotos
+import static br.com.clubelinkar.test.CompanyObjectMother.allMotosWithCategories
+import static br.com.clubelinkar.test.CompanyObjectMother.allMotosWithRepeatedCategories
+import static br.com.clubelinkar.test.CompanyObjectMother.homaMotos
 import static org.junit.Assert.*
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
@@ -58,33 +59,77 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     @Test
     public void "Deve cadastrar uma empresa corretamente"() {
 
-        when(companyRepositoryMock.save(aCompany)).thenReturn(aCompany);
+        when(companyRepositoryMock.save(allMotos())).thenReturn(allMotos());
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aCompany))
+                .content(new Gson().toJson(allMotos()))
         ).andExpect(status().isOk()).andReturn()
 
         def company = new Gson().fromJson(result.response.contentAsString, Company)
 
         assertNotNull company
-        assertEquals aCompany.name, company.name
-        assertEquals aCompany.description, company.description
-        assertEquals aCompany.address, company.address
-        assertEquals aCompany.phones, company.phones
-        assertEquals aCompany.url, company.url
-        assertEquals aCompany.email, company.email
+        assertEquals allMotos().name, company.name
+        assertEquals allMotos().description, company.description
+        assertEquals allMotos().address, company.address
+        assertEquals allMotos().phones, company.phones
+        assertEquals allMotos().url, company.url
+        assertEquals allMotos().email, company.email
+    }
 
+    @Test
+    public void "Deve cadastrar uma empresa com categorias corretamente"() {
+
+        when(companyRepositoryMock.save(allMotosWithCategories())).thenReturn(allMotosWithCategories());
+
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(allMotosWithCategories()))
+        ).andExpect(status().isOk()).andReturn()
+
+        def company = new Gson().fromJson(result.response.contentAsString, Company)
+
+        assertNotNull company
+        assertEquals allMotosWithCategories().name, company.name
+        assertEquals allMotosWithCategories().description, company.description
+        assertEquals allMotosWithCategories().address, company.address
+        assertEquals allMotosWithCategories().phones, company.phones
+        assertEquals allMotosWithCategories().url, company.url
+        assertEquals allMotosWithCategories().email, company.email
+        assertEquals allMotosWithCategories().categories, company.categories
+    }
+
+    @Test
+    public void "Deve cadastrar uma empresa com categorias repetidas corretamente"() {
+
+        when(companyRepositoryMock.save(allMotosWithRepeatedCategories())).thenReturn(allMotosWithRepeatedCategories());
+
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(allMotosWithRepeatedCategories()))
+        ).andExpect(status().isOk()).andReturn()
+
+        def company = new Gson().fromJson(result.response.contentAsString, Company)
+
+        assertNotNull company
+        assertEquals allMotosWithRepeatedCategories().name, company.name
+        assertEquals allMotosWithRepeatedCategories().description, company.description
+        assertEquals allMotosWithRepeatedCategories().address, company.address
+        assertEquals allMotosWithRepeatedCategories().phones, company.phones
+        assertEquals allMotosWithRepeatedCategories().url, company.url
+        assertEquals allMotosWithRepeatedCategories().email, company.email
+        assertEquals 2, company.categories.size()
+        assertEquals(["c1", "c2"] as SortedSet, company.categories)
     }
 
     @Test
     public void "Deve enviar email de boas vindas para novas empresas cadastradas com sucesso"() {
 
-        when(companyRepositoryMock.save(aCompany)).thenReturn(aCompany);
+        when(companyRepositoryMock.save(allMotos())).thenReturn(allMotos());
 
         mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aCompany))
+                .content(new Gson().toJson(allMotos()))
         ).andExpect(status().isOk()).andReturn()
 
         def mail = new Mail()
@@ -92,7 +137,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
                 .to("allmotos@allmotos.com.br")
                 .subject("Sua empresa está na Linkar!")
                 .template(MailTemplate.STORE_REGISTRATION)
-                .addParameter("name", aCompany.name)
+                .addParameter("name", allMotos().name)
 
         verify(mailServiceMock).send(mail)
 
@@ -100,14 +145,14 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
 
     @Test
     public void "Deve criticar empresa com cnpj nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.cnpj = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com password nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
@@ -116,69 +161,69 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     @Ignore
     // TODO implementar validacao de passwrod
     public void "Deve criticar empresa com password inválido"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com name nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com description nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.description = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com address nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.address = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com phones nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.phones = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com email nulo"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.email = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Deve criticar empresa com email inválido"() {
-        def invalidStore = aCompany
+        def invalidStore = allMotos()
         invalidStore.email = "email.invalido"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
     }
 
     @Test
     public void "Não deve permitir empresa com mesmo e-mail"() {
-        when(companyValidatorMock.validate(aCompany, null)).thenThrow(new RepeatedStoreEmailException());
-        postAndExpectBadRequest(BASE_ENDPOINT, aCompany)
+        when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new RepeatedStoreEmailException());
+        postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
     }
 
     @Test
     public void "Não deve permitir empresa com mesmo cnpj"() {
-        when(companyValidatorMock.validate(aCompany, null)).thenThrow(new RepeatedStoreCNPJException());
-        postAndExpectBadRequest(BASE_ENDPOINT, aCompany)
+        when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new RepeatedStoreCNPJException());
+        postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
     }
 
     @Test
     public void "Deve listar corretamente todas as empresas cadastradas no sistema"() {
 
-        def companyListMock = [aCompany, anotherCompany]
+        def companyListMock = [allMotos(), homaMotos()]
 
         when(companyRepositoryMock.findAll()).thenReturn(companyListMock)
 

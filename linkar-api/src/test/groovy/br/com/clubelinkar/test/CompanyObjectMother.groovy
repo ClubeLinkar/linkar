@@ -7,7 +7,7 @@ import br.com.clubelinkar.api.company.Company
  */
 class CompanyObjectMother {
 
-    def static getaCompany() {
+    def static allMotos() {
         new Company(name: 'All Motos',
                 description: 'All Motos',
                 cnpj: "123.456.789/0001-23",
@@ -18,7 +18,25 @@ class CompanyObjectMother {
                 email: 'allmotos@allmotos.com.br')
     }
 
-    def static getAnotherCompany() {
+    def static allMotosWithCategories() {
+        Company c = allMotos()
+
+        c.addCategory("c1")
+        c.addCategory("c2")
+
+        return c
+    }
+
+    def static allMotosWithRepeatedCategories() {
+        Company c = allMotosWithCategories()
+
+        c.addCategory("c1")
+        c.addCategory("c2")
+
+        return c
+    }
+
+    def static homaMotos() {
         new Company(name: 'Homa Motos',
                 description: 'Homa Motos',
                 cnpj: "987.654.321-0001-23",
