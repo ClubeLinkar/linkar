@@ -1,10 +1,4 @@
 package br.com.clubelinkar.api.user
-
-import br.com.clubelinkar.api.category.Category
-import br.com.clubelinkar.api.company.Company
-import br.com.clubelinkar.api.product.Product
-import br.com.clubelinkar.api.user.User
-
 /**
  * @author Lennon Jesus
  */
