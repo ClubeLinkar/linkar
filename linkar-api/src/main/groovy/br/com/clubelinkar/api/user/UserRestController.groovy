@@ -1,17 +1,13 @@
 package br.com.clubelinkar.api.user
 
-import br.com.clubelinkar.api.store.Store
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 
 import javax.validation.Valid
-import java.util.Date
-import java.util.List
 
 /**
  * @author Lennon Jesus

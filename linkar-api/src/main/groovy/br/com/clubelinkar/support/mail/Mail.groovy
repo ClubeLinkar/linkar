@@ -1,12 +1,8 @@
 package br.com.clubelinkar.support.mail
 
 import groovy.transform.EqualsAndHashCode
-import org.apache.commons.lang3.builder.EqualsBuilder
-import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.thymeleaf.context.Context
 import org.thymeleaf.context.IContext
-
-import java.util.Locale
 
 /**
  * @author Lennon Jesus

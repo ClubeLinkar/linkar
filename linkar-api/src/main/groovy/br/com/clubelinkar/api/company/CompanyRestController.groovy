@@ -1,14 +1,13 @@
-package br.com.clubelinkar.api.company;
+package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.support.mail.Mail;
-import br.com.clubelinkar.support.mail.MailService;
-import br.com.clubelinkar.support.mail.MailTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import br.com.clubelinkar.support.mail.Mail
+import br.com.clubelinkar.support.mail.MailService
+import br.com.clubelinkar.support.mail.MailTemplate
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
 
-import javax.validation.Valid;
-import java.util.List;
+import javax.validation.Valid
 
 /**
  * @author Lennon Jesus
@@ -20,7 +19,7 @@ public class CompanyRestController {
     private CompanyRepository companyRepository;
 
     @Autowired
-    private CompanyValidator companyValidator;
+    private ICompanyValidator companyValidator;
 
     @Autowired
     private MailService mailService;

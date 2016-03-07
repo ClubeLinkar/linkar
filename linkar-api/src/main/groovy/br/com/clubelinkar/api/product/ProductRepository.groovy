@@ -1,8 +1,6 @@
-package br.com.clubelinkar.api.product;
+package br.com.clubelinkar.api.product
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import java.util.List;
+import org.springframework.data.mongodb.repository.MongoRepository
 
 /**
  * @author Lennon Jesus

@@ -7,7 +7,7 @@ import br.com.clubelinkar.api.company.Company
  */
 class CompanyObjectMother {
 
-    def static getaStore() {
+    def static getaCompany() {
         new Company(name: 'All Motos',
                 description: 'All Motos',
                 cnpj: "123.456.789/0001-23",
@@ -18,7 +18,7 @@ class CompanyObjectMother {
                 email: 'allmotos@allmotos.com.br')
     }
 
-    def static getAnotherStore() {
+    def static getAnotherCompany() {
         new Company(name: 'Homa Motos',
                 description: 'Homa Motos',
                 cnpj: "987.654.321-0001-23",

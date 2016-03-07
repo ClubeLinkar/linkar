@@ -4,7 +4,6 @@ import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailService
 import br.com.clubelinkar.support.mail.MailTemplate
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
@@ -20,7 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.UserObjectMother.*
+import static br.com.clubelinkar.test.UserObjectMother.getAnUser
+import static br.com.clubelinkar.test.UserObjectMother.getAnotherUser
 import static org.junit.Assert.*
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when

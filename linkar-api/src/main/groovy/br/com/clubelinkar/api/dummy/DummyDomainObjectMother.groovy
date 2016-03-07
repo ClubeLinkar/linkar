@@ -2,11 +2,8 @@ package br.com.clubelinkar.api.dummy
 
 import br.com.clubelinkar.api.category.Category
 import br.com.clubelinkar.api.company.Company
-import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.api.product.Product
-import br.com.clubelinkar.api.store.Store
-
-import java.math.BigDecimal
+import br.com.clubelinkar.api.user.User
 
 /**
  * @author Lennon Jesus
@@ -75,38 +72,6 @@ public class DummyDomainObjectMother {
         product.addCategory("cat 2")
 
         return product
-    }
-
-    public static Store getStore() {
-        Store store = new Store()
-
-        store.setId("store_1")
-        store.setName("All Motos")
-        store.setDescription("A All Motos é uma loja de comércio eletrônico de peças e acessórios para motos. Selcionamos os melhores produtos para você e buscamos agilidade no atendimento.")
-        store.setAddress("Rua Siqueira Campos, 243 Loja B, Copacabana, 22031-071, Rio de Janeiro - RJ")
-        store.setPhones("(21) 3442-3584")
-        store.setEmail("allmotos@allmotos.com.br")
-        store.setUrl("http://www.allmotos.com.br")
-        store.setCnpj("XX.XXX.XXX/YYYY-ZZ")
-        store.setPassword("654321")
-
-        return store
-    }
-
-    public static Store getAnotherStore() {
-        Store store = new Store()
-
-        store.setId("store_2")
-        store.setName("Mulher na Moda")
-        store.setDescription("A casa da mulher bem resolvida.")
-        store.setAddress("Av. Brigadeiro Lima e Silva, 1590, Centro, Duque de Caxias, RJ")
-        store.setPhones("(21) 2771-1114")
-        store.setEmail("mulhernamoda@blah123.com")
-        store.setUrl("http://www.blahblahblah123.com.br")
-        store.setCnpj("XX.XXX.XXX/YYYY-ZZ")
-        store.setPassword("987654321")
-
-        return store
     }
 
     public static Company getCompany() {

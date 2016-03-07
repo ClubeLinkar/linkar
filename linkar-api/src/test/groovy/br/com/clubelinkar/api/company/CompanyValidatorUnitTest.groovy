@@ -10,7 +10,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import static br.com.clubelinkar.test.CompanyObjectMother.aStore
+import static br.com.clubelinkar.test.CompanyObjectMother.getaCompany
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when
 public class CompanyValidatorUnitTest {
 
     @Mock
-    def CompanyRepository storeRepositoryMock
+    def CompanyRepository companyRepositoryMock
 
     @InjectMocks
     def CompanyValidator storeValidator
@@ -33,28 +33,28 @@ public class CompanyValidatorUnitTest {
 
     @Test
     public void "Não deve criticar loja se e-mail ainda não existir"() {
-        when(storeRepositoryMock.findByEmail(aStore.email)).thenReturn(null)
-        storeValidator.validate(aStore, null)
-        verify(storeRepositoryMock).findByEmail(aStore.email)
+        when(companyRepositoryMock.findByEmail(aCompany.email)).thenReturn(null)
+        storeValidator.validate(aCompany, null)
+        verify(companyRepositoryMock).findByEmail(aCompany.email)
     }
 
     @Test(expected = RepeatedStoreEmailException)
     public void "Deve criticar loja com e-mail repetido"() {
-        when(storeRepositoryMock.findByEmail(aStore.email)).thenReturn(aStore)
-        storeValidator.validate(aStore, null)
+        when(companyRepositoryMock.findByEmail(aCompany.email)).thenReturn(aCompany)
+        storeValidator.validate(aCompany, null)
     }
 
     @Test
     public void "Não deve criticar loja se cnpj ainda não existir"() {
-        when(storeRepositoryMock.findByCnpj(aStore.cnpj)).thenReturn(null)
-        storeValidator.validate(aStore, null)
-        verify(storeRepositoryMock).findByCnpj(aStore.cnpj)
+        when(companyRepositoryMock.findByCnpj(aCompany.cnpj)).thenReturn(null)
+        storeValidator.validate(aCompany, null)
+        verify(companyRepositoryMock).findByCnpj(aCompany.cnpj)
     }
 
     @Test(expected = RepeatedStoreCNPJException)
     public void "Deve criticar loja com cnpj repetido"() {
-        when(storeRepositoryMock.findByCnpj(aStore.cnpj)).thenReturn(aStore)
-        storeValidator.validate(aStore, null)
+        when(companyRepositoryMock.findByCnpj(aCompany.cnpj)).thenReturn(aCompany)
+        storeValidator.validate(aCompany, null)
     }
 
 }

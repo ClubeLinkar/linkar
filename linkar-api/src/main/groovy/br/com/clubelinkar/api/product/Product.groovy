@@ -1,18 +1,11 @@
 package br.com.clubelinkar.api.product
 
-import groovy.transform.EqualsAndHashCode;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import groovy.transform.EqualsAndHashCode
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotNull
 
 /**
  * @author Lennon Jesus

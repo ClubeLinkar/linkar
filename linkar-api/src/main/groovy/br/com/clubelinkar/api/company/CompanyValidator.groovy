@@ -1,17 +1,16 @@
-package br.com.clubelinkar.api.company;
+package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.exception.RepeatedStoreCNPJException;
-import br.com.clubelinkar.exception.RepeatedStoreEmailException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
+import br.com.clubelinkar.exception.RepeatedStoreCNPJException
+import br.com.clubelinkar.exception.RepeatedStoreEmailException
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
+import org.springframework.validation.Errors
 
 /**
  * @author Lennon Jesus
  */
 @Component
-public class CompanyValidator implements Validator {
+public class CompanyValidator implements ICompanyValidator {
 
     @Autowired
     private CompanyRepository companyRepository;

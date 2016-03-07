@@ -1,6 +1,5 @@
 package br.com.clubelinkar.support.date
 
-import br.com.clubelinkar.support.date.IDateFactory
 import org.springframework.stereotype.Component
 
 /**

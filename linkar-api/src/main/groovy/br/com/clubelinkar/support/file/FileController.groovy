@@ -1,10 +1,10 @@
 package br.com.clubelinkar.support.file
 
+import org.springframework.http.HttpStatus
+
 /**
  * Created by lennonjesus on 1/22/16.
  */
-
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
@@ -12,13 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.MultipartHttpServletRequest
-
-import java.io.BufferedOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.util.Iterator
-import java.util.UUID
-
 
 @CrossOrigin
 @RestController

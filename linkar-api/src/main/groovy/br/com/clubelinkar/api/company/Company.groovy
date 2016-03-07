@@ -1,6 +1,5 @@
-package br.com.clubelinkar.api.store
+package br.com.clubelinkar.api.company
 
-import groovy.transform.EqualsAndHashCode
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.hibernate.validator.constraints.Email
@@ -13,109 +12,126 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
-@EqualsAndHashCode
-public final class Store {
+public final class Company {
 
     @Id
-    private String id
+    private String id;
 
     @NotNull
-    private String cnpj
+    private String cnpj;
 
     @NotNull
-    private String password // FIXME HASH!!!!!!!
+    private String password; // FIXME HASH!!!!!!!
 
     @NotNull
-    private String name
+    private String name;
 
     @NotNull
-    private String description
+    private String description;
 
     @NotNull
-    private String address
+    private String address;
 
     @NotNull
-    private String phones
+    private String phones;
 
     @NotNull
     @Email
-    private String email
+    private String email;
 
-    private String url
+    private String url;
 
-    public Store() {
+    public Company() {
     }
 
     public String getId() {
-        return id
+        return id;
     }
 
     public void setId(String id) {
-        this.id = id
+        this.id = id;
     }
 
     public String getCnpj() {
-        return cnpj
+        return cnpj;
     }
 
     public void setCnpj(String cnpj) {
-        this.cnpj = cnpj
+        this.cnpj = cnpj;
     }
 
     public String getPassword() {
-        return password
+        return password;
     }
 
     public void setPassword(String password) {
-        this.password = password
+        this.password = password;
     }
 
     public String getName() {
-        return name
+        return name;
     }
 
     public void setName(String name) {
-        this.name = name
+        this.name = name;
     }
 
     public String getDescription() {
-        return description
+        return description;
     }
 
     public void setDescription(String description) {
-        this.description = description
+        this.description = description;
     }
 
     public String getAddress() {
-        return address
+        return address;
     }
 
     public void setAddress(String address) {
-        this.address = address
+        this.address = address;
     }
 
     public String getPhones() {
-        return phones
+        return phones;
     }
 
     public void setPhones(String phones) {
-        this.phones = phones
+        this.phones = phones;
     }
 
     public String getEmail() {
-        return email
+        return email;
     }
 
     public void setEmail(String email) {
-        this.email = email
+        this.email = email;
     }
 
     public String getUrl() {
-        return url
+        return url;
     }
 
     public void setUrl(String url) {
-        this.url = url
+        this.url = url;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Company company = (Company) o;
+
+        return new EqualsBuilder()
+                .append(cnpj, company.cnpj)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(cnpj)
+                .toHashCode();
+    }
 }

@@ -2,8 +2,6 @@ package br.com.clubelinkar.api.category
 
 import org.springframework.data.mongodb.repository.MongoRepository
 
-import java.util.List
-
 /**
  * @author Lennon Jesus
  */
