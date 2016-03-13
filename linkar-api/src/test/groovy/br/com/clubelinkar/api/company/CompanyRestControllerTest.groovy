@@ -21,10 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.CompanyObjectMother.allMotos
-import static br.com.clubelinkar.test.CompanyObjectMother.allMotosWithCategories
-import static br.com.clubelinkar.test.CompanyObjectMother.allMotosWithRepeatedCategories
-import static br.com.clubelinkar.test.CompanyObjectMother.homaMotos
+import static br.com.clubelinkar.test.CompanyObjectMother.*
 import static org.junit.Assert.*
 import static org.mockito.Matchers.any
 import static org.mockito.Mockito.never
@@ -152,6 +149,28 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
 
 //        verify(mailServiceMock).send(mail)
 
+    }
+
+    @Test
+    public void "Deve cadastrar uma empresa com responsavel corretamente"() {
+
+        when(companyRepositoryMock.save(allMotosWithResponsible())).thenReturn(allMotosWithResponsible());
+
+        def result = mockMvc.perform(post(BASE_ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new Gson().toJson(allMotosWithResponsible()))
+        ).andExpect(status().isOk()).andReturn()
+
+        def company = new Gson().fromJson(result.response.contentAsString, Company)
+
+        assertNotNull company
+        assertEquals allMotosWithResponsible().name, company.name
+        assertEquals allMotosWithResponsible().description, company.description
+        assertEquals allMotosWithResponsible().address, company.address
+        assertEquals allMotosWithResponsible().phones, company.phones
+        assertEquals allMotosWithResponsible().url, company.url
+        assertEquals allMotosWithResponsible().email, company.email
+        assertEquals allMotosWithResponsible().responsiblePerson, company.responsiblePerson
     }
 
     @Test

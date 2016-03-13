@@ -36,6 +36,14 @@ class CompanyObjectMother {
         return c
     }
 
+    def static allMotosWithResponsible() {
+        Company c = allMotos()
+
+        c.responsiblePerson = "Tino Marcos"
+
+        return c
+    }
+
     def static homaMotos() {
         new Company(name: 'Homa Motos',
                 description: 'Homa Motos',
