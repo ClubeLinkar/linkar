@@ -1,5 +1,7 @@
 package br.com.clubelinkar.api.company
 
+import br.com.clubelinkar.support.async.EventType
+import br.com.clubelinkar.support.async.IEventBus
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -22,7 +24,7 @@ public class CompanyRestController {
     private ICompanyValidator companyValidator;
 
     @Autowired
-    private IMailService mailService;
+    private IEventBus eventBus;
 
     @RequestMapping(value = "/company", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Company create(@RequestBody @Valid Company company) {
@@ -31,14 +33,7 @@ public class CompanyRestController {
 
         Company createdCompany = companyRepository.save(company);
 
-        Mail email = new Mail()
-                .from("noreply@clubelinkar.com.br") // FIXME
-                .to(company.getEmail())
-                .subject("Sua loja está na Linkar!") // FIXME
-                .template(MailTemplate.STORE_REGISTRATION)
-                .addParameter("name", company.getName()); // FIXME
-
-        mailService.send(email);
+        eventBus.publish(EventType.COMPANY_CREATED, createdCompany)
 
         return createdCompany;
     }

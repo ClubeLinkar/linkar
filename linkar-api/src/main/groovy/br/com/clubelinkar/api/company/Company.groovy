@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull
  */
 @Document
 @EqualsAndHashCode
-final class Company {
+final class Company implements Serializable {
 
     @Id
     String id
