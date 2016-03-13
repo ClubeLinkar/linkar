@@ -8,6 +8,7 @@ import br.com.clubelinkar.api.order.OrderRepository;
 import br.com.clubelinkar.api.product.ProductMother;
 import br.com.clubelinkar.api.product.ProductRepository;
 import br.com.clubelinkar.api.user.UserRepository;
+import br.com.clubelinkar.support.event.TimelineEventRepository;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private TimelineEventRepository timelineEventRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         // pra resetar a base, coloque a VM option <code>-DresetDatabase=true</code> ou
@@ -58,6 +62,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     private void clearDatabase() {
+        timelineEventRepository.deleteAll();
         productRepository.deleteAll();
         companyRepository.deleteAll();
         orderRepository.deleteAll();

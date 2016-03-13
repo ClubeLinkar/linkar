@@ -19,16 +19,21 @@ import javax.jms.Session
 class EventBus implements IEventBus {
 
     @Autowired
-    private ConfigurableApplicationContext context;
+    private ConfigurableApplicationContext context
+
+    @Autowired
+    private TimelineEventRepository timelineEventRepository
 
     @Override
     void publish(IEvent event) {
         log.info("Novo evento >> type: ${event.type.name()}, payload: ${event.payload?.toString()}")
         String destination = event.type.name() + "-destination";
         MessageCreator messageCreator = instantiateMessageCreator(event.payload)
-        JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+        JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class)
+        TimelineEvent timelineEvent = TimelineEvent.from(event)
 
-        jmsTemplate.send(destination, messageCreator);
+        jmsTemplate.send(destination, messageCreator)
+        timelineEventRepository.save(timelineEvent)
     }
 
     private MessageCreator instantiateMessageCreator(def payload) {
