@@ -41,6 +41,8 @@ final class Company {
 
     String url
 
+    String responsiblePerson
+
     SortedSet<String> categories = new TreeSet<>()
 
     void addCategory(String c) {

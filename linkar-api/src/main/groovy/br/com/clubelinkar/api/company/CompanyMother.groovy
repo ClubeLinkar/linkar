@@ -13,6 +13,7 @@ class CompanyMother {
         company.setAddress("Rua Siqueira Campos, 243 Loja B, Copacabana, 22031-071, Rio de Janeiro - RJ");
         company.setPhones("(21) 3442-3584");
         company.setEmail("allmotos@allmotos.com.br");
+        company.setResponsiblePerson("Tino Marcos");
         company.setUrl("http://www.allmotos.com.br");
         company.setCnpj("XX.XXX.XXX/YYYY-ZZ");
         company.setPassword("654321");
