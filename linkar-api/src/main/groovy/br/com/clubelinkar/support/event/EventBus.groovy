@@ -1,4 +1,4 @@
-package br.com.clubelinkar.support.async
+package br.com.clubelinkar.support.event
 
 import groovy.util.logging.Log4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,10 +22,10 @@ class EventBus implements IEventBus {
     private ConfigurableApplicationContext context;
 
     @Override
-    void publish(EventType eventType, def payload) {
-        log.info("Novo evento >> type: ${eventType.name()}, payload: ${payload?.toString()}")
-        String destination = eventType.name() + "-destination";
-        MessageCreator messageCreator = instantiateMessageCreator(payload)
+    void publish(IEvent event) {
+        log.info("Novo evento >> type: ${event.type.name()}, payload: ${event.payload?.toString()}")
+        String destination = event.type.name() + "-destination";
+        MessageCreator messageCreator = instantiateMessageCreator(event.payload)
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 
         jmsTemplate.send(destination, messageCreator);

@@ -1,10 +1,7 @@
 package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.support.async.EventType
-import br.com.clubelinkar.support.async.IEventBus
-import br.com.clubelinkar.support.mail.IMailService
-import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailTemplate
+import br.com.clubelinkar.support.event.CompanyCreatedEvent
+import br.com.clubelinkar.support.event.IEventBus
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -33,7 +30,7 @@ public class CompanyRestController {
 
         Company createdCompany = companyRepository.save(company);
 
-        eventBus.publish(EventType.COMPANY_CREATED, createdCompany)
+        eventBus.publish(new CompanyCreatedEvent(createdCompany))
 
         return createdCompany;
     }

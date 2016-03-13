@@ -42,11 +42,7 @@ public class MailService implements IMailService {
 
             javaMailSender.send(mimeMessage)
 
-        } catch (MessagingException e) {
-            log.warn("Problema ao enviar e-mail: " + e.getMessage())
-        } catch (ConnectException e) {
-            log.warn("Problema ao enviar e-mail: " + e.getMessage())
-        } catch (Exception e) {
+        } catch (MessagingException | ConnectException | Exception e) {
             log.warn("Problema ao enviar e-mail: " + e.getMessage())
         }
     }

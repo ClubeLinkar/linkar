@@ -1,4 +1,4 @@
-package br.com.clubelinkar.support.async.listener
+package br.com.clubelinkar.support.event.listener
 
 import br.com.clubelinkar.api.company.Company
 import br.com.clubelinkar.support.notification.INotificationService
