@@ -2,6 +2,8 @@ package br.com.clubelinkar.api.company
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
+import br.com.clubelinkar.support.event.CompanyCreatedEvent
+import br.com.clubelinkar.support.event.IEventBus
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -24,6 +26,9 @@ import static br.com.clubelinkar.test.CompanyObjectMother.allMotosWithCategories
 import static br.com.clubelinkar.test.CompanyObjectMother.allMotosWithRepeatedCategories
 import static br.com.clubelinkar.test.CompanyObjectMother.homaMotos
 import static org.junit.Assert.*
+import static org.mockito.Matchers.any
+import static org.mockito.Mockito.never
+import static org.mockito.Mockito.times
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -44,7 +49,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     ICompanyValidator companyValidatorMock
 
     @Mock
-    IMailService mailServiceMock
+    IEventBus eventBusMock
 
     @InjectMocks
     CompanyRestController companyRestController
@@ -75,6 +80,8 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         assertEquals allMotos().phones, company.phones
         assertEquals allMotos().url, company.url
         assertEquals allMotos().email, company.email
+
+        verify(eventBusMock, times(1)).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -97,6 +104,8 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         assertEquals allMotosWithCategories().url, company.url
         assertEquals allMotosWithCategories().email, company.email
         assertEquals allMotosWithCategories().categories, company.categories
+
+        verify(eventBusMock, times(1)).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -120,9 +129,11 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         assertEquals allMotosWithRepeatedCategories().email, company.email
         assertEquals 2, company.categories.size()
         assertEquals(["c1", "c2"] as SortedSet, company.categories)
+
+        verify(eventBusMock, times(1)).publish(any(CompanyCreatedEvent.class))
     }
 
-    @Test
+//    @Test
     public void "Deve enviar email de boas vindas para novas empresas cadastradas com sucesso"() {
 
         when(companyRepositoryMock.save(allMotos())).thenReturn(allMotos());
@@ -139,7 +150,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
                 .template(MailTemplate.STORE_REGISTRATION)
                 .addParameter("name", allMotos().name)
 
-        verify(mailServiceMock).send(mail)
+//        verify(mailServiceMock).send(mail)
 
     }
 
@@ -148,6 +159,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.cnpj = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -155,6 +167,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -164,6 +177,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -171,6 +185,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -178,6 +193,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.description = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -185,6 +201,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.address = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -192,6 +209,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.phones = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -199,6 +217,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.email = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
@@ -206,18 +225,21 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.email = "email.invalido"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
     public void "Não deve permitir empresa com mesmo e-mail"() {
         when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new RepeatedStoreEmailException());
         postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
     public void "Não deve permitir empresa com mesmo cnpj"() {
         when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new RepeatedStoreCNPJException());
         postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
     }
 
     @Test
