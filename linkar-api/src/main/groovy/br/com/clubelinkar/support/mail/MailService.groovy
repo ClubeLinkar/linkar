@@ -1,5 +1,6 @@
 package br.com.clubelinkar.support.mail
 
+import groovy.util.logging.Log4j
 import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,9 +16,8 @@ import javax.mail.internet.MimeMessage
  * @author Lennon Jesus
  */
 @Service
+@Log4j
 public class MailService implements IMailService {
-
-    private final Log logger = LogFactory.getLog(this.getClass())
 
     @Autowired
     private JavaMailSender javaMailSender
@@ -31,18 +31,19 @@ public class MailService implements IMailService {
 
             MimeMessage mimeMessage = javaMailSender.createMimeMessage()
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8")
+            Boolean isHtml = Boolean.TRUE
 
             message.setSubject(email.getSubject())
             message.setFrom(email.getFrom())
             message.setTo(email.getTo())
 
             String htmlContent = templateEngine.process(email.getTemplate().getName(), email.getParameters())
-            message.setText(htmlContent, true /* isHtml */)
+            message.setText(htmlContent, isHtml)
 
             javaMailSender.send(mimeMessage)
 
-        } catch (MessagingException e) {
-            logger.warn("Problema ao enviar e-mail: " + e.getCause())
+        } catch (MessagingException | ConnectException | Exception e) {
+            log.warn("Problema ao enviar e-mail: " + e.getMessage())
         }
     }
 
