@@ -1,8 +1,6 @@
 package br.com.clubelinkar.support.mail
 
 import groovy.util.logging.Log4j
-import org.apache.commons.logging.Log
-import org.apache.commons.logging.LogFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
