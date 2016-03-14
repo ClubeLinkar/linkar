@@ -2,6 +2,7 @@ package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -22,6 +23,7 @@ import java.lang.reflect.Type
 import static br.com.clubelinkar.test.UserObjectMother.getAnUser
 import static br.com.clubelinkar.test.UserObjectMother.getAnotherUser
 import static org.junit.Assert.*
+import static org.mockito.Matchers.anyString
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -44,6 +46,9 @@ class UserRestControllerTest extends BaseRestControllerMock {
     @Mock
     IMailService mailServiceMock
 
+    @Mock
+    IPasswordEncrypter passwordEncrypterMock
+
     @InjectMocks
     UserRestController userRestController
 
@@ -52,6 +57,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         MockitoAnnotations.initMocks(this)
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(userRestController).build();
+
+        when(passwordEncrypterMock.encrypt(anyString())).thenReturn("hash")
     }
 
     @Test

@@ -21,19 +21,14 @@ public class UserValidator implements IUserValidator {
     }
 
     @Override
-    public void validate(Object target, Errors errors) {
+    public void validate(def target, Errors errors) {
 
-        User existentUser = userRepository.findByEmail(((User) target).getEmail())
-
-        if (existentUser != null) {
+        if (null != userRepository.findByEmail(target.getEmail())) {
             throw new RepeatedUserEmailException()
         }
 
-        existentUser = userRepository.findByCpf(((User) target).getCpf())
-
-        if (existentUser != null) {
+        if (null != userRepository.findByCpf(target.getCpf())) {
             throw new RepeatedUserCPFException()
         }
-
     }
 }

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
-@EqualsAndHashCode
+@EqualsAndHashCode(excludes = ["password"])
 class User {
 
     @Id
@@ -38,6 +38,6 @@ class User {
     String state
 
     @NotNull
-    String password // FIXME HASH!!!!!!! + Regras de forca de senha
+    String password // FIXME Regras de forca de senha
 
 }

@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.user
 
+import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -24,10 +25,14 @@ public class UserRestController {
     @Autowired
     private IMailService mailService
 
+    @Autowired
+    private IPasswordEncrypter encrypter
+
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User create(@RequestBody @Valid User user) {
 
         userValidator.validate(user, null)
+        user.password = encrypter.encrypt(user.password)
 
         User createdUser = userRepository.save(user)
 
