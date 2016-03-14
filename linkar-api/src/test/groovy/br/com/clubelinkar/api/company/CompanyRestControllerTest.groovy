@@ -2,9 +2,8 @@ package br.com.clubelinkar.api.company
 
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
-import br.com.clubelinkar.support.event.CompanyCreatedEvent
+import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import br.com.clubelinkar.support.event.IEventBus
-import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
 import br.com.clubelinkar.test.BaseRestControllerMock

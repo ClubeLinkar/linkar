@@ -1,6 +1,6 @@
 package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.support.event.CompanyCreatedEvent
+import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import br.com.clubelinkar.support.event.IEventBus
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType

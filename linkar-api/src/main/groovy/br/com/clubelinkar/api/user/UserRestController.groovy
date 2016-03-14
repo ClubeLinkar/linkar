@@ -1,9 +1,9 @@
 package br.com.clubelinkar.api.user
 
 import br.com.clubelinkar.support.crypto.IPasswordEncrypter
+import br.com.clubelinkar.support.event.IEventBus
+import br.com.clubelinkar.support.event.objects.UserCreatedEvent
 import br.com.clubelinkar.support.mail.IMailService
-import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailTemplate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -28,22 +28,19 @@ public class UserRestController {
     @Autowired
     private IPasswordEncrypter encrypter
 
+    @Autowired
+    private IEventBus eventBus
+
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User create(@RequestBody @Valid User user) {
 
         userValidator.validate(user, null)
+
         user.password = encrypter.encrypt(user.password)
 
         User createdUser = userRepository.save(user)
 
-        Mail email = new Mail()
-                .from("noreply@clubelinkar.com.br") // FIXME
-                .to(user.getEmail())
-                .subject("Você se cadastrou na Linkar!") // FIXME
-                .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("name", user.getName()) // FIXME
-
-        mailService.send(email)
+        eventBus.publish(new UserCreatedEvent(createdUser))
 
         return createdUser
     }

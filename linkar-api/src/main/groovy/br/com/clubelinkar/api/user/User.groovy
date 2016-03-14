@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull
  */
 @Document
 @EqualsAndHashCode(excludes = ["password"])
-class User {
+class User implements Serializable {
 
     @Id
     String id

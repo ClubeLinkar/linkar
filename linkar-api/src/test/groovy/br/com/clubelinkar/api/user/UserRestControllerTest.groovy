@@ -3,6 +3,9 @@ package br.com.clubelinkar.api.user
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
 import br.com.clubelinkar.support.crypto.IPasswordEncrypter
+import br.com.clubelinkar.support.event.IEvent
+import br.com.clubelinkar.support.event.IEventBus
+import br.com.clubelinkar.support.event.objects.UserCreatedEvent
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -14,6 +17,7 @@ import org.junit.Ignore
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -24,6 +28,8 @@ import static br.com.clubelinkar.test.UserObjectMother.getAnUser
 import static br.com.clubelinkar.test.UserObjectMother.getAnotherUser
 import static org.junit.Assert.*
 import static org.mockito.Matchers.anyString
+import static org.mockito.Mockito.never
+import static org.mockito.Mockito.times
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -44,10 +50,10 @@ class UserRestControllerTest extends BaseRestControllerMock {
     IUserValidator userValidatorMock
 
     @Mock
-    IMailService mailServiceMock
+    IPasswordEncrypter passwordEncrypterMock
 
     @Mock
-    IPasswordEncrypter passwordEncrypterMock
+    IEventBus eventBus
 
     @InjectMocks
     UserRestController userRestController
@@ -82,28 +88,7 @@ class UserRestControllerTest extends BaseRestControllerMock {
         assertEquals anUser.state, savedUser.state
         assertEquals anUser.password, savedUser.password
 
-    }
-
-    @Test
-    public void "Deve enviar email de boas vindas para novos usuarios cadastrados com sucesso"() {
-
-        when(userRepositoryMock.save(anUser)).thenReturn(anUser);
-
-        mockMvc.perform(post(BASE_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(anUser))
-        ).andExpect(status().isOk()).andReturn()
-
-
-        def mail = new Mail()
-                .from("noreply@clubelinkar.com.br")
-                .to("lennon.jesus@gmail.com")
-                .subject("Você se cadastrou na Linkar!")
-                .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("name", anUser.name)
-
-        verify(mailServiceMock).send(mail)
-
+        verify(eventBus, times(1)).publish(Mockito.any(UserCreatedEvent.class))
     }
 
     @Test
@@ -111,6 +96,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -118,6 +105,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.email = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -125,6 +114,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.email = "email.inválido"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -132,6 +123,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.cpf = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -141,6 +134,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.cpf = "abc123"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -148,6 +143,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.city = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -155,6 +152,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.state = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -162,6 +161,8 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
@@ -171,18 +172,24 @@ class UserRestControllerTest extends BaseRestControllerMock {
         def invalidUser = anUser
         invalidUser.password = "123"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
     public void "Não deve permitir novo usuário com e-mail já existente"() {
         when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserEmailException());
         postAndExpectBadRequest(BASE_ENDPOINT, anUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
     public void "Não deve permitir novo usuário com cpf já existente"() {
         when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserCPFException());
         postAndExpectBadRequest(BASE_ENDPOINT, anUser)
+
+        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test

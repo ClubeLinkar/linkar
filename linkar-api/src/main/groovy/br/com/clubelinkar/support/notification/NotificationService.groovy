@@ -1,6 +1,7 @@
 package br.com.clubelinkar.support.notification
 
 import br.com.clubelinkar.api.company.Company
+import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -24,6 +25,18 @@ class NotificationService implements INotificationService {
                 .subject("Sua loja está na Linkar!") // FIXME
                 .template(MailTemplate.STORE_REGISTRATION)
                 .addParameter("name", newCompany.getName()); // FIXME
+
+        mailService.send(email);
+    }
+
+    @Override
+    void notifyUserCreation(User newUser) {
+        Mail email = new Mail()
+                .from("noreply@clubelinkar.com.br") // FIXME
+                .to(newUser.getEmail())
+                .subject("Você se cadastrou na Linkar!") // FIXME
+                .template(MailTemplate.USER_REGISTRATION)
+                .addParameter("name", newUser.getName()) // FIXME
 
         mailService.send(email);
     }

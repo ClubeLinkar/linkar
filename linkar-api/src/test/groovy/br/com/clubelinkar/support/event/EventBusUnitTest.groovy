@@ -1,6 +1,7 @@
 package br.com.clubelinkar.support.event
 
 import br.com.clubelinkar.api.company.Company
+import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import org.junit.Before
 import org.mockito.Mockito
 import org.springframework.jms.core.JmsTemplate
