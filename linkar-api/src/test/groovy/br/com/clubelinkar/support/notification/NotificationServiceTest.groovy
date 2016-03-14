@@ -1,6 +1,7 @@
 package br.com.clubelinkar.support.notification
 
 import br.com.clubelinkar.api.company.Company
+import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import org.junit.Test
@@ -11,6 +12,7 @@ import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 
 import static br.com.clubelinkar.api.company.CompanyMother.allMotos
+import static br.com.clubelinkar.api.user.UserMother.lennonJesus
 import static org.mockito.Mockito.times
 import static org.mockito.Mockito.verify
 
@@ -31,6 +33,15 @@ class NotificationServiceTest {
         Company company = allMotos()
 
         notificationService.notifyCompanyCreation(company)
+
+        verify(mailServiceMock, times(1)).send(Mockito.any(Mail.class))
+    }
+
+    @Test
+    void "notifyUserCreation delegates to mailService"() {
+        User lennon = lennonJesus()
+
+        notificationService.notifyUserCreation(lennon)
 
         verify(mailServiceMock, times(1)).send(Mockito.any(Mail.class))
     }

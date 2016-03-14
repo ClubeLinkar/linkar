@@ -12,7 +12,7 @@ public class Mail {
 
     private String subject
 
-    private String from
+    private String from = "noreply@clubelinkar.com.br" // FIXME
 
     private String to
 
@@ -72,6 +72,18 @@ public class Mail {
         this.parameters.setVariable(name, value)
 
         return this
+    }
+
+    public static newCompany() {
+        return new Mail()
+                .subject("Sua loja está na Linkar!") // FIXME
+                .template(MailTemplate.STORE_REGISTRATION)
+    }
+
+    public static newUser() {
+        return new Mail()
+                .subject("Você se cadastrou na Linkar!") // FIXME
+                .template(MailTemplate.USER_REGISTRATION)
     }
 
 }

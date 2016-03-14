@@ -4,7 +4,6 @@ import br.com.clubelinkar.api.company.Company
 import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailTemplate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -19,24 +18,18 @@ class NotificationService implements INotificationService {
 
     @Override
     void notifyCompanyCreation(Company newCompany) {
-        Mail email = new Mail()
-                .from("noreply@clubelinkar.com.br") // FIXME
-                .to(newCompany.getEmail())
-                .subject("Sua loja está na Linkar!") // FIXME
-                .template(MailTemplate.STORE_REGISTRATION)
-                .addParameter("name", newCompany.getName()); // FIXME
+        Mail email = Mail.newCompany()
+                .to(newCompany.email)
+                .addParameter("name", newCompany.name) // FIXME
 
         mailService.send(email);
     }
 
     @Override
     void notifyUserCreation(User newUser) {
-        Mail email = new Mail()
-                .from("noreply@clubelinkar.com.br") // FIXME
-                .to(newUser.getEmail())
-                .subject("Você se cadastrou na Linkar!") // FIXME
-                .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("name", newUser.getName()) // FIXME
+        Mail email = Mail.newUser()
+                .to(newUser.email)
+                .addParameter("name", newUser.name) // FIXME
 
         mailService.send(email);
     }
