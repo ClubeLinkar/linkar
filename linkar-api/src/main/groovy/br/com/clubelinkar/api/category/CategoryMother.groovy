@@ -5,20 +5,16 @@ package br.com.clubelinkar.api.category
  */
 class CategoryMother {
     public static Category servicosMecanica() {
-        Category category = new Category()
-
-        category.setId("category_1")
-        category.setName("Serviços de mecânica")
-
-        return category
+        return new Category(
+                id: "category_1",
+                name: "Serviços de mecânica"
+        )
     }
 
     public static Category pecasMoto() {
-        Category category = new Category()
-
-        category.setId("product_2")
-        category.setName("Peças de moto")
-
-        return category
+        return new Category(
+                id: "product_2",
+                name: "Peças de moto"
+        )
     }
 }

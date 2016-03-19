@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.ProductObjectMother.*
+import static br.com.clubelinkar.api.product.ProductMother.*
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -44,82 +44,82 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
     @Test
     public void "Deve cadastrar um produto corretamente"() {
 
-        when(productRepositoryMock.save(aProduct)).thenReturn(aProduct);
+        when(productRepositoryMock.save(riserGuidao())).thenReturn(riserGuidao());
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aProduct))
+                .content(new Gson().toJson(riserGuidao()))
         ).andExpect(status().isOk()).andReturn()
 
         def product = new Gson().fromJson(result.response.contentAsString, Product)
 
         assertNotNull product
-        assertEquals aProduct.name, product.name
-        assertEquals aProduct.description, product.description
-        assertEquals aProduct.brand, product.brand
-        assertEquals aProduct.price, product.price
-        assertEquals aProduct.storeId, product.storeId
+        assertEquals riserGuidao().name, product.name
+        assertEquals riserGuidao().description, product.description
+        assertEquals riserGuidao().brand, product.brand
+        assertEquals riserGuidao().price, product.price
+        assertEquals riserGuidao().storeId, product.storeId
 
     }
 
     @Test
     public void "Deve cadastrar um produto corretamente com categorias"() {
 
-        when(productRepositoryMock.save(aProductWithCategories)).thenReturn(aProductWithCategories);
+        when(productRepositoryMock.save(riserGuidaoWithCategories())).thenReturn(riserGuidaoWithCategories());
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aProductWithCategories))
+                .content(new Gson().toJson(riserGuidaoWithCategories()))
         ).andExpect(status().isOk()).andReturn()
 
         def product = new Gson().fromJson(result.response.contentAsString, Product)
 
         assertNotNull product
-        assertEquals aProductWithCategories.name, product.name
-        assertEquals aProductWithCategories.description, product.description
-        assertEquals aProductWithCategories.brand, product.brand
-        assertEquals aProductWithCategories.price, product.price
-        assertEquals aProductWithCategories.storeId, product.storeId
-        assertEquals aProductWithCategories.categories, product.categories
+        assertEquals riserGuidaoWithCategories().name, product.name
+        assertEquals riserGuidaoWithCategories().description, product.description
+        assertEquals riserGuidaoWithCategories().brand, product.brand
+        assertEquals riserGuidaoWithCategories().price, product.price
+        assertEquals riserGuidaoWithCategories().storeId, product.storeId
+        assertEquals riserGuidaoWithCategories().categories, product.categories
     }
 
     @Test
     public void "Deve cadastrar um produto corretamente com categorias e eliminar categorias repetidas"() {
 
-        when(productRepositoryMock.save(aProductWithRepeatedCategories)).thenReturn(aProductWithRepeatedCategories);
+        when(productRepositoryMock.save(riserGuidaoWithRepeatedCategories())).thenReturn(riserGuidaoWithRepeatedCategories());
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aProductWithRepeatedCategories))
+                .content(new Gson().toJson(riserGuidaoWithRepeatedCategories()))
         ).andExpect(status().isOk()).andReturn()
 
         def product = new Gson().fromJson(result.response.contentAsString, Product)
 
         assertNotNull product
-        assertEquals aProductWithRepeatedCategories.name, product.name
-        assertEquals aProductWithRepeatedCategories.description, product.description
-        assertEquals aProductWithRepeatedCategories.brand, product.brand
-        assertEquals aProductWithRepeatedCategories.price, product.price
-        assertEquals aProductWithRepeatedCategories.storeId, product.storeId
-        assertEquals aProductWithRepeatedCategories.categories, product.categories
+        assertEquals riserGuidaoWithRepeatedCategories().name, product.name
+        assertEquals riserGuidaoWithRepeatedCategories().description, product.description
+        assertEquals riserGuidaoWithRepeatedCategories().brand, product.brand
+        assertEquals riserGuidaoWithRepeatedCategories().price, product.price
+        assertEquals riserGuidaoWithRepeatedCategories().storeId, product.storeId
+        assertEquals riserGuidaoWithRepeatedCategories().categories, product.categories
         assertEquals 2, product.categories.size()
 
-        assertEquals aProductWithCategories.categories, product.categories
-        // a comparacao com aProductWithCategories, diferente das anteriores eh de proposito, pois queremos garantir
-        // que o produto retornado so tem 2 categorias, e nao 3, como as associadas ao aProductWithRepeatedCategories
+        assertEquals riserGuidaoWithCategories().categories, product.categories
+        // a comparacao com riserGuidao()WithCategories, diferente das anteriores eh de proposito, pois queremos garantir
+        // que o produto retornado so tem 2 categorias, e nao 3, como as associadas ao riserGuidaoWithRepeatedCategories()
 
     }
 
     @Test
     public void "Deve criticar loja com name nulo"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com description nulo"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.description = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
@@ -127,28 +127,28 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
     @Test
     @Ignore
     public void "Deve criticar loja com brand nulo"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.brand = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com price nulo"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.price = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com price zero"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.price = 0
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     public void "Deve criticar loja com storeId nulo"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.storeId = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
@@ -157,7 +157,7 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
     @Ignore
     // TODO Implementar
     public void "Deve criticar loja com storeId inválido"() {
-        def invalidProduct = aProduct
+        def invalidProduct = riserGuidao()
         invalidProduct.storeId = "blah"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
@@ -170,7 +170,7 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
     @Test
     public void "Deve listar corretamente todos os produtos cadastradas no sistema"() {
 
-        def productListMock = [aProduct, anotherProduct]
+        def productListMock = [riserGuidao(), espadrilla()]
 
         when(productRepositoryMock.findAll()).thenReturn(productListMock)
 
@@ -182,14 +182,12 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
 
         assertFalse productsList.empty
         assertEquals productListMock, productsList
-
     }
-
 
     @Test
     public void "Deve listar todos os produtos de uma determinada loja"() {
 
-        def productListMock = [aProduct, anotherProduct]
+        def productListMock = [riserGuidao(), espadrilla()]
 
         when(productRepositoryMock.findByStoreId("id_123456_store")).thenReturn(productListMock)
 
@@ -201,7 +199,6 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
 
         assertFalse productsList.empty
         assertEquals productListMock, productsList
-
     }
 
 }

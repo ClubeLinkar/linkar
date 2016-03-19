@@ -10,7 +10,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import static br.com.clubelinkar.test.CompanyObjectMother.allMotos
+import static br.com.clubelinkar.api.company.CompanyMother.allMotos
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 

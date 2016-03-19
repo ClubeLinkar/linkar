@@ -5,36 +5,43 @@ package br.com.clubelinkar.api.product
  */
 class ProductMother {
     public static Product riserGuidao() {
-        Product product = new Product()
+        return new Product(
+                id: "product_1",
+                name: "Riser de guidão Anker para Triumhp 800 XC",
+                description: "Os Riser’s de guidão Anker Acessórios são projetados para ajustar a altura do guidão, elevando-o para uma postura correta de pilotagem e com isso proporcionando maior conforto. Usinados a partir de alumínio naval com traços que remetem à originalidade da motocicleta, são disponíveis na versão alongador e alongador recuado/avançado.",
+                brand: "ANKER",
+                price: new BigDecimal(189),
+                storeId: "store_1",
+                categories: ["cat 1", "cat funda"] as SortedSet
+        )
+    }
 
-        product.setId("product_1")
-        product.setName("Riser de guidão Anker para Triumhp 800 XC")
-        product.setDescription("Os Riser’s de guidão Anker Acessórios são projetados para ajustar a altura do guidão, elevando-o para uma postura correta de pilotagem e com isso proporcionando maior conforto. Usinados a partir de alumínio naval com traços que remetem à originalidade da motocicleta, são disponíveis na versão alongador e alongador recuado/avançado.")
-        product.setBrand("ANKER")
-        product.setPrice(new BigDecimal(189))
-        product.setStoreId("store_1")
-        product.addCategory("cat 1")
-        product.addCategory("cat funda")
+    def static riserGuidaoWithCategories() {
+        Product product = riserGuidao()
+        product.categories = ["cat1", "cat2"] as SortedSet
+        return product
+    }
 
+    def static riserGuidaoWithRepeatedCategories() {
+        Product product = riserGuidaoWithCategories()
+        product.addCategory("cat2")
         return product
     }
 
     public static Product espadrilla() {
-        Product product = new Product()
-
-        product.setId("product_2")
-        product.setName("Espadrille Caramelo & Preta 7,5cmC")
-        product.setDescription("Espadrille nas cores caramelo e preta.\n" +
-                "Fechamento por tira para amarração no tornozelo.\n" +
-                "Parte posterior com recorte vazado.\n" +
-                "Salto médio.\n" +
-                "Palmilha com inscrição da marca.\n" +
-                "Solado antiderrapante.")
-        product.setBrand("Azaléia")
-        product.setPrice(new BigDecimal(189))
-        product.setStoreId("store_2")
-        product.addCategory("cat 2")
-
-        return product
+        return new Product(
+                id: "product_2",
+                name: "Espadrille Caramelo & Preta 7,5cmC",
+                description: "Espadrille nas cores caramelo e preta.\n" +
+                        "Fechamento por tira para amarração no tornozelo.\n" +
+                        "Parte posterior com recorte vazado.\n" +
+                        "Salto médio.\n" +
+                        "Palmilha com inscrição da marca.\n" +
+                        "Solado antiderrapante.",
+                brand: "Azaleia",
+                price: new BigDecimal(189),
+                storeId: "store_2",
+                categories: ["cat 2"] as SortedSet
+        )
     }
 }

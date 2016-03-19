@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations
 
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
-import static br.com.clubelinkar.test.UserObjectMother.*
+import static br.com.clubelinkar.api.user.UserMother.*
 
 /**
  * @author Lennon Jesus
@@ -33,28 +33,28 @@ public class UserValidatorUnitTest {
 
     @Test
     public void "Não deve criticar usuário se e-mail ainda não existir"() {
-        when(userRepositoryMock.findByEmail(anUser.email)).thenReturn(null)
-        userValidator.validate(anUser, null)
-        verify(userRepositoryMock).findByEmail(anUser.email)
+        when(userRepositoryMock.findByEmail(lennonJesus().email)).thenReturn(null)
+        userValidator.validate(lennonJesus(), null)
+        verify(userRepositoryMock).findByEmail(lennonJesus().email)
     }
 
     @Test(expected = RepeatedUserEmailException)
     public void "Deve criticar usuário com e-mail repetido"() {
-        when(userRepositoryMock.findByEmail(anUser.email)).thenReturn(anUser)
-        userValidator.validate(anUser, null)
+        when(userRepositoryMock.findByEmail(lennonJesus().email)).thenReturn(lennonJesus())
+        userValidator.validate(lennonJesus(), null)
     }
 
     @Test
     public void "Não deve criticar usuário se cpf ainda não existir"() {
-        when(userRepositoryMock.findByCpf(anUser.cpf)).thenReturn(null)
-        userValidator.validate(anUser, null)
-        verify(userRepositoryMock).findByCpf(anUser.cpf)
+        when(userRepositoryMock.findByCpf(lennonJesus().cpf)).thenReturn(null)
+        userValidator.validate(lennonJesus(), null)
+        verify(userRepositoryMock).findByCpf(lennonJesus().cpf)
     }
 
     @Test(expected = RepeatedUserCPFException)
     public void "Deve criticar usuário com cpf repetido"() {
-        when(userRepositoryMock.findByCpf(anUser.cpf)).thenReturn(anUser)
-        userValidator.validate(anUser, null)
+        when(userRepositoryMock.findByCpf(lennonJesus().cpf)).thenReturn(lennonJesus())
+        userValidator.validate(lennonJesus(), null)
     }
 
 }
