@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.user
 
+import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,9 @@ public class UserValidator implements IUserValidator {
     @Autowired
     private UserRepository userRepository
 
+    @Autowired
+    private IPasswordPolicy passwordPolicy
+
     @Override
     public boolean supports(Class<?> clazz) {
         return User.class.isAssignableFrom(clazz)
@@ -23,11 +27,15 @@ public class UserValidator implements IUserValidator {
     @Override
     public void validate(def target, Errors errors) {
 
-        if (null != userRepository.findByEmail(target.getEmail())) {
+        if(!passwordPolicy.matches(target.password)) {
+            throw new InvalidPasswordException()
+        }
+
+        if (null != userRepository.findByEmail(target.email)) {
             throw new RepeatedUserEmailException()
         }
 
-        if (null != userRepository.findByCpf(target.getCpf())) {
+        if (null != userRepository.findByCpf(target.cpf)) {
             throw new RepeatedUserCPFException()
         }
     }
