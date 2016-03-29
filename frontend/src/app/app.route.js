@@ -14,6 +14,12 @@
               url: "/main",
               templateUrl: "app/main/main.html"
           })
+          .state('admin.logout', {
+              url: "/logout",
+              templateUrl: "app/main/main.html",
+              controller: 'Logout',
+              controllerAs: 'vm'
+          })
           ;
 
       $urlRouterProvider.otherwise('/admin/main');
