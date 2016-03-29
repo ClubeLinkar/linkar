@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
@@ -24,28 +25,32 @@ import javax.annotation.Resource
 class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
+    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler
 
     @Resource
-    private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
+    private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler
 
     @Resource
-    private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
+    private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler
 
     @Resource
-    private Http401UnauthorizedEntryPoint authenticationEntryPoint;
+    private Http401UnauthorizedEntryPoint authenticationEntryPoint
 
     @Resource
-    SecurityAuthenticationProvider securityAuthenticationProvider;
+    SecurityAuthenticationProvider securityAuthenticationProvider
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder()
     }
 
     @Autowired
+    private UserDetailsService userDetailsService
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(securityAuthenticationProvider);
+//        auth.authenticationProvider(securityAuthenticationProvider)
+        auth.userDetailsService(userDetailsService)
     }
 
     @Override
@@ -85,7 +90,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions()
                 .disable()
-        ;
+        
 
     }
 

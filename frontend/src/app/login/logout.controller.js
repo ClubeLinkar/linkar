@@ -21,6 +21,10 @@
       }).error(function() {
         $rootScope.authenticated = true;
       });
+      // $http.post('/linkar/api/logout', {}).finally(function() {
+      //   $rootScope.authenticated = false;
+      //   $location.path("/");
+      // });
     }
 
   }
