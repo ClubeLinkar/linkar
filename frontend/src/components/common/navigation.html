@@ -41,6 +41,29 @@
             </li>
 
             <li ui-sref-active="active" ng-show="authenticated">
+                <a><i class="fa fa-suitcase"></i>
+                  <span class="nav-label">Vendedores</span>
+                  <span class="fa arrow"></span>
+                </a>
+
+                <ul class="nav nav-second-level">
+                    <li class="active">
+                      <a ui-sref="salesman.main">
+                        <i class="fa fa-desktop"></i>
+                        Exibir
+                      </a>
+                    </li>
+                    <li>
+                      <a ui-sref="salesman.form">
+                        <i class="fa fa-cogs"></i>
+                        Cadastrar
+                      </a>
+                    </li>
+                </ul>
+
+            </li>
+
+            <li ui-sref-active="active" ng-show="authenticated">
                 <a><i class="fa fa-building-o"></i>
                   <span class="nav-label">Empresas</span>
                   <span class="fa arrow"></span>
