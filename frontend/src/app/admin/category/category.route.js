@@ -12,19 +12,19 @@
           .state('category.main', {
               url: "/main",
               templateUrl: "app/admin/category/main.html",
-              controller: 'Category',
+              controller: 'CategoryList',
               controllerAs: 'vm'
           })
           .state('category.form', {
               url: "/form",
               templateUrl: "app/admin/category/form.html",
-              controller: 'Category',
+              controller: 'CategoryEdit',
               controllerAs: 'vm'
           })
           .state('category.detail', {
               url: "/detail/:categoryId",
               templateUrl: "app/admin/category/form.html",
-              controller: 'Category',
+              controller: 'CategoryEdit',
               controllerAs: 'vm'
           })
 
