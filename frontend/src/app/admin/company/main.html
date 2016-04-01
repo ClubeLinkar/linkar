@@ -22,7 +22,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr ng-repeat="company in companyList">
+                      <tr ng-repeat="company in vm.companyList">
                           <td><a ui-sref="company.detail({companyId: company.id})">{{company.name}}</a></td>
                           <td>{{company.description}}</td>
                           <td>{{company.address}}</td>

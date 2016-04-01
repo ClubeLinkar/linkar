@@ -23,7 +23,6 @@
 
       if ($stateParams.categoryId) {
         Category.get({ id: $stateParams.categoryId }, function(data) {
-          console.log("category::controller:detail");
           vm.category = data;
         });
       }
@@ -31,7 +30,6 @@
 
     function save() {
       Category.save(vm.category, function (data) {
-        console.log("category::controller:save");
 
         ngToast.create('A categoria ' + vm.category.name + ' foi cadastrada com sucesso!');
         $state.go('category.main');

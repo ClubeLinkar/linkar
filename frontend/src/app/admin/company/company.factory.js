@@ -6,7 +6,6 @@
   Company.$inject = ['$resource'];
 
   function Company($resource) {
-    console.log('company::factory');
     return $resource("/linkar/api/company/:id");
   }
 })();
