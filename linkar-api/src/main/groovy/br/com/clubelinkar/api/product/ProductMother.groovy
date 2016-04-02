@@ -11,7 +11,7 @@ class ProductMother {
                 description: "Os Riser’s de guidão Anker Acessórios são projetados para ajustar a altura do guidão, elevando-o para uma postura correta de pilotagem e com isso proporcionando maior conforto. Usinados a partir de alumínio naval com traços que remetem à originalidade da motocicleta, são disponíveis na versão alongador e alongador recuado/avançado.",
                 brand: "ANKER",
                 price: new BigDecimal(189),
-                storeId: "store_1",
+                companyId: "store_1",
                 categories: ["cat 1", "cat funda"] as SortedSet
         )
     }
@@ -40,7 +40,7 @@ class ProductMother {
                         "Solado antiderrapante.",
                 brand: "Azaleia",
                 price: new BigDecimal(189),
-                storeId: "store_2",
+                companyId: "store_2",
                 categories: ["cat 2"] as SortedSet
         )
     }

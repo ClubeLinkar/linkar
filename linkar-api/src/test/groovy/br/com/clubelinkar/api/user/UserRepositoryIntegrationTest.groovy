@@ -31,7 +31,7 @@ class UserRepositoryIntegrationTest {
     public void setupData() {
         userRepository.save(new User(id: "user_id_1", name: "Lennon Jesus", email: "lennon.jesus@gmail.com", password: "123456"))
 
-        purchaseRepository.save(new Order(userId: "user_id_1", storeId: "store_id_1", productId: "product_id_1"))
+        purchaseRepository.save(new Order(userId: "user_id_1", companyId: "store_id_1", productId: "product_id_1"))
     }
 
     @After

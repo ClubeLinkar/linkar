@@ -49,9 +49,9 @@ class OrderServiceUnitTest {
     @Before
     public void setup() {
         when(userRepositoryMock.findByEmailAndPassword(purchase.userEmail, purchase.userPassword)).thenReturn(user)
-        when(storeRepositoryMock.findByIdAndPassword(purchase.storeId, purchase.storePassword)).thenReturn(store)
-        when(productRepositoryMock.findByIdAndStoreId(purchase.productId, purchase.storeId)).thenReturn(product)
-        when(orderRepositoryMock.findByUserIdAndStoreIdAndProductId(user.id, store.id, product.id)).thenReturn(null)
+        when(storeRepositoryMock.findByIdAndPassword(purchase.companyId, purchase.storePassword)).thenReturn(store)
+        when(productRepositoryMock.findByIdAndCompanyId(purchase.productId, purchase.companyId)).thenReturn(product)
+        when(orderRepositoryMock.findByUserIdAndCompanyIdAndProductId(user.id, store.id, product.id)).thenReturn(null)
         when(orderRepositoryMock.save(purchase)).thenReturn(purchase);
         when(dateFactoryMock.now()).thenReturn(new Date());
     }
@@ -63,9 +63,9 @@ class OrderServiceUnitTest {
 
         verify(dateFactoryMock).now()
         verify(userRepositoryMock, times(1)).findByEmailAndPassword(purchase.userEmail, purchase.userPassword)
-        verify(storeRepositoryMock, times(1)).findByIdAndPassword(purchase.storeId, purchase.storePassword)
-        verify(productRepositoryMock, times(1)).findByIdAndStoreId(purchase.productId, purchase.storeId)
-        verify(orderRepositoryMock, times(1)).findByUserIdAndStoreIdAndProductId(user.id, store.id, product.id)
+        verify(storeRepositoryMock, times(1)).findByIdAndPassword(purchase.companyId, purchase.storePassword)
+        verify(productRepositoryMock, times(1)).findByIdAndCompanyId(purchase.productId, purchase.companyId)
+        verify(orderRepositoryMock, times(1)).findByUserIdAndCompanyIdAndProductId(user.id, store.id, product.id)
         verify(orderRepositoryMock).save(purchase)
     }
 
@@ -77,19 +77,19 @@ class OrderServiceUnitTest {
 
     @Test(expected = InvalidStoreException)
     public void "Não deve concretizar compra se as credenciais do lojista forem inválidas"() {
-        when(storeRepositoryMock.findByIdAndPassword(purchase.storeId, purchase.storePassword)).thenReturn(null)
+        when(storeRepositoryMock.findByIdAndPassword(purchase.companyId, purchase.storePassword)).thenReturn(null)
         orderService.validate(purchase)
     }
 
     @Test(expected = InvalidProductException)
     public void "Não deve concretizar compra se o produto comprado não pertencer à loja selecionada"() {
-        when(productRepositoryMock.findByIdAndStoreId(purchase.productId, purchase.storeId)).thenReturn(null)
+        when(productRepositoryMock.findByIdAndCompanyId(purchase.productId, purchase.companyId)).thenReturn(null)
         orderService.validate(purchase)
     }
 
     @Test(expected = RepeatedPurchaseException)
     public void "Não deve concretizar compra já existir uma compra anterior para o mesmo produto, na mesma loja, para o mesmo usuário"() {
-        when(orderRepositoryMock.findByUserIdAndStoreIdAndProductId(user.id, store.id, product.id)).thenReturn(purchase)
+        when(orderRepositoryMock.findByUserIdAndCompanyIdAndProductId(user.id, store.id, product.id)).thenReturn(purchase)
         orderService.validate(purchase)
     }
 
@@ -98,7 +98,7 @@ class OrderServiceUnitTest {
     }
 
     def Product getProduct() {
-        new Product(id: "product_1", name: "Produto 1", storeId: store.id)
+        new Product(id: "product_1", name: "Produto 1", companyId: store.id)
     }
 
     def Company getStore() {
@@ -110,7 +110,7 @@ class OrderServiceUnitTest {
                 userId: user.id,
                 userEmail: user.email,
                 userPassword: user.password,
-                storeId: store.id,
+                companyId: store.id,
                 storePassword: store.password,
                 productId: product.id
         )

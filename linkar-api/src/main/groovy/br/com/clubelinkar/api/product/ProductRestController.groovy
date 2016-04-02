@@ -30,9 +30,9 @@ public class ProductRestController {
         return productRepository.findOne(id)
     }
 
-    @RequestMapping(value = "/product/store/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/company/{id}", method = RequestMethod.GET)
     public List<Product> findByStoreId(@PathVariable("id") String id) {
-        return productRepository.findByStoreId(id)
+        return productRepository.findByCompanyId(id)
     }
 
 }

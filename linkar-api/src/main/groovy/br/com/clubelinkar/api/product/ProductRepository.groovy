@@ -7,8 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository
  */
 public interface ProductRepository extends MongoRepository<Product, String> {
 
-    List<Product> findByStoreId(String storeId);
+    List<Product> findByCompanyId(String companyId);
 
-    Product findByIdAndStoreId(String id, String storeId);
+    Product findByIdAndCompanyId(String id, String companyId);
 
 }
