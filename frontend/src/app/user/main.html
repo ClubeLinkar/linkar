@@ -20,7 +20,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr ng-repeat="user in userList">
+                      <tr ng-repeat="user in vm.userList">
                           <td><a ui-sref="user.detail({userId: user.id})">{{user.name}}</a></td>
                           <td>{{user.email}}</td>
                           <td>{{user.cpf}}</td>

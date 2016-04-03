@@ -31,7 +31,7 @@
                         <div class="col-sm-10" ng-class="{'has-error' : salesmanForm.name.$dirty && salesmanForm.name.$invalid}">
                           <div class="input-group m-b">
                             <span class="input-group-addon fa fa-salesman"></span>
-                            <input type="text" class="form-control" ng-model="salesman.name" required="required">
+                            <input type="text" class="form-control" ng-model="vm.salesman.name" required="required">
                           </div>
                         </div>
                       </div>
@@ -41,7 +41,7 @@
                         <div class="col-sm-10" ng-class="{'has-error' : salesmanForm.email.$dirty && salesmanForm.email.$invalid}">
                           <div class="input-group m-b">
                             <span class="input-group-addon fa">@</span>
-                            <input type="text" class="form-control" ng-model="salesman.email" required="required">
+                            <input type="text" class="form-control" ng-model="vm.salesman.email" required="required">
                           </div>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
                         <div class="col-sm-10" ng-class="{'has-error' : salesmanForm.password.$dirty && salesmanForm.password.$invalid}">
                           <div class="input-group m-b">
                             <span class="input-group-addon fa fa-lock"></span>
-                            <input type="password" class="form-control" ng-model="salesman.password" required="required">
+                            <input type="password" class="form-control" ng-model="vm.salesman.password" required="required">
                           </div>
                         </div>
                       </div>
@@ -61,7 +61,7 @@
                         <div class="col-sm-10" ng-class="{'has-error' : salesmanForm.cpf.$dirty && salesmanForm.cpf.$invalid}">
                           <div class="input-group m-b">
                             <span class="input-group-addon fa fa-credit-card"></span>
-                            <input type="text" class="form-control" ng-model="salesman.cpf" required="required">
+                            <input type="text" class="form-control" ng-model="vm.salesman.cpf" required="required">
                           </div>
                         </div>
                       </div>
@@ -69,7 +69,7 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Telefones</label>
                         <div class="col-sm-10" ng-class="{'has-error' : salesmanForm.phones.$dirty && salesmanForm.phones.$invalid}">
-                            <input type="text" class="form-control" ng-model="salesman.phones" required="required">
+                            <input type="text" class="form-control" ng-model="vm.salesman.phones" required="required">
                         </div>
                       </div>
 

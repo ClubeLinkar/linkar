@@ -6,7 +6,6 @@
   Salesman.$inject = ['$resource'];
 
   function Salesman($resource) {
-    console.log('salesman::factory');
     return $resource("/linkar/api/salesman/:id");
   }
 })();

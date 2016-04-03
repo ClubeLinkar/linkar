@@ -18,7 +18,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr ng-repeat="salesman in salesmanList">
+                      <tr ng-repeat="salesman in vm.salesmanList">
                           <td><a ui-sref="salesman.detail({salesmanId: salesman.id})">{{salesman.name}}</a></td>
                           <td>{{salesman.email}}</td>
                           <td>{{salesman.cpf}}</td>

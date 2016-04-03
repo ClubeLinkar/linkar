@@ -12,19 +12,19 @@
           .state('salesman.main', {
               url: "/main",
               templateUrl: "app/admin/salesman/main.html",
-              controller: 'Salesman',
+              controller: 'SalesmanList',
               controllerAs: 'vm'
           })
           .state('salesman.form', {
               url: "/new",
               templateUrl: "app/admin/salesman/form.html",
-              controller: 'Salesman',
+              controller: 'SalesmanEdit',
               controllerAs: 'vm'
           })
           .state('salesman.detail', {
               url: "/detail/:salesmanId",
               templateUrl: "app/admin/salesman/form.html",
-              controller: 'Salesman',
+              controller: 'SalesmanEdit',
               controllerAs: 'vm'
           })
       ;
