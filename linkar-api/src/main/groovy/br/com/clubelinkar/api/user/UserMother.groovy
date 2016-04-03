@@ -33,5 +33,18 @@ public class UserMother {
         )
     }
 
+    public static User felipe() {
+        return new User(
+                id: null,
+                name: "Felipe Abrantes",
+                email: "felipe@blah.com",
+                password: BCrypt.hashpw("1234567890", BCrypt.gensalt()),
+                cpf: "111.2222.333-45",
+                district: "Blah",
+                city: "Rio de Janeiro",
+                state: "RJ"
+        )
+    }
+
 
 }
