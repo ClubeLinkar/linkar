@@ -58,7 +58,7 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
         assertEquals riserGuidao().description, product.description
         assertEquals riserGuidao().brand, product.brand
         assertEquals riserGuidao().price, product.price
-        assertEquals riserGuidao().storeId, product.storeId
+        assertEquals riserGuidao().companyId, product.companyId
 
     }
 
@@ -79,7 +79,7 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
         assertEquals riserGuidaoWithCategories().description, product.description
         assertEquals riserGuidaoWithCategories().brand, product.brand
         assertEquals riserGuidaoWithCategories().price, product.price
-        assertEquals riserGuidaoWithCategories().storeId, product.storeId
+        assertEquals riserGuidaoWithCategories().companyId, product.companyId
         assertEquals riserGuidaoWithCategories().categories, product.categories
     }
 
@@ -100,7 +100,7 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
         assertEquals riserGuidaoWithRepeatedCategories().description, product.description
         assertEquals riserGuidaoWithRepeatedCategories().brand, product.brand
         assertEquals riserGuidaoWithRepeatedCategories().price, product.price
-        assertEquals riserGuidaoWithRepeatedCategories().storeId, product.storeId
+        assertEquals riserGuidaoWithRepeatedCategories().companyId, product.companyId
         assertEquals riserGuidaoWithRepeatedCategories().categories, product.categories
         assertEquals 2, product.categories.size()
 
@@ -147,18 +147,18 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
     }
 
     @Test
-    public void "Deve criticar loja com storeId nulo"() {
+    public void "Deve criticar loja com companyId nulo"() {
         def invalidProduct = riserGuidao()
-        invalidProduct.storeId = null
+        invalidProduct.companyId = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
     @Test
     @Ignore
     // TODO Implementar
-    public void "Deve criticar loja com storeId inválido"() {
+    public void "Deve criticar loja com companyId inválido"() {
         def invalidProduct = riserGuidao()
-        invalidProduct.storeId = "blah"
+        invalidProduct.companyId = "blah"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidProduct)
     }
 
@@ -189,9 +189,9 @@ public class ProductRestControllerTest extends BaseRestControllerMock {
 
         def productListMock = [riserGuidao(), espadrilla()]
 
-        when(productRepositoryMock.findByStoreId("id_123456_store")).thenReturn(productListMock)
+        when(productRepositoryMock.findByCompanyId("id_123456_company")).thenReturn(productListMock)
 
-        def result = mockMvc.perform(get("/product/store/id_123456_store")).andExpect(status().isOk()).andReturn()
+        def result = mockMvc.perform(get("/product/company/id_123456_company")).andExpect(status().isOk()).andReturn()
 
         Type dummyListType = new TypeToken<ArrayList<Product>>() {}.getType();
 

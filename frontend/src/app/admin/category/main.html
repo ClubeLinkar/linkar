@@ -15,7 +15,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr ng-repeat="category in categoryList">
+                      <tr ng-repeat="category in vm.categoryList">
                           <td><a ui-sref="category.detail({categoryId: category.id})">{{category.name}}</a></td>
                       </tr>
 

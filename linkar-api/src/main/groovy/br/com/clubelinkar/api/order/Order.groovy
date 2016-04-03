@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document
  * @author Lennon Jesus
  */
 @Document
-@EqualsAndHashCode(includes = ["id", "userId", "storeId", "productId", "purchasePrice"])
+@EqualsAndHashCode(includes = ["id", "userId", "companyId", "productId", "purchasePrice"])
 final class Order {
 
     @Id
@@ -23,7 +23,7 @@ final class Order {
     @Transient
     String userPassword
 
-    String storeId
+    String companyId
 
     @Transient
     String storePassword

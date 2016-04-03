@@ -27,7 +27,7 @@ public class OrderService implements IOrderService {
     private ProductRepository productRepository
 
     @Autowired
-    private CompanyRepository storeRepository
+    private CompanyRepository companyRepository
 
     @Autowired
     private OrderRepository orderRepository
@@ -52,16 +52,16 @@ public class OrderService implements IOrderService {
         if (user == null) throw new InvalidUserException()
         order.setUserId(user.getId())
 
-        // verificar se storeId e storePass coincidem
-        Company company = storeRepository.findByIdAndPassword(order.getStoreId(), order.getStorePassword())
+        // verificar se companyId e storePass coincidem
+        Company company = companyRepository.findByIdAndPassword(order.getCompanyId(), order.getStorePassword())
         if (company == null) throw new InvalidStoreException()
 
-        // verificar se storeId e productStoreId coincidem
-        Product product = productRepository.findByIdAndStoreId(order.getProductId(), order.getStoreId())
-        if (product == null || !company.getId().equals(product.getStoreId())) throw new InvalidProductException()
+        // verificar se companyId e productCompanyId coincidem
+        Product product = productRepository.findByIdAndCompanyId(order.getProductId(), order.getCompanyId())
+        if (product == null || !company.getId().equals(product.getCompanyId())) throw new InvalidProductException()
 
-        // verificar se nao existe um order by userId + storeId + productId
-        Order existingOrder = orderRepository.findByUserIdAndStoreIdAndProductId(user.getId(), company.getId(), product.getId())
+        // verificar se nao existe um order by userId + companyId + productId
+        Order existingOrder = orderRepository.findByUserIdAndCompanyIdAndProductId(user.getId(), company.getId(), product.getId())
         if (existingOrder != null) throw new RepeatedPurchaseException()
     }
 

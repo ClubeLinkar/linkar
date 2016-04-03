@@ -17,7 +17,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      <tr ng-repeat="product in productList">
+                      <tr ng-repeat="product in vm.productList">
                           <td><a ui-sref="product.detail({productId: product.id})">{{product.name}}</a></td>
                           <td>{{product.description}}</td>
                           <td class="text-navy">{{product.price}}</td>

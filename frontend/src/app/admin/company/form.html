@@ -30,7 +30,7 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10" ng-class="{'has-error' : companyForm.name.$dirty && companyForm.name.$invalid}">
-                          <input type="text" class="form-control" ng-model="company.name" required="required" />
+                          <input type="text" class="form-control" ng-model="vm.company.name" required="required" />
                           <span class="help-block m-b-none">
                             Ex: All Motos
                           </span>
@@ -40,7 +40,7 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Descrição</label>
                         <div class="col-sm-10" ng-class="{'has-error' : companyForm.description.$dirty && companyForm.description.$invalid}">
-                          <textarea class="form-control" ng-model="company.description" required="required"/>
+                          <textarea class="form-control" ng-model="vm.company.description" required="required"/>
                           <span class="help-block m-b-none">
                             Ex: A All Motos é uma loja de comércio eletrônico de peças e acessórios para motos.
                             Selecionamos os melhores produtos para você e buscamos agilidade no atendimento.
@@ -51,7 +51,7 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Endereço</label>
                         <div class="col-sm-10" ng-class="{'has-error' : companyForm.address.$dirty && companyForm.address.$invalid}">
-                          <textarea class="form-control" ng-model="company.address" required="required"/>
+                          <textarea class="form-control" ng-model="vm.company.address" required="required"/>
                           <span class="help-block m-b-none">
                             Ex: Rua Siqueira Campos, 243 Loja B, Copacabana, 22031-071, Rio de Janeiro - RJ
                           </span>
@@ -61,7 +61,7 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Categorias</label>
                         <div class="col-sm-10" ng-class="{'has-error' : companyForm.categories.$dirty && companyForm.categories.$invalid}">
-                          <input type="text" class="form-control" ng-model="company.categories" ng-list required="required">
+                          <input type="text" class="form-control" ng-model="vm.company.categories" ng-list required="required">
                           <span class="help-block m-b-none">
                             Ex: motos, peças, acessórios
                           </span>
@@ -74,7 +74,7 @@
                           <div class="col-sm-10" ng-class="{'has-error' : companyForm.phones.$dirty && companyForm.phones.$invalid}">
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-phone"></span>
-                                <input type="text" class="form-control" ng-model="company.phones" required="required">
+                                <input type="text" class="form-control" ng-model="vm.company.phones" required="required">
                               </div>
                               <span class="help-block m-b-none">Ex: (21) 3442-3584</span>
                           </div>
@@ -83,7 +83,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label">Pessoa responsável</label>
                       <div class="col-sm-10" ng-class="{'has-error' : companyForm.responsiblePerson.$dirty && companyForm.responsiblePerson.$invalid}">
-                        <input type="text" class="form-control" ng-model="company.responsiblePerson">
+                        <input type="text" class="form-control" ng-model="vm.company.responsiblePerson">
                         <span class="help-block m-b-none">Ex: Tinoco Silveira</span>
                       </div>
                     </div>
@@ -96,7 +96,7 @@
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon">@</span>
-                                <input type="text" class="form-control" ng-model="company.email" required="required">
+                                <input type="text" class="form-control" ng-model="vm.company.email" required="required">
                               </div>
                               <span class="help-block m-b-none">Ex: allmotos@allmotos.com.br</span>
                           </div>
@@ -110,7 +110,7 @@
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-lock"></span>
-                                <input type="password" class="form-control" ng-model="company.password" required="required">
+                                <input type="password" class="form-control" ng-model="vm.company.password" required="required">
                               </div>
                           </div>
                       </div>
@@ -123,7 +123,7 @@
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-paperclip"></span>
-                                <input type="text" class="form-control" ng-model="company.url" required="required">
+                                <input type="text" class="form-control" ng-model="vm.company.url" required="required">
                               </div>
                               <span class="help-block m-b-none">Ex: http://www.allmotos.com.br</span>
                           </div>
@@ -137,7 +137,7 @@
 
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-credit-card"></span>
-                                <input type="text" class="form-control" ng-model="company.cnpj" required="required">
+                                <input type="text" class="form-control" ng-model="vm.company.cnpj" required="required">
                               </div>
                               <span class="help-block m-b-none">Informe apenas números, sem traços, pontos ou vírgulas.</span>
                           </div>

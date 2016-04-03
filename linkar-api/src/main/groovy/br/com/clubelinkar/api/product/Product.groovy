@@ -31,7 +31,7 @@ final class Product {
     BigDecimal price;
 
     @NotNull
-    String storeId;
+    String companyId;
 
     List<String> photos = new ArrayList<>();
 
