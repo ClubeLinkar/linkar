@@ -39,9 +39,6 @@
 
 			self.credentials = {};
 			self.login = function() {
-
-        console.log(self.credentials);
-
 				authenticate(self.credentials, function(authenticated) {
 					if (authenticated) {
 						console.log("Login succeeded")
