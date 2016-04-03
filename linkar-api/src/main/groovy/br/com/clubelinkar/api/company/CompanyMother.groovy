@@ -34,6 +34,21 @@ class CompanyMother {
         )
     }
 
+    public static Company novaLoja() {
+        return new Company(
+                id: null,
+                name: "Nova Loja",
+                description: "Essa loja é novinha em folha no sistema",
+                address: "Blah Blah Blah",
+                phones: "(21) 2771-1111",
+                email: "novaloja@linkar.com",
+                responsiblePerson: "Yamato Kushai Sang",
+                url: "http://www.novinha.com.br",
+                cnpj: "AA.BBB.CCC/YYYY-ZZ",
+                password: "987654321"
+        )
+    }
+
     def static allMotosWithCategories() {
         Company c = allMotos()
 

@@ -31,11 +31,15 @@ public class UserValidator implements IUserValidator {
             throw new InvalidPasswordException()
         }
 
-        if (null != userRepository.findByEmail(target.email)) {
+        def existentUser = userRepository.findByEmail(target.email)
+
+        if (null != existentUser && target.id != existentUser.id) {
             throw new RepeatedUserEmailException()
         }
 
-        if (null != userRepository.findByCpf(target.cpf)) {
+        existentUser = userRepository.findByCpf(target.cpf)
+
+        if (null != existentUser && target.id != existentUser.id) {
             throw new RepeatedUserCPFException()
         }
     }

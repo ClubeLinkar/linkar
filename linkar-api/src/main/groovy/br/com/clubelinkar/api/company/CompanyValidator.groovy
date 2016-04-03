@@ -22,15 +22,17 @@ public class CompanyValidator implements ICompanyValidator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        Company existentCompany = companyRepository.findByEmail(((Company) target).getEmail());
+        def company = (Company) target
 
-        if (existentCompany != null) {
+        Company existentCompany = companyRepository.findByEmail(company.getEmail());
+
+        if (existentCompany != null && company.id != existentCompany.id) {
             throw new RepeatedStoreEmailException();
         }
 
-        existentCompany = companyRepository.findByCnpj(((Company) target).getCnpj());
+        existentCompany = companyRepository.findByCnpj(company.getCnpj());
 
-        if (existentCompany != null) {
+        if (existentCompany != null && company.id != existentCompany.id) {
             throw new RepeatedStoreCNPJException();
         }
     }
