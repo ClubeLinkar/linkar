@@ -20,7 +20,6 @@
 
     function list() {
       Product.query(function (data) {
-        console.log("product::controller:list");
         vm.productList = data;
       });
     }

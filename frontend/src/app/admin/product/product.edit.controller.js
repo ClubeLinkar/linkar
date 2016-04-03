@@ -12,6 +12,7 @@
     vm.init = init;
     vm.get = get;
     vm.save = save;
+    vm.loadCompanies = loadCompanies;
 
     vm.init();
 
@@ -21,22 +22,21 @@
 
     function get() {
       if ($stateParams.productId) {
+        vm.loadCompanies(); // FIXME tah meio bugado isso aqui...
+
         Product.get({ id: $stateParams.productId }, function(data) {
-          console.log("product::controller:detail");
           vm.product = data;
         });
-
-        Company.query(function (data) {
-          console.log("product::controller:list:companyList");
-          vm.companyList = data;
-        });
+      } else {
+        vm.loadCompanies();
       }
     }
 
-
-
-
-
+    function loadCompanies() {
+      Company.query(function (data) {
+        vm.companyList = data;
+      });
+    }
 
     function save() {
 
