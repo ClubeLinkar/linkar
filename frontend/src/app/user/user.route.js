@@ -12,19 +12,19 @@
           .state('user.main', {
               url: "/main",
               templateUrl: "app/user/main.html",
-              controller: 'User',
+              controller: 'UserList',
               controllerAs: 'vm'
           })
           .state('user.form', {
               url: "/new",
               templateUrl: "app/user/form.html",
-              controller: 'User',
+              controller: 'UserEdit',
               controllerAs: 'vm'
           })
           .state('user.detail', {
               url: "/detail/:userId",
               templateUrl: "app/user/form.html",
-              controller: 'User',
+              controller: 'UserEdit',
               controllerAs: 'vm'
           })
       ;
