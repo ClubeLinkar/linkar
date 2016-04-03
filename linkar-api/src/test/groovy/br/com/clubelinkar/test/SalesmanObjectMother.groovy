@@ -30,4 +30,15 @@ class SalesmanObjectMother {
         )
     }
 
+    public static Salesman getaNewSalesman() {
+        return new Salesman(
+                id: null,
+                name: "Vera Alice",
+                email: "vera@gmail.com",
+                password: BCrypt.hashpw("1234567890", BCrypt.gensalt()),
+                cpf: "581.537.487-34",
+                phones: "21 3333-3333"
+        )
+    }
+
 }

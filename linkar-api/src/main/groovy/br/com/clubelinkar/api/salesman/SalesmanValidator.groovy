@@ -23,15 +23,17 @@ class SalesmanValidator implements ISalesmanValidator {
     @Override
     public void validate(Object target, Errors errors) {
 
-        Salesman existentSalesman = salesmanRepository.findByEmail(((Salesman) target).getEmail())
+        def salesman = (Salesman) target
 
-        if (existentSalesman != null) {
+        Salesman existentSalesman = salesmanRepository.findByEmail(salesman.getEmail())
+
+        if (existentSalesman != null && salesman.id != existentSalesman.id) {
             throw new RepeatedUserEmailException()
         }
 
-        existentSalesman = salesmanRepository.findByCpf(((Salesman) target).getCpf())
+        existentSalesman = salesmanRepository.findByCpf(salesman.getCpf())
 
-        if (existentSalesman != null) {
+        if (existentSalesman != null && salesman.id != existentSalesman.id) {
             throw new RepeatedUserCPFException()
         }
 
