@@ -1,11 +1,13 @@
 package br.com.clubelinkar.api.company
 
+import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
 import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import br.com.clubelinkar.support.event.IEventBus
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
+import br.com.clubelinkar.support.security.service.ILoggedUserService
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -47,6 +49,9 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     @Mock
     IEventBus eventBusMock
 
+    @Mock
+    ILoggedUserService loggedUserServiceMock
+
     @InjectMocks
     CompanyRestController companyRestController
 
@@ -55,6 +60,8 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         MockitoAnnotations.initMocks(this)
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(companyRestController).build();
+
+        when(loggedUserServiceMock.currentLoggedUser).thenReturn(new User(id: "criador_id"))
     }
 
     @Test
@@ -76,8 +83,10 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         assertEquals allMotos().phones, company.phones
         assertEquals allMotos().url, company.url
         assertEquals allMotos().email, company.email
+        assertEquals allMotos().createdBy, company.createdBy
 
-        verify(eventBusMock, times(1)).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock).publish(any(CompanyCreatedEvent))
+        verify(loggedUserServiceMock).currentLoggedUser
     }
 
     @Test
@@ -101,7 +110,8 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         assertEquals allMotosWithCategories().email, company.email
         assertEquals allMotosWithCategories().categories, company.categories
 
-        verify(eventBusMock, times(1)).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock).publish(any(CompanyCreatedEvent))
+        verify(loggedUserServiceMock).currentLoggedUser
     }
 
     @Test
@@ -126,10 +136,12 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         assertEquals 2, company.categories.size()
         assertEquals(["c1", "c2"] as SortedSet, company.categories)
 
-        verify(eventBusMock, times(1)).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock).publish(any(CompanyCreatedEvent))
+        verify(loggedUserServiceMock).currentLoggedUser
     }
 
 //    @Test
+    // FIXME
     public void "Deve enviar email de boas vindas para novas empresas cadastradas com sucesso"() {
 
         when(companyRepositoryMock.save(allMotos())).thenReturn(allMotos());
@@ -177,7 +189,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.cnpj = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -185,7 +197,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -195,7 +207,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -203,7 +215,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -211,7 +223,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.description = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -219,7 +231,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.address = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -227,7 +239,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.phones = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -235,7 +247,7 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.email = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
@@ -243,21 +255,21 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         def invalidStore = allMotos()
         invalidStore.email = "email.invalido"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
     public void "Não deve permitir empresa com mesmo e-mail"() {
         when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new RepeatedStoreEmailException());
         postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test
     public void "Não deve permitir empresa com mesmo cnpj"() {
         when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new RepeatedStoreCNPJException());
         postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent.class))
+        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
     }
 
     @Test

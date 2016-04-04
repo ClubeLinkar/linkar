@@ -45,6 +45,8 @@ final class Company implements Serializable {
 
     SortedSet<String> categories = new TreeSet<>()
 
+    String createdBy
+
     void addCategory(String c) {
         categories.add(c)
     }

@@ -15,7 +15,8 @@ class CompanyMother {
                 responsiblePerson: "Tino Marcos",
                 url: "http://www.allmotos.com.br",
                 cnpj: "XX.XXX.XXX/YYYY-ZZ",
-                password: "654321"
+                password: "654321",
+                createdBy: "criador_id"
         )
     }
 
@@ -30,7 +31,8 @@ class CompanyMother {
                 responsiblePerson: "Tino Marcos",
                 url: "http://www.blahblahblah123.com.br",
                 cnpj: "XX.XXX.XXX/YYYY-ZZ",
-                password: "987654321"
+                password: "987654321",
+                createdBy: "criador_id"
         )
     }
 
@@ -83,6 +85,7 @@ class CompanyMother {
                 address: 'Rua do Riachuelo, Centro, Rio de Janeiro - RJ',
                 phones: '(21) 1111-2222',
                 url: 'homamotos.com.br',
-                email: 'contato@homamotos.com.br')
+                email: 'contato@homamotos.com.br',
+                createdBy: "criador_id")
     }
 }
