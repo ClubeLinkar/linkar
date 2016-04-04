@@ -3,10 +3,10 @@ package br.com.clubelinkar.api.salesman
 import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
-import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
+import br.com.clubelinkar.support.security.password.crypto.IPasswordEncrypter
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

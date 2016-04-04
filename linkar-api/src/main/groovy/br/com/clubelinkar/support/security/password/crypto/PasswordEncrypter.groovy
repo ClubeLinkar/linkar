@@ -1,4 +1,4 @@
-package br.com.clubelinkar.support.crypto
+package br.com.clubelinkar.support.security.password.crypto
 
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.stereotype.Component

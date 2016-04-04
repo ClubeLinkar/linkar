@@ -1,4 +1,4 @@
-package br.com.clubelinkar.support.crypto
+package br.com.clubelinkar.support.security.password.crypto
 
 /**
  * Created by felipe on 3/14/16.

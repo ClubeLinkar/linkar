@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.user
+package br.com.clubelinkar.support.security.password.policy
 
 import org.springframework.stereotype.Component
 

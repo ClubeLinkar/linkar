@@ -1,9 +1,9 @@
 package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.api.user.IPasswordPolicy
 import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
+import br.com.clubelinkar.support.security.password.policy.IPasswordPolicy
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.validation.Errors

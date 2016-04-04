@@ -1,9 +1,9 @@
 package br.com.clubelinkar.api.user
 
-import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.event.IEventBus
 import br.com.clubelinkar.support.event.objects.UserCreatedEvent
 import br.com.clubelinkar.support.mail.IMailService
+import br.com.clubelinkar.support.security.password.crypto.IPasswordEncrypter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*

@@ -4,12 +4,12 @@ import br.com.clubelinkar.api.user.User
 import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
-import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.event.IEvent
 import br.com.clubelinkar.support.event.IEventBus
 import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
+import br.com.clubelinkar.support.security.password.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.security.service.ILoggedUserService
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson

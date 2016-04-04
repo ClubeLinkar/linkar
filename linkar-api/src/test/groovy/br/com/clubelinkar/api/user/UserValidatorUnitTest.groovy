@@ -3,6 +3,7 @@ package br.com.clubelinkar.api.user
 import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.support.security.password.policy.IPasswordPolicy
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

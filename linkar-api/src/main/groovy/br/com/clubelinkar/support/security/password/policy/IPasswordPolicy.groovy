@@ -1,4 +1,4 @@
-package br.com.clubelinkar.api.user
+package br.com.clubelinkar.support.security.password.policy
 
 /**
  * Created by felipe on 3/19/16.

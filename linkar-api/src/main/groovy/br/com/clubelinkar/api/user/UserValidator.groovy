@@ -3,6 +3,7 @@ package br.com.clubelinkar.api.user
 import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.support.security.password.policy.IPasswordPolicy
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.validation.Errors

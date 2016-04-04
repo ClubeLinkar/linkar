@@ -1,8 +1,8 @@
 package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.event.IEventBus
 import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
+import br.com.clubelinkar.support.security.password.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.security.service.ILoggedUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
