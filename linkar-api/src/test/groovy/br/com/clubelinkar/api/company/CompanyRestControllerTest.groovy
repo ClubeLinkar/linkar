@@ -1,10 +1,13 @@
 package br.com.clubelinkar.api.company
 
 import br.com.clubelinkar.api.user.User
+import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedStoreCNPJException
 import br.com.clubelinkar.exception.RepeatedStoreEmailException
-import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
+import br.com.clubelinkar.support.crypto.IPasswordEncrypter
+import br.com.clubelinkar.support.event.IEvent
 import br.com.clubelinkar.support.event.IEventBus
+import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
 import br.com.clubelinkar.support.security.service.ILoggedUserService
@@ -12,10 +15,10 @@ import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
@@ -25,10 +28,8 @@ import java.lang.reflect.Type
 import static br.com.clubelinkar.api.company.CompanyMother.*
 import static org.junit.Assert.*
 import static org.mockito.Matchers.any
-import static org.mockito.Mockito.never
-import static org.mockito.Mockito.times
-import static org.mockito.Mockito.verify
-import static org.mockito.Mockito.when
+import static org.mockito.Matchers.anyString
+import static org.mockito.Mockito.*
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -52,6 +53,9 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     @Mock
     ILoggedUserService loggedUserServiceMock
 
+    @Mock
+    IPasswordEncrypter passwordEncrypterMock
+
     @InjectMocks
     CompanyRestController companyRestController
 
@@ -62,6 +66,9 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
         this.mockMvc = MockMvcBuilders.standaloneSetup(companyRestController).build();
 
         when(loggedUserServiceMock.currentLoggedUser).thenReturn(new User(id: "criador_id"))
+
+        when(passwordEncrypterMock.encrypt(anyString())).thenReturn("hash")
+
     }
 
     @Test
@@ -201,13 +208,11 @@ public class CompanyRestControllerTest extends BaseRestControllerMock {
     }
 
     @Test
-    @Ignore
-    // TODO implementar validacao de passwrod
     public void "Deve criticar empresa com password inválido"() {
-        def invalidStore = allMotos()
-        invalidStore.password = null
-        postAndExpectBadRequest(BASE_ENDPOINT, invalidStore)
-        verify(eventBusMock, never()).publish(any(CompanyCreatedEvent))
+        when(companyValidatorMock.validate(allMotos(), null)).thenThrow(new InvalidPasswordException());
+        postAndExpectBadRequest(BASE_ENDPOINT, allMotos())
+
+        verify(eventBusMock, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test

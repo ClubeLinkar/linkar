@@ -1,5 +1,7 @@
 package br.com.clubelinkar.api.salesman
 
+import br.com.clubelinkar.api.user.IPasswordPolicy
+import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +17,9 @@ class SalesmanValidator implements ISalesmanValidator {
     @Autowired
     def SalesmanRepository salesmanRepository
 
+    @Autowired
+    def IPasswordPolicy passwordPolicy
+
     @Override
     public boolean supports(Class<?> clazz) {
         return Salesman.class.isAssignableFrom(clazz)
@@ -24,6 +29,10 @@ class SalesmanValidator implements ISalesmanValidator {
     public void validate(Object target, Errors errors) {
 
         def salesman = (Salesman) target
+
+        if(!passwordPolicy.matches(salesman.password)) {
+            throw new InvalidPasswordException()
+        }
 
         Salesman existentSalesman = salesmanRepository.findByEmail(salesman.getEmail())
 

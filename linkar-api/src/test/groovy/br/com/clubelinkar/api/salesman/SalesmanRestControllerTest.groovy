@@ -1,7 +1,9 @@
 package br.com.clubelinkar.api.salesman
 
+import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
+import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -19,8 +21,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.SalesmanObjectMother.*
+import static br.com.clubelinkar.test.SalesmanObjectMother.getAnotherSalesman
+import static br.com.clubelinkar.test.SalesmanObjectMother.getaSalesman
 import static org.junit.Assert.*
+import static org.mockito.Matchers.anyString
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -30,7 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * @author Lennon Jesus
  */
-@Ignore // necessario corrigir apos a cagada que o Lennon fez com merges de auth
 class SalesmanRestControllerTest extends BaseRestControllerMock {
 
     private static final String BASE_ENDPOINT = "/salesman"
@@ -44,6 +47,9 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
     @Mock
     IMailService mailServiceMock
 
+    @Mock
+    IPasswordEncrypter passwordEncrypterMock
+
     @InjectMocks
     SalesmanRestController salesmanRestController
 
@@ -52,6 +58,9 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
         MockitoAnnotations.initMocks(this)
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(salesmanRestController).build();
+
+        when(passwordEncrypterMock.encrypt(anyString())).thenReturn("hash")
+
     }
 
     @Test
@@ -70,7 +79,6 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
         assertEquals aSalesman.name, savedSalesman.name
         assertEquals aSalesman.email, savedSalesman.email
         assertEquals aSalesman.cpf, savedSalesman.cpf
-        assertEquals aSalesman.password, savedSalesman.password
         assertEquals aSalesman.phones, savedSalesman.phones
 
     }
@@ -149,12 +157,11 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
     }
 
     @Test
-    @Ignore
-    // definir e implementar regras de seguranca
-    public void "Deve criticar vendedor com password inválida"() {
-        def invalidSalesman = aSalesman
-        invalidSalesman.password = "123"
-        postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
+    public void "Deve criticar usuário com password inválida"() {
+        when(salesmanValidatorMock.validate(aSalesman, null)).thenThrow(new InvalidPasswordException());
+        postAndExpectBadRequest(BASE_ENDPOINT, aSalesman)
+
+//        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test

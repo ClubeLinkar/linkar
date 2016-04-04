@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
-@EqualsAndHashCode
+@EqualsAndHashCode(excludes = "password")
 final class Company implements Serializable {
 
     @Id
@@ -21,7 +21,7 @@ final class Company implements Serializable {
     String cnpj
 
     @NotNull
-    String password // FIXME HASH!!!!!!!
+    String password
 
     @NotNull
     String name

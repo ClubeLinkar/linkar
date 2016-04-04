@@ -1,5 +1,6 @@
 package br.com.clubelinkar.api.salesman
 
+import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.mail.IMailService
 import br.com.clubelinkar.support.mail.Mail
 import br.com.clubelinkar.support.mail.MailTemplate
@@ -22,12 +23,17 @@ public class SalesmanRestController {
     private ISalesmanValidator salesmanValidator
 
     @Autowired
+    private IPasswordEncrypter encrypter
+
+    @Autowired
     private IMailService mailService
 
     @RequestMapping(value = "/salesman", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Salesman create(@RequestBody @Valid Salesman salesman) {
 
         salesmanValidator.validate(salesman, null)
+
+        salesman.password = encrypter.encrypt(salesman.password)
 
         Salesman createdSalesman = salesmanRepository.save(salesman)
 

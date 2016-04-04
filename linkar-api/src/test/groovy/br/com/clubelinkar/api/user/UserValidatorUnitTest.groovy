@@ -11,10 +11,11 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
+import static br.com.clubelinkar.api.user.UserMother.felipe
+import static br.com.clubelinkar.api.user.UserMother.lennonJesus
 import static org.mockito.Matchers.anyString
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
-import static br.com.clubelinkar.api.user.UserMother.*
 
 /**
  * @author Lennon Jesus
@@ -26,7 +27,7 @@ public class UserValidatorUnitTest {
     UserRepository userRepositoryMock
 
     @Mock
-    IPasswordPolicy passwordPolicy
+    IPasswordPolicy passwordPolicyMock
 
     @InjectMocks
     UserValidator userValidator
@@ -34,7 +35,7 @@ public class UserValidatorUnitTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this)
-        when(passwordPolicy.matches(anyString())).thenReturn(Boolean.TRUE)
+        when(passwordPolicyMock.matches(anyString())).thenReturn(Boolean.TRUE)
     }
 
     @Test
@@ -77,7 +78,7 @@ public class UserValidatorUnitTest {
 
     @Test(expected = InvalidPasswordException)
     public void "Deve criticar se a senha nao estiver de acordo com as regras de senhas"() {
-        when(passwordPolicy.matches(anyString())).thenReturn(Boolean.FALSE)
+        when(passwordPolicyMock.matches(anyString())).thenReturn(Boolean.FALSE)
         userValidator.validate(lennonJesus(), null)
     }
 

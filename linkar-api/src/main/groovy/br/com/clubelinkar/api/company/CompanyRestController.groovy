@@ -1,10 +1,9 @@
 package br.com.clubelinkar.api.company
 
-import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
+import br.com.clubelinkar.support.crypto.IPasswordEncrypter
 import br.com.clubelinkar.support.event.IEventBus
-import br.com.clubelinkar.support.security.domain.CurrentUser
+import br.com.clubelinkar.support.event.objects.CompanyCreatedEvent
 import br.com.clubelinkar.support.security.service.ILoggedUserService
-import br.com.clubelinkar.support.security.service.LoggedUserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -24,6 +23,9 @@ public class CompanyRestController {
     private ICompanyValidator companyValidator
 
     @Autowired
+    private IPasswordEncrypter encrypter
+
+    @Autowired
     private IEventBus eventBus
     
     @Autowired
@@ -33,6 +35,8 @@ public class CompanyRestController {
     public Company create(@RequestBody @Valid Company company) {
 
         companyValidator.validate(company, null)
+
+        company.password = encrypter.encrypt(company.password)
 
         company.createdBy = loggedUserService.currentLoggedUser.id
 

@@ -1,5 +1,7 @@
 package br.com.clubelinkar.api.salesman
 
+import br.com.clubelinkar.api.user.IPasswordPolicy
+import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
 import org.junit.Before
@@ -10,8 +12,9 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import static br.com.clubelinkar.test.SalesmanObjectMother.aSalesman
 import static br.com.clubelinkar.test.SalesmanObjectMother.aNewSalesman
+import static br.com.clubelinkar.test.SalesmanObjectMother.aSalesman
+import static org.mockito.Matchers.anyString
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
 
@@ -24,12 +27,16 @@ public class SalesmanValidatorUnitTest {
     @Mock
     def SalesmanRepository salesmanRepositoryMock
 
+    @Mock
+    IPasswordPolicy passwordPolicyMock
+
     @InjectMocks
     def SalesmanValidator salesmanValidator
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this)
+        when(passwordPolicyMock.matches(anyString())).thenReturn(Boolean.TRUE)
     }
 
     @Test
@@ -67,6 +74,12 @@ public class SalesmanValidatorUnitTest {
     @Test
     public void "Não deve criticar vendedor com cpf repetido se a operação for de edição"() {
         when(salesmanRepositoryMock.findByCpf(aSalesman.cpf)).thenReturn(aSalesman)
+        salesmanValidator.validate(aSalesman, null)
+    }
+
+    @Test(expected = InvalidPasswordException)
+    public void "Deve criticar se a senha nao estiver de acordo com as regras de senhas"() {
+        when(passwordPolicyMock.matches(anyString())).thenReturn(Boolean.FALSE)
         salesmanValidator.validate(aSalesman, null)
     }
 }

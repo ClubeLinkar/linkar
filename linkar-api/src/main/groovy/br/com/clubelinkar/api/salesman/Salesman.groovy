@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull
  * @author Lennon Jesus
  */
 @Document
-@EqualsAndHashCode
+@EqualsAndHashCode(excludes = ["password"])
 final class Salesman {
 
     @Id
@@ -28,7 +28,7 @@ final class Salesman {
     String cpf
 
     @NotNull
-    String password // FIXME HASH!!!!!!!
+    String password
 
     @NotNull
     String phones
