@@ -49,8 +49,10 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(securityAuthenticationProvider)
-        auth.userDetailsService(userDetailsService)
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder())
+
     }
 
     @Override
@@ -90,7 +92,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions()
                 .disable()
-        
+
 
     }
 
