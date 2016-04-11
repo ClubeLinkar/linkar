@@ -6,11 +6,11 @@
     <parent>
         <groupId>br.com.clubelinkar</groupId>
         <artifactId>linkar</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
 
     <artifactId>linkar-api</artifactId>
-    <version>0.0.11</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>linkar-api</name>
