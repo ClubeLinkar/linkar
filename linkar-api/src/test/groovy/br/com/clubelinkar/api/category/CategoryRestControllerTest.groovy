@@ -13,8 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.CategoryObjectMother.aCategory
-import static br.com.clubelinkar.test.CategoryObjectMother.anotherCategory
+import static br.com.clubelinkar.api.category.CategoryMother.*
 import static org.junit.Assert.*
 import static org.mockito.Mockito.when
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -44,23 +43,23 @@ public class CategoryRestControllerTest extends BaseRestControllerMock {
     @Test
     public void "Deve cadastrar uma categoria corretamente"() {
 
-        when(categoryRepositoryMock.save(aCategory)).thenReturn(aCategory);
+        when(categoryRepositoryMock.save(servicosMecanica())).thenReturn(servicosMecanica());
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aCategory))
+                .content(new Gson().toJson(servicosMecanica()))
         ).andExpect(status().isOk()).andReturn()
 
         def category = new Gson().fromJson(result.response.contentAsString, Category)
 
         assertNotNull category
-        assertEquals aCategory.name, category.name
+        assertEquals servicosMecanica().name, category.name
 
     }
 
     @Test
     public void "Deve criticar categoria com name nulo"() {
-        def invalidCategory = aCategory
+        def invalidCategory = servicosMecanica()
         invalidCategory.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidCategory)
     }
@@ -73,7 +72,7 @@ public class CategoryRestControllerTest extends BaseRestControllerMock {
     @Test
     public void "Deve listar corretamente todas as categorias cadastradas no sistema"() {
 
-        def categoryListMock = [aCategory, anotherCategory]
+        def categoryListMock = [servicosMecanica(), pecasMoto()]
 
         when(categoryRepositoryMock.findAll()).thenReturn(categoryListMock)
 

@@ -1,0 +1,42 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+
+      <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5>Lista de empresas</h5>
+              </div>
+              <div class="ibox-content">
+
+                  <table class="table table-striped">
+                      <thead>
+                      <tr>
+                          <th>Nome</th>
+                          <th>Descrição</th>
+                          <th>Endereço</th>
+                          <th>Telefone</th>
+                          <th>E-mail</th>
+                          <th>Site</th>
+                          <th>CNPJ</th>
+                          <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat="company in vm.companyList">
+                          <td><a ui-sref="company.detail({companyId: company.id})">{{company.name}}</a></td>
+                          <td>{{company.description}}</td>
+                          <td>{{company.address}}</td>
+                          <td>{{company.phones}}</td>
+                          <td><a href="mailto:{{company.email}}">{{company.email}}</a></td>
+                          <td><a href="{{company.url}}" target="_blank">{{company.url}}</a></td>
+                          <td>{{company.cnpj}}</td>
+                          <td><a href="#">editar</a></td>
+                      </tr>
+
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>

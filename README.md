@@ -1,11 +1,41 @@
 ```
 git clone https://gitlab.com/lennonjesus/linkar.git
 ```
+### Configuração do ambiente
+
+Necessário ter instalado Java 8, Maven, MongoDB, NodeJS.
+
+#### NVM
+```
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+```
+
+NODE
+```
+$ nvm install stable
+$ nvm use stable
+```
+
+BOWER
+```
+$ npm install -g bower
+```
+
+GULP
+```
+$ npm install -g gulp
+```
+
+#### COMPONENTES
 
 ### /linkar-api
-  Backend construído com Maven e SpringBoot
+  Backend construído com Maven, SpringBoot e MongoDB.
   ```
-  Deixa o IntelliJ trabalhar.
+  Antes de rodar a API, é necessário ter o MongoDB instalado. Para isso, você pode usar o homebrew (se você usa Mac).
+
+  Uma vez o MongoDB instalado, pra testar o funcionamento da API, rode a classe `LinkarApplication` (via sua IDE preferida) ou entre no diretório `/linkar-api` e rode `mvn spring-boot:run`, via linha de comando.
+
+  Com a aplicação iniciada, você pode fazer uma chamada GET `http://localhost:8080/linkar/api/dummy/`. Esta chamada vai criar massa de teste na sua base local. Você deveria receber uma mensagem de retorno dizendo `Dumyy Loaded!`.
   ```
 
 ### /frontend
@@ -37,34 +67,7 @@ git clone https://gitlab.com/lennonjesus/linkar.git
 ### /linkar-frontend
   Isso é uma versão mais antiga. Migrei o que tinha feito aqui para o /frontend. Em breve será apagado.
 
-Necessário ter instalado Java 8, Maven, MongoDB, NodeJS.
-
-Configuração do ambiente
-
-### Configuração do ambiente
-
-#### NVM
-```
-$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-```
-
-NODE
-```
-$ nvm install stable
-$ nvm use stable
-```
-
-BOWER
-```
-$ npm install -g bower
-```
-
-GULP
-```
-$ npm install -g gulp
-```
-
-GIT FLOW
+#### GIT FLOW
 
 Um modelo de trabalho com branches: http://danielkummer.github.io/git-flow-cheatsheet/index.pt_BR.html
 

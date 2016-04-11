@@ -4,6 +4,7 @@ import br.com.clubelinkar.LinkarApplication
 import br.com.clubelinkar.api.user.User
 import com.google.gson.Gson
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.SpringApplicationConfiguration
@@ -24,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = LinkarApplication.class)
 @WebAppConfiguration
+@Ignore
 public class BaseRestControllerMock {
 
     protected MockMvc mockMvc;

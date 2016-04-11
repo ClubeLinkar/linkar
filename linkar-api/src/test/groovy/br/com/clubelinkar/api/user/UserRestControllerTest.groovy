@@ -1,10 +1,12 @@
 package br.com.clubelinkar.api.user
 
+import br.com.clubelinkar.exception.InvalidPasswordException
 import br.com.clubelinkar.exception.RepeatedUserCPFException
 import br.com.clubelinkar.exception.RepeatedUserEmailException
-import br.com.clubelinkar.support.mail.Mail
-import br.com.clubelinkar.support.mail.MailService
-import br.com.clubelinkar.support.mail.MailTemplate
+import br.com.clubelinkar.support.event.IEvent
+import br.com.clubelinkar.support.event.IEventBus
+import br.com.clubelinkar.support.event.objects.UserCreatedEvent
+import br.com.clubelinkar.support.security.password.crypto.IPasswordEncrypter
 import br.com.clubelinkar.test.BaseRestControllerMock
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,11 +21,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.UserObjectMother.anUser
-import static br.com.clubelinkar.test.UserObjectMother.anotherUser
+import static br.com.clubelinkar.api.user.UserMother.carlaVidal
+import static br.com.clubelinkar.api.user.UserMother.lennonJesus
 import static org.junit.Assert.*
-import static org.mockito.Mockito.verify
-import static org.mockito.Mockito.when
+import static org.mockito.Matchers.any
+import static org.mockito.Matchers.anyString
+import static org.mockito.Mockito.*
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -36,152 +39,157 @@ class UserRestControllerTest extends BaseRestControllerMock {
     private static final String BASE_ENDPOINT = "/user"
 
     @Mock
-    def UserRepository userRepositoryMock
+    UserRepository userRepositoryMock
 
     @Mock
-    def UserValidator userValidatorMock
+    IUserValidator userValidatorMock
 
     @Mock
-    def MailService mailServiceMock
+    IPasswordEncrypter passwordEncrypterMock
+
+    @Mock
+    IEventBus eventBusMock
 
     @InjectMocks
-    def UserRestController userRestController
+    UserRestController userRestController
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this)
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(userRestController).build();
+
+        when(passwordEncrypterMock.encrypt(anyString())).thenReturn("hash")
     }
 
     @Test
     public void "Deve adicionar um novo usuário corretamente"() {
 
-        when(userRepositoryMock.save(anUser)).thenReturn(anUser);
+        User lennon = lennonJesus()
+
+        when(userRepositoryMock.save(lennonJesus())).thenReturn(lennon);
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(anUser))
+                .content(new Gson().toJson(lennon))
         ).andExpect(status().isOk()).andReturn()
 
         def savedUser = new Gson().fromJson(result.response.contentAsString, User)
 
         assertNotNull savedUser
-        assertEquals anUser.name, savedUser.name
-        assertEquals anUser.email, savedUser.email
-        assertEquals anUser.cpf, savedUser.cpf
-        assertEquals anUser.district, savedUser.district
-        assertEquals anUser.city, savedUser.city
-        assertEquals anUser.state, savedUser.state
-        assertEquals anUser.password, savedUser.password
+        assertEquals lennon.name, savedUser.name
+        assertEquals lennon.email, savedUser.email
+        assertEquals lennon.cpf, savedUser.cpf
+        assertEquals lennon.district, savedUser.district
+        assertEquals lennon.city, savedUser.city
+        assertEquals lennon.state, savedUser.state
+        assertEquals lennon.password, savedUser.password
 
-    }
-
-    @Test
-    public void "Deve enviar email de boas vindas para novos usuarios cadastrados com sucesso"() {
-
-        when(userRepositoryMock.save(anUser)).thenReturn(anUser);
-
-        mockMvc.perform(post(BASE_ENDPOINT)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(anUser))
-        ).andExpect(status().isOk()).andReturn()
-
-
-        def mail = new Mail()
-                .from("noreply@clubelinkar.com.br")
-                .to("lennon.jesus@gmail.com")
-                .subject("Você se cadastrou na Linkar!")
-                .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("name", anUser.name)
-
-        verify(mailServiceMock).send(mail)
-
+        verify(eventBusMock, times(1)).publish(any(UserCreatedEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com nome nulo"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com email nulo"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.email = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com email inválido"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.email = "email.inválido"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com cpf nulo"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.cpf = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     @Ignore
     // implementar validacao de cpf
     public void "Deve criticar usuário com cpf inválido"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.cpf = "abc123"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com cidade nula"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.city = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com uf nulo"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.state = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve criticar usuário com password nula"() {
-        def invalidUser = anUser
+        def invalidUser = lennonJesus()
         invalidUser.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
-    @Ignore
-    // definir e implementar regras de seguranca
     public void "Deve criticar usuário com password inválida"() {
-        def invalidUser = anUser
-        invalidUser.password = "123"
-        postAndExpectBadRequest(BASE_ENDPOINT, invalidUser)
+        when(userValidatorMock.validate(lennonJesus(), null)).thenThrow(new InvalidPasswordException());
+        postAndExpectBadRequest(BASE_ENDPOINT, lennonJesus())
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Não deve permitir novo usuário com e-mail já existente"() {
-        when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserEmailException());
-        postAndExpectBadRequest(BASE_ENDPOINT, anUser)
+        when(userValidatorMock.validate(lennonJesus(), null)).thenThrow(new RepeatedUserEmailException());
+        postAndExpectBadRequest(BASE_ENDPOINT, lennonJesus())
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Não deve permitir novo usuário com cpf já existente"() {
-        when(userValidatorMock.validate(anUser, null)).thenThrow(new RepeatedUserCPFException());
-        postAndExpectBadRequest(BASE_ENDPOINT, anUser)
+        when(userValidatorMock.validate(lennonJesus(), null)).thenThrow(new RepeatedUserCPFException());
+        postAndExpectBadRequest(BASE_ENDPOINT, lennonJesus())
+
+        verify(eventBusMock, never()).publish(any(IEvent.class))
     }
 
     @Test
     public void "Deve listar todos os Usuários existentes"() {
 
-        def userListMock = [anUser, anotherUser]
+        def userListMock = [lennonJesus(), carlaVidal()]
 
         when(userRepositoryMock.findAll()).thenReturn(userListMock)
 

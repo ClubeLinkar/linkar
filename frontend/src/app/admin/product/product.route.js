@@ -12,19 +12,19 @@
           .state('product.main', {
               url: "/main",
               templateUrl: "app/admin/product/main.html",
-              controller: 'Product',
+              controller: 'ProductList',
               controllerAs: 'vm'
           })
           .state('product.form', {
               url: "/form",
               templateUrl: "app/admin/product/form.html",
-              controller: 'Product',
+              controller: 'ProductEdit',
               controllerAs: 'vm'
           })
           .state('product.detail', {
               url: "/detail/:productId",
               templateUrl: "app/admin/product/form.html",
-              controller: 'Product',
+              controller: 'ProductEdit',
               controllerAs: 'vm'
           })
 
