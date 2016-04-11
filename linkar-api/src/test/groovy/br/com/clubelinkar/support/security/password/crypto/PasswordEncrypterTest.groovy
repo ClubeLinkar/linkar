@@ -4,7 +4,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.springframework.security.crypto.bcrypt.BCrypt
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 
 import static org.apache.commons.lang3.StringUtils.isBlank
 import static org.junit.Assert.*
@@ -14,9 +15,13 @@ class PasswordEncrypterTest {
 
     PasswordEncrypter encrypter
 
+    PasswordEncoder encoder
+
     @Before
     public void setup() {
         encrypter = new PasswordEncrypter()
+        encoder = new BCryptPasswordEncoder()
+        encrypter.passwordEncoder = encoder
     }
 
     @Test
@@ -26,7 +31,7 @@ class PasswordEncrypterTest {
 
         assertNotNull hash
         assertFalse isBlank(hash)
-        assertTrue BCrypt.checkpw(plain, hash)
+        assertTrue encoder.matches(plain, hash)
     }
 
     @Test
