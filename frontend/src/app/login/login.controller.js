@@ -3,7 +3,7 @@
 
   angular.module('linkar').controller('Login', Login);
 
-		function Login($rootScope, $http, $location) {
+		function Login($rootScope, $http, $location, ngToast) {
 
 			var self = this;
 
@@ -41,12 +41,12 @@
 			self.login = function() {
 				authenticate(self.credentials, function(authenticated) {
 					if (authenticated) {
-						console.log("Login succeeded")
+						ngToast.create('Autenticação bem sucedida.');
 						$location.path("/");
 						self.error = false;
 						$rootScope.authenticated = true;
 					} else {
-						console.log("Login failed")
+						ngToast.danger('Falha de autenticação. Verifique se os dados informados estão corretos.');
 						$location.path("/login");
 						self.error = true;
 						$rootScope.authenticated = false;
