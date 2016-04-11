@@ -1,14 +1,13 @@
-package br.com.clubelinkar.test
+package br.com.clubelinkar.api.salesman
 
-import br.com.clubelinkar.api.salesman.Salesman
 import org.springframework.security.crypto.bcrypt.BCrypt
 
 /**
  * @author Lennon Jesus
  */
-class SalesmanObjectMother {
+class SalesmanMother {
 
-    public static Salesman getaSalesman() {
+    public static Salesman salesman() {
         return new Salesman(
                 id: "user_1",
                 name: "Lennon Jesus",
@@ -19,7 +18,7 @@ class SalesmanObjectMother {
         )
     }
 
-    public static Salesman getAnotherSalesman() {
+    public static Salesman anotherSalesman() {
         return new Salesman(
                 id: "user_2",
                 name: "Carla Vidal",
@@ -30,7 +29,7 @@ class SalesmanObjectMother {
         )
     }
 
-    public static Salesman getaNewSalesman() {
+    public static Salesman newSalesman() {
         return new Salesman(
                 id: null,
                 name: "Vera Alice",

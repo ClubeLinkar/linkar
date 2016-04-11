@@ -12,8 +12,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-import static br.com.clubelinkar.test.SalesmanObjectMother.aNewSalesman
-import static br.com.clubelinkar.test.SalesmanObjectMother.aSalesman
+import static br.com.clubelinkar.api.salesman.SalesmanMother.newSalesman
+import static br.com.clubelinkar.api.salesman.SalesmanMother.salesman
 import static org.mockito.Matchers.anyString
 import static org.mockito.Mockito.verify
 import static org.mockito.Mockito.when
@@ -41,45 +41,45 @@ public class SalesmanValidatorUnitTest {
 
     @Test
     public void "Não deve criticar novo vendedor se e-mail ainda não existir"() {
-        when(salesmanRepositoryMock.findByEmail(aNewSalesman.email)).thenReturn(null)
-        salesmanValidator.validate(aNewSalesman, null)
-        verify(salesmanRepositoryMock).findByEmail(aNewSalesman.email)
+        when(salesmanRepositoryMock.findByEmail(newSalesman().email)).thenReturn(null)
+        salesmanValidator.validate(newSalesman(), null)
+        verify(salesmanRepositoryMock).findByEmail(newSalesman().email)
     }
 
     @Test(expected = RepeatedUserEmailException)
     public void "Deve criticar novo vendedor com e-mail repetido"() {
-        when(salesmanRepositoryMock.findByEmail(aNewSalesman.email)).thenReturn(aSalesman)
-        salesmanValidator.validate(aNewSalesman, null)
+        when(salesmanRepositoryMock.findByEmail(newSalesman().email)).thenReturn(salesman())
+        salesmanValidator.validate(newSalesman(), null)
     }
 
     @Test
     public void "Não deve criticar vendedor com e-mail repetido se a operação for de edição"() {
-        when(salesmanRepositoryMock.findByEmail(aSalesman.email)).thenReturn(aSalesman)
-        salesmanValidator.validate(aSalesman, null)
+        when(salesmanRepositoryMock.findByEmail(salesman().email)).thenReturn(salesman())
+        salesmanValidator.validate(salesman(), null)
     }
 
     @Test
     public void "Não deve criticar novo vendedor se cpf ainda não existir"() {
-        when(salesmanRepositoryMock.findByCpf(aNewSalesman.cpf)).thenReturn(null)
-        salesmanValidator.validate(aNewSalesman, null)
-        verify(salesmanRepositoryMock).findByCpf(aNewSalesman.cpf)
+        when(salesmanRepositoryMock.findByCpf(newSalesman().cpf)).thenReturn(null)
+        salesmanValidator.validate(newSalesman(), null)
+        verify(salesmanRepositoryMock).findByCpf(newSalesman().cpf)
     }
 
     @Test(expected = RepeatedUserCPFException)
     public void "Deve criticar novo vendedor com cpf repetido"() {
-        when(salesmanRepositoryMock.findByCpf(aNewSalesman.cpf)).thenReturn(aSalesman)
-        salesmanValidator.validate(aNewSalesman, null)
+        when(salesmanRepositoryMock.findByCpf(newSalesman().cpf)).thenReturn(salesman())
+        salesmanValidator.validate(newSalesman(), null)
     }
 
     @Test
     public void "Não deve criticar vendedor com cpf repetido se a operação for de edição"() {
-        when(salesmanRepositoryMock.findByCpf(aSalesman.cpf)).thenReturn(aSalesman)
-        salesmanValidator.validate(aSalesman, null)
+        when(salesmanRepositoryMock.findByCpf(salesman().cpf)).thenReturn(salesman())
+        salesmanValidator.validate(salesman(), null)
     }
 
     @Test(expected = InvalidPasswordException)
     public void "Deve criticar se a senha nao estiver de acordo com as regras de senhas"() {
         when(passwordPolicyMock.matches(anyString())).thenReturn(Boolean.FALSE)
-        salesmanValidator.validate(aSalesman, null)
+        salesmanValidator.validate(salesman(), null)
     }
 }

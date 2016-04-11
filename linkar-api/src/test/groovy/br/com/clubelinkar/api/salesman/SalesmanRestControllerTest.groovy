@@ -21,8 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
 import java.lang.reflect.Type
 
-import static br.com.clubelinkar.test.SalesmanObjectMother.getAnotherSalesman
-import static br.com.clubelinkar.test.SalesmanObjectMother.getaSalesman
+import static br.com.clubelinkar.api.salesman.SalesmanMother.anotherSalesman
+import static br.com.clubelinkar.api.salesman.SalesmanMother.salesman
 import static org.junit.Assert.*
 import static org.mockito.Matchers.anyString
 import static org.mockito.Mockito.verify
@@ -66,31 +66,31 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
     @Test
     public void "Deve adicionar um novo vendedor corretamente"() {
 
-        when(salesmanRepositoryMock.save(aSalesman)).thenReturn(aSalesman);
+        when(salesmanRepositoryMock.save(salesman())).thenReturn(salesman());
 
         def result = mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aSalesman))
+                .content(new Gson().toJson(salesman()))
         ).andExpect(status().isOk()).andReturn()
 
         def savedSalesman = new Gson().fromJson(result.response.contentAsString, Salesman)
 
         assertNotNull savedSalesman
-        assertEquals aSalesman.name, savedSalesman.name
-        assertEquals aSalesman.email, savedSalesman.email
-        assertEquals aSalesman.cpf, savedSalesman.cpf
-        assertEquals aSalesman.phones, savedSalesman.phones
+        assertEquals salesman().name, savedSalesman.name
+        assertEquals salesman().email, savedSalesman.email
+        assertEquals salesman().cpf, savedSalesman.cpf
+        assertEquals salesman().phones, savedSalesman.phones
 
     }
 
     @Test
     public void "Deve enviar email de boas vindas para novos vendedores cadastrados com sucesso"() {
 
-        when(salesmanRepositoryMock.save(aSalesman)).thenReturn(aSalesman);
+        when(salesmanRepositoryMock.save(salesman())).thenReturn(salesman());
 
         mockMvc.perform(post(BASE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new Gson().toJson(aSalesman))
+                .content(new Gson().toJson(salesman()))
         ).andExpect(status().isOk()).andReturn()
 
 
@@ -99,7 +99,7 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
                 .to("lennon.jesus@gmail.com")
                 .subject("Você se cadastrou na Linkar!")
                 .template(MailTemplate.USER_REGISTRATION)
-                .addParameter("name", aSalesman.name)
+                .addParameter("name", salesman().name)
 
         verify(mailServiceMock).send(mail)
 
@@ -107,35 +107,35 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
 
     @Test
     public void "Deve criticar vendedor com nome nulo"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.name = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
 
     @Test
     public void "Deve criticar vendedor com email nulo"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.email = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
 
     @Test
     public void "Deve criticar vendedor com email inválido"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.email = "email.inválido"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
 
     @Test
     public void "Deve criticar vendedor com cpf nulo"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.cpf = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
 
     @Test
     public void "Deve criticar vendedor com phone nulo"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.phones = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
@@ -144,42 +144,42 @@ class SalesmanRestControllerTest extends BaseRestControllerMock {
     @Ignore
     // implementar validacao de cpf
     public void "Deve criticar vendedor com cpf inválido"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.cpf = "abc123"
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
 
     @Test
     public void "Deve criticar vendedor com password nula"() {
-        def invalidSalesman = aSalesman
+        def invalidSalesman = salesman()
         invalidSalesman.password = null
         postAndExpectBadRequest(BASE_ENDPOINT, invalidSalesman)
     }
 
     @Test
     public void "Deve criticar usuário com password inválida"() {
-        when(salesmanValidatorMock.validate(aSalesman, null)).thenThrow(new InvalidPasswordException());
-        postAndExpectBadRequest(BASE_ENDPOINT, aSalesman)
+        when(salesmanValidatorMock.validate(salesman(), null)).thenThrow(new InvalidPasswordException());
+        postAndExpectBadRequest(BASE_ENDPOINT, salesman())
 
 //        verify(eventBus, never()).publish(Mockito.any(IEvent.class))
     }
 
     @Test
     public void "Não deve permitir novo vendedor com e-mail já existente"() {
-        when(salesmanValidatorMock.validate(aSalesman, null)).thenThrow(new RepeatedUserEmailException());
-        postAndExpectBadRequest(BASE_ENDPOINT, aSalesman)
+        when(salesmanValidatorMock.validate(salesman(), null)).thenThrow(new RepeatedUserEmailException());
+        postAndExpectBadRequest(BASE_ENDPOINT, salesman())
     }
 
     @Test
     public void "Não deve permitir novo vendedor com cpf já existente"() {
-        when(salesmanValidatorMock.validate(aSalesman, null)).thenThrow(new RepeatedUserCPFException());
-        postAndExpectBadRequest(BASE_ENDPOINT, aSalesman)
+        when(salesmanValidatorMock.validate(salesman(), null)).thenThrow(new RepeatedUserCPFException());
+        postAndExpectBadRequest(BASE_ENDPOINT, salesman())
     }
 
     @Test
     public void "Deve listar todos os vendedores existentes"() {
 
-        def salesmanListMock = [aSalesman, anotherSalesman]
+        def salesmanListMock = [salesman(), anotherSalesman()]
 
         when(salesmanRepositoryMock.findAll()).thenReturn(salesmanListMock)
 
