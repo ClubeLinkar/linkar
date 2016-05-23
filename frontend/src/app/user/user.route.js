@@ -27,6 +27,16 @@
               controller: 'UserEdit',
               controllerAs: 'vm'
           })
+          .state('user.signup', {
+              url: "/signup",
+              templateUrl: "app/user/form.html",
+              controller: 'Signup',
+              controllerAs: 'vm'
+          })
+          .state('user.welcome', {
+              url: "/welcome",
+              templateUrl: "app/signup/success.html"
+          })
       ;
 
     })

@@ -13,6 +13,7 @@
     vm.get = get;
     vm.save = save;
     vm.loadCompanies = loadCompanies;
+    vm.cancel = cancel;
 
     vm.init();
 
@@ -50,7 +51,11 @@
         console.log(erro);
         ngToast.danger("Houve um erro de validação dos dados. " + erro.data.exception);
       });
-    };
+    }
+
+    function cancel() {
+      $state.go("product.main");
+    }
 
     vm.photos = [];
 

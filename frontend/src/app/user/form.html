@@ -80,6 +80,17 @@
                           </div>
                       </div>
 
+                      <div class="form-group" ng-if="authenticated && loggedUser.role === 'ADMIN'">
+                        <label class="col-sm-2 control-label">Perfil de usuário</label>
+                        <div class="col-sm-10" ng-class="{'has-error' : userForm.role.$dirty && userForm.role.$invalid}">
+                          <select class="form-control m-b" name="role" ng-model="vm.user.role" required="required">
+                            <option value="ADMIN">Administrador</option>
+                            <option value="CUSTOMER">Cliente</option>
+                            <option value="SALESMAN">Vendedor</option>
+                          </select>
+
+                        </div>
+                      </div>
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Bairro</label>
@@ -107,7 +118,7 @@
 
                       <div class="form-group">
                           <div class="col-sm-4 col-sm-offset-2">
-                              <button class="btn btn-white" type="submit">Cancelar</button>
+                              <button class="btn btn-white" type="button" ng-click="vm.cancel()">Cancelar</button>
                               <button class="btn btn-primary" type="submit">Salvar</button>
                           </div>
                       </div>

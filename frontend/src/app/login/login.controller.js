@@ -24,6 +24,11 @@
 				}).success(function(data) {
 					if (data.name) {
 						$rootScope.authenticated = true;
+            $rootScope.loggedUser = {
+              email: data.principal.user.email,
+              name: data.principal.user.name,
+              role: data.principal.user.role
+            }
 					} else {
 						$rootScope.authenticated = false;
 					}

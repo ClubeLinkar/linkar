@@ -17,6 +17,7 @@
           $rootScope.authenticated = true;
         } else {
           $rootScope.authenticated = false;
+          $rootScope.loggedUser = null;
         }
       }).error(function() {
         $rootScope.authenticated = true;

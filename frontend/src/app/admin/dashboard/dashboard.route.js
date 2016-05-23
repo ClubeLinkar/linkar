@@ -21,6 +21,24 @@
               controller: 'Dashboard',
               controllerAs: 'vm'
           })
+          .state('dashboard.pontos', {
+              url: "/pontos",
+              templateUrl: "app/admin/dashboard/meuspontos.html",
+              controller: 'Dashboard',
+              controllerAs: 'vm'
+          })
+          .state('dashboard.transacoes', {
+              url: "/transacoes",
+              templateUrl: "app/admin/dashboard/minhascompras.html",
+              controller: 'Dashboard',
+              controllerAs: 'vm'
+          })
+          .state('dashboard.perfil', {
+              url: "/perfil",
+              templateUrl: "app/admin/dashboard/perfil.html",
+              controller: 'Dashboard',
+              controllerAs: 'vm'
+          })
       ;
 
     })

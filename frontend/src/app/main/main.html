@@ -7,11 +7,14 @@
 
             <div class="text-center m-t-lg">
 
-              <h3>
+              <h3 ng-if="!loggedUser">
                 Cadastre-se e
-                <a ui-sref="user.form">comece a linkar!</a>
+                <a ui-sref="user.signup">comece a linkar!</a>
               </h3>
 
+              <h3 ng-if="loggedUser">
+                Olá, {{loggedUser.name}}!
+              </h3>
 
             </div>
         </div>

@@ -12,6 +12,7 @@
     vm.init = init;
     vm.get = get;
     vm.save = save;
+    vm.cancel = cancel;
 
     vm.init();
 
@@ -38,6 +39,10 @@
           ngToast.danger("Houve um erro de validação dos dados. " + erro.data.exception);
         });
 
+    }
+
+    function cancel() {
+      $state.go("company.main");
     }
 
   }
