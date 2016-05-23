@@ -83,6 +83,7 @@ class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/authentication").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
+                .antMatchers("/api/signup").permitAll()
 //                .antMatchers("/api/v2/api-docs").permitAll()
 //                .antMatchers("/api/**").hasAnyAuthority("ROLE_USER")
                 .anyRequest().authenticated()
