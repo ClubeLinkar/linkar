@@ -11,20 +11,20 @@ class CurrentUser extends org.springframework.security.core.userdetails.User {
     private User user
 
     public CurrentUser(User user) {
-        super(user.email, user.password, AuthorityUtils.createAuthorityList(Role.ADMIN.name))
+        super(user.email, user.password, AuthorityUtils.createAuthorityList(user.role))
         this.user = user
     }
 
     public User getUser() {
-        return user
+        user
     }
 
     public String getId() {
-        return user.id
+        user.id
     }
 
     public Role getRole() {
-        return Role.ADMIN
+        Role.from(user.role)
     }
 
 }

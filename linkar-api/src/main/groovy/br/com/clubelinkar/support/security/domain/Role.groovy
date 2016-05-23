@@ -5,7 +5,7 @@ package br.com.clubelinkar.support.security.domain
  */
 enum Role {
 
-    USER("USER"), ADMIN("ADMIN"), SALESMAN("SALESMAN");
+    USER("USER"), ADMIN("ADMIN"), SALESMAN("SALESMAN"), CUSTOMER("CUSTOMER");
 
     private String name;
 
@@ -15,5 +15,18 @@ enum Role {
 
     public String getName() {
         return name;
+    }
+
+    public static Role from(String str) {
+
+
+        for (Role role : values()) {
+            if (str == role.name) {
+                return role
+            }
+        }
+
+        null
+
     }
 }

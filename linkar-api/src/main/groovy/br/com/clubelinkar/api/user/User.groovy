@@ -40,4 +40,6 @@ class User implements Serializable {
     @NotNull
     String password // FIXME Regras de forca de senha
 
+    String role
+
 }

@@ -3,6 +3,7 @@ package br.com.clubelinkar.api.user
 import br.com.clubelinkar.support.event.IEventBus
 import br.com.clubelinkar.support.event.objects.UserCreatedEvent
 import br.com.clubelinkar.support.mail.IMailService
+import br.com.clubelinkar.support.security.domain.Role
 import br.com.clubelinkar.support.security.password.crypto.IPasswordEncrypter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -31,8 +32,22 @@ public class UserRestController {
     @Autowired
     private IEventBus eventBus
 
+    @RequestMapping(value = "/signup", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public User signup(@RequestBody @Valid User user) {
+        user.role = "CUSTOMER"
+        return createUser(user)
+    }
+
     @RequestMapping(value = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public User create(@RequestBody @Valid User user) {
+        return createUser(user)
+    }
+
+    private createUser(User user) {
+
+        if (!user.role) {
+            user.role = Role.CUSTOMER
+        }
 
         userValidator.validate(user, null)
 
