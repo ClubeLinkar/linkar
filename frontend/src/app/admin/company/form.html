@@ -21,12 +21,9 @@
           <div class="ibox float-e-margins">
               <div class="ibox-title">
                   <h5>Dados da empressa <small>Todos os campos são obrigatórios.</small></h5>
-
               </div>
               <div class="ibox-content">
                   <form name="companyForm" class="form-horizontal" ng-submit="vm.save()">
-
-
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nome</label>
                         <div class="col-sm-10" ng-class="{'has-error' : companyForm.name.$dirty && companyForm.name.$invalid}">
@@ -74,7 +71,7 @@
                           <div class="col-sm-10" ng-class="{'has-error' : companyForm.phones.$dirty && companyForm.phones.$invalid}">
                               <div class="input-group m-b">
                                 <span class="input-group-addon fa fa-phone"></span>
-                                <input type="text" class="form-control" ng-model="vm.company.phones" required="required">
+                                <input type="text" class="form-control" ng-model="vm.company.phones" required="required" ui-br-phone-number>
                               </div>
                               <span class="help-block m-b-none">Ex: (21) 3442-3584</span>
                           </div>

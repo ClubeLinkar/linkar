@@ -56,10 +56,10 @@
 
                       <div class="form-group">
                         <label class="col-sm-2 control-label">CPF</label>
-                        <div class="col-sm-10" ng-class="{'has-error' : userForm.cpf.$dirty && userForm.cpf.$invalid}">
+                        <div class="col-sm-10" ng-class="{'has-error' : userForm.cpf.$dirty && userForm.cpf.$error}">
                           <div class="input-group m-b">
                             <span class="input-group-addon fa fa-credit-card"></span>
-                            <input type="text" class="form-control" ng-model="vm.user.cpf" required="required">
+                            <input type="text" class="form-control" ng-model="vm.user.cpf" required="required" ui-br-cpf-mask>
                           </div>
                         </div>
                       </div>
