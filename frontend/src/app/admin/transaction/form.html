@@ -1,0 +1,77 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>linkar</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Categorias</a>
+      </li>
+      <li class="active">
+        <strong>Cadastro</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Dados da transação <small>Todos os campos são obrigatórios.</small></h5>
+        </div>
+        <div class="ibox-content">
+          <form name="transactionForm" class="form-horizontal" ng-submit="vm.save()">
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Produto</label>
+
+              <div class="col-sm-10" ng-class="{'has-error' : transactionForm.productId.$dirty && transactionForm.productId.$invalid}">
+                <select class="form-control m-b" ng-model="vm.productSelected" ng-options="product as product.name for product in vm.productList"></select>
+              </div>
+            </div>
+
+            <div class="form-group" ng-if="vm.productSelected">
+              <label class="col-sm-2 control-label">Preço</label>
+                <div class="col-sm-10" ng-class="{'has-error' : transactionForm.price.$dirty && transactionForm.price.$invalid}">
+                    <div class="input-group m-b">
+                      <span class="input-group-addon">R</span>
+                      <input type="text" class="form-control" ng-model="vm.productSelected.price" required="required" ui-money-mask="2" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Cliente</label>
+
+              <div class="col-sm-10" ng-class="{'has-error' : transactionForm.customerId.$dirty && transactionForm.customerId.$invalid}">
+                <select class="form-control m-b" ng-model="vm.customerSelected" ng-options="customer as customer.name for customer in vm.customerList"></select>
+              </div>
+            </div>
+
+            <div class="form-group" ng-if="vm.customerSelected">
+              <label class="col-sm-2 control-label">Nome</label>
+              <div class="col-sm-10" ng-class="{'has-error' : transactionForm.name.$dirty && transactionForm.name.$invalid}">
+                <div class="input-group m-b">
+                  <span class="input-group-addon fa fa-user"></span>
+                  <input type="text" class="form-control" value="{{vm.customerSelected.name}}" required="required">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                <button class="btn btn-white" type="button" ng-click="vm.cancel()">Cancelar</button>
+                <button class="btn btn-white" type="button" ng-click="vm.test()">Testar</button>
+                <button class="btn btn-primary" type="submit">Salvar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

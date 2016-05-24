@@ -63,6 +63,9 @@
                       <div class="form-group"><label class="col-sm-2 control-label">Categorias</label>
                           <div class="col-sm-10" ng-class="{'has-error' : productForm.categories.$dirty && productForm.categories.$invalid}">
                               <input type="tel" class="form-control" ng-model="vm.product.categories" ng-list required="required">
+                              <span class="help-block m-b-none">
+                                Ex: importado, peças de moto, acessórios
+                              </span>
                           </div>
                       </div>
 
