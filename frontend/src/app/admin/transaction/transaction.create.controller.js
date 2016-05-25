@@ -38,7 +38,14 @@
     function save() {
 
       vm.transaction.productId = vm.productSelected.id;
+      vm.transaction.productName = vm.productSelected.name;
+      vm.transaction.productUnitPrice = vm.productSelected.price;
+
       vm.transaction.customerId = vm.customerSelected.id;
+      vm.transaction.customerName = vm.customerSelected.name;
+      vm.transaction.customerEmail = vm.customerSelected.email;
+
+      vm.transaction.companyId = vm.productSelected.companyId;
 
       Transaction.save(vm.transaction, function (data) {
 

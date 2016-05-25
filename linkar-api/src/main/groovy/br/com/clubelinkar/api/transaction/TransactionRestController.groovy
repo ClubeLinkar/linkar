@@ -34,6 +34,8 @@ public class TransactionRestController {
 
         transaction.dateCreated = dateFactory.now()
 
+        transaction.amount = transaction.productUnitPrice * transaction.productQuantity
+
         return transactionRepository.save(transaction)
     }
 
