@@ -12,7 +12,6 @@
     vm.init = init;
     vm.save = save;
     vm.cancel = cancel;
-    vm.test = test;
 
     vm.init();
 
@@ -60,11 +59,6 @@
 
     function cancel() {
       $state.go("transaction.main");
-    }
-
-    function test() {
-      console.log(vm.customerSelected);
-      console.log(vm.productSelected);
     }
 
   }

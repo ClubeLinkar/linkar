@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service
  * @author Lennon Jesus
  */
 @Service
+@Deprecated
 class SecurityAuthenticationProvider implements AuthenticationProvider {
 
     @Override

@@ -21,7 +21,7 @@
 
     function save() {
 
-      console.log($http);
+      console.log(vm.user);
 
       $http.post('/linkar/api/signup', vm.user).then(function (data) {
         ngToast.create('Seu usuário foi criado com sucesso, ' + vm.user.name + '. Você já pode Linkar!');

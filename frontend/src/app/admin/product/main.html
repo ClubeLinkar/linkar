@@ -1,32 +1,44 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
+  <div class="row">
 
-      <div class="col-lg-12">
-          <div class="ibox float-e-margins">
-              <div class="ibox-title">
-                  <h5>Lista de produtos </h5>
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Lista de produtos </h5>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+          <div class="col-md-3" ng-repeat="product in vm.productList">
+            <div class="ibox">
+              <div class="ibox-content product-box">
+
+                <div class="product-imitation">
+                  {{product.name}}
+                </div>
+                <div class="product-desc">
+                  <span class="product-price">
+                    R$ {{product.price}}
+                  </span>
+                  <small class="text-muted" ng-repeat="category in product.categories"> {{category}} </small>
+                  <a ui-sref="product.detail({productId: product.id})" class="product-name"> {{product.name}}</a>
+
+
+
+                  <div class="small m-t-xs">
+                    {{product.description}}
+                  </div>
+                  <div class="m-t text-righ">
+
+                    <a ui-sref="product.detail({productId: product.id})" class="btn btn-xs btn-outline btn-primary">Visualizar <i class="fa fa-long-arrow-right"></i> </a>
+                  </div>
+                </div>
               </div>
-              <div class="ibox-content">
-
-                  <table class="table table-striped">
-                      <thead>
-                      <tr>
-                          <th>Nome</th>
-                          <th>Descrição</th>
-                          <th>Preço</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr ng-repeat="product in vm.productList">
-                          <td><a ui-sref="product.detail({productId: product.id})">{{product.name}}</a></td>
-                          <td>{{product.description}}</td>
-                          <td class="text-navy">{{product.price}}</td>
-                      </tr>
-
-                      </tbody>
-                  </table>
-              </div>
+            </div>
           </div>
+
+
+        </div>
       </div>
     </div>
+  </div>
 </div>

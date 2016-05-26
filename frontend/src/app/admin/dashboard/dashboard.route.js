@@ -39,6 +39,12 @@
               controller: 'Dashboard',
               controllerAs: 'vm'
           })
+          .state('dashboard.password', {
+              url: "/password",
+              templateUrl: "app/admin/dashboard/password.html",
+              controller: 'Dashboard',
+              controllerAs: 'vm'
+          })
       ;
 
     })
